@@ -17,14 +17,16 @@ export const IntroSection: React.FC<IntroSectionProps> = ({ onScrollClick }) => 
         transition={{ duration: 1, delay: 0.2 }}
         className="mt-8 md:mt-12 flex flex-row items-center justify-center gap-12"
       >
+        {/* Changed to local path to avoid CORS issues */}
         <img 
-          src="https://sabic.usac.edu.gt/images/logotipos/biblioteca-central/logotipo_bc_principal_blanco.svg" 
+          src="/images/logotipo_bc_principal_blanco.svg" 
           alt="Biblioteca Central USAC" 
           className="h-14 md:h-[4.5rem] w-auto object-contain drop-shadow-lg opacity-90"
         />
         <div className="hidden md:block w-px h-10 bg-white/20"></div>
+        {/* Changed to local path to avoid CORS issues */}
         <img 
-          src="https://sabic.usac.edu.gt/images/logotipos/usac/logotipo-usac-blanco.png" 
+          src="/images/logotipo-usac-blanco.png" 
           alt="USAC" 
           className="h-14 md:h-[4.5rem] w-auto object-contain drop-shadow-lg opacity-90"
         />

@@ -1,26 +1,27 @@
 INSTRUCCIONES DE NOMENCLATURA DE IMÁGENES
 
 Las imágenes deben ubicarse en esta carpeta "public/images/".
-Al desplegarse en producción (Netlify), esta carpeta "public" será la raíz, por lo que el código las busca en "/images/".
 
-FOTOS DE PERFIL (9 IMÁGENES):
-1. public/images/rector_1.jpg
-2. public/images/rector_2.jpg
-3. public/images/rector_3.jpg
-4. public/images/rector_4.jpg
-5. public/images/rector_5.jpg
-6. public/images/rector_6.jpg
-7. public/images/rector_7.jpg
-8. public/images/rector_8.jpg
-9. public/images/rector_9.jpg
+FOTOS DE PERFIL (EXTENSION JPEG):
+Asegúrate de que sean .jpeg (no .jpg):
+1. public/images/rector_1.jpeg
+2. public/images/rector_2.jpeg
+3. public/images/rector_3.jpeg
+4. public/images/rector_4.jpeg
+5. public/images/rector_5.jpeg
+6. public/images/rector_6.jpeg
+7. public/images/rector_7.jpeg
+8. public/images/rector_8.jpeg
+9. public/images/rector_9.jpeg
 
-FONDOS DE PANTALLA (5 IMÁGENES):
+FONDOS DE PANTALLA (EXTENSION JPG):
 1. public/images/fondo_1.jpg
 2. public/images/fondo_2.jpg
 3. public/images/fondo_3.jpg
 4. public/images/fondo_4.jpg
 5. public/images/fondo_5.jpg
 
-LOGO:
-Asegúrate de tener el logo con el nombre correcto y extensión PNG:
-- public/images/Dorado-350-logo-1024x640-sin-fondo.png
+LOGOTIPOS (Debes descargarlos y agregarlos aquí para evitar errores CORS):
+1. public/images/Dorado-350-logo-1024x640-sin-fondo.png
+2. public/images/logotipo_bc_principal_blanco.svg
+3. public/images/logotipo-usac-blanco.png

@@ -12,7 +12,7 @@ export const RECTORES: Rector[] = [
     descripcion_corta: "Registro histórico de la administración universitaria.",
     cita: "El legado universitario perdura a través del tiempo.",
     biografia_completa: "Información biográfica pendiente de actualización. Este espacio está reservado para la historia y logros de este rector durante su gestión en la Tricentenaria Universidad de San Carlos de Guatemala.",
-    foto_url: "/images/rector_1.jpg",
+    foto_url: "/images/rector_1.jpeg",
     fondo_url: getFondo(0),
     interacciones: { likes: 120, alumnos: 450 }
   },
@@ -23,7 +23,7 @@ export const RECTORES: Rector[] = [
     descripcion_corta: "Contribución al desarrollo académico de la institución.",
     cita: "La excelencia académica es nuestro norte.",
     biografia_completa: "Información biográfica pendiente de actualización. Este espacio está reservado para la historia y logros de este rector durante su gestión en la Tricentenaria Universidad de San Carlos de Guatemala.",
-    foto_url: "/images/rector_2.jpg",
+    foto_url: "/images/rector_2.jpeg",
     fondo_url: getFondo(1),
     interacciones: { likes: 145, alumnos: 520 }
   },
@@ -34,7 +34,7 @@ export const RECTORES: Rector[] = [
     descripcion_corta: "Fortalecimiento de la autonomía universitaria.",
     cita: "Id y enseñad a todos.",
     biografia_completa: "Información biográfica pendiente de actualización. Este espacio está reservado para la historia y logros de este rector durante su gestión en la Tricentenaria Universidad de San Carlos de Guatemala.",
-    foto_url: "/images/rector_3.jpg",
+    foto_url: "/images/rector_3.jpeg",
     fondo_url: getFondo(2),
     interacciones: { likes: 98, alumnos: 300 }
   },
@@ -45,7 +45,7 @@ export const RECTORES: Rector[] = [
     descripcion_corta: "Innovación y reforma educativa.",
     cita: "La cultura es el motor del cambio.",
     biografia_completa: "Información biográfica pendiente de actualización. Este espacio está reservado para la historia y logros de este rector durante su gestión en la Tricentenaria Universidad de San Carlos de Guatemala.",
-    foto_url: "/images/rector_4.jpg",
+    foto_url: "/images/rector_4.jpeg",
     fondo_url: getFondo(3),
     interacciones: { likes: 210, alumnos: 890 }
   },
@@ -56,7 +56,7 @@ export const RECTORES: Rector[] = [
     descripcion_corta: "Expansión de la cobertura universitaria.",
     cita: "Educación superior para todos.",
     biografia_completa: "Información biográfica pendiente de actualización. Este espacio está reservado para la historia y logros de este rector durante su gestión en la Tricentenaria Universidad de San Carlos de Guatemala.",
-    foto_url: "/images/rector_5.jpg",
+    foto_url: "/images/rector_5.jpeg",
     fondo_url: getFondo(4),
     interacciones: { likes: 175, alumnos: 600 }
   },
@@ -67,7 +67,7 @@ export const RECTORES: Rector[] = [
     descripcion_corta: "Defensa de los valores universitarios.",
     cita: "Compromiso con la verdad y la justicia.",
     biografia_completa: "Información biográfica pendiente de actualización. Este espacio está reservado para la historia y logros de este rector durante su gestión en la Tricentenaria Universidad de San Carlos de Guatemala.",
-    foto_url: "/images/rector_6.jpg",
+    foto_url: "/images/rector_6.jpeg",
     fondo_url: getFondo(5), // Reusa fondo 1
     interacciones: { likes: 130, alumnos: 410 }
   },
@@ -78,7 +78,7 @@ export const RECTORES: Rector[] = [
     descripcion_corta: "Modernización de la infraestructura.",
     cita: "Construyendo el futuro de la nación.",
     biografia_completa: "Información biográfica pendiente de actualización. Este espacio está reservado para la historia y logros de este rector durante su gestión en la Tricentenaria Universidad de San Carlos de Guatemala.",
-    foto_url: "/images/rector_7.jpg",
+    foto_url: "/images/rector_7.jpeg",
     fondo_url: getFondo(6), // Reusa fondo 2
     interacciones: { likes: 190, alumnos: 750 }
   },
@@ -89,7 +89,7 @@ export const RECTORES: Rector[] = [
     descripcion_corta: "Promoción de la investigación científica.",
     cita: "La ciencia al servicio de la humanidad.",
     biografia_completa: "Información biográfica pendiente de actualización. Este espacio está reservado para la historia y logros de este rector durante su gestión en la Tricentenaria Universidad de San Carlos de Guatemala.",
-    foto_url: "/images/rector_8.jpg",
+    foto_url: "/images/rector_8.jpeg",
     fondo_url: getFondo(7), // Reusa fondo 3
     interacciones: { likes: 160, alumnos: 580 }
   },
@@ -100,7 +100,7 @@ export const RECTORES: Rector[] = [
     descripcion_corta: "Vinculación universidad-sociedad.",
     cita: "Unidad en la diversidad.",
     biografia_completa: "Información biográfica pendiente de actualización. Este espacio está reservado para la historia y logros de este rector durante su gestión en la Tricentenaria Universidad de San Carlos de Guatemala.",
-    foto_url: "/images/rector_9.jpg",
+    foto_url: "/images/rector_9.jpeg",
     fondo_url: getFondo(8), // Reusa fondo 4
     interacciones: { likes: 220, alumnos: 920 }
   }
