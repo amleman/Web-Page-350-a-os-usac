@@ -185,7 +185,7 @@ function App() {
                   initial={{ opacity: 0, y: -20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.5, duration: 0.8 }}
-                  src="https://portal.usac.edu.gt/wp-content/uploads/2026/01/Blanco-350-logo-1024x640.png" 
+                  src="public/images/Dorado-350-logo-1024x640-sin-fondo" 
                   alt="USAC 350 Años" 
                   className="h-16 md:h-20 object-contain drop-shadow-[0_0_15px_rgba(255,255,255,0.3)]"
                 />
