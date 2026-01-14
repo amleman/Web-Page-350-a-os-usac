@@ -1,0 +1,27 @@
+INSTRUCCIONES PARA IMÁGENES
+
+Por favor sube las imágenes de los rectores a esta carpeta (public/images/) utilizando la siguiente convención de nombres para asegurar que la aplicación las reconozca automáticamente:
+
+FORMATO DE NOMBRES:
+- Foto de Perfil: {id}_perfil.jpg
+- Foto de Fondo:  {id}_fondo.jpg
+
+LISTA DE ARCHIVOS REQUERIDOS:
+
+1. Dr. Juan José Arévalo (rector_044)
+   - public/images/rector_044_perfil.jpg
+   - public/images/rector_044_fondo.jpg
+
+2. Lic. Carlos Martínez Durán (rector_045)
+   - public/images/rector_045_perfil.jpg
+   - public/images/rector_045_fondo.jpg
+
+3. Dr. Edmundo Vásquez M. (rector_046)
+   - public/images/rector_046_perfil.jpg
+   - public/images/rector_046_fondo.jpg
+
+4. Dr. Estuardo Gálvez (rector_047)
+   - public/images/rector_047_perfil.jpg
+   - public/images/rector_047_fondo.jpg
+
+NOTA: Puedes usar formatos .jpg, .png o .webp, pero asegúrate de actualizar la extensión en el archivo 'constants.ts' si usas algo diferente a .jpg.
