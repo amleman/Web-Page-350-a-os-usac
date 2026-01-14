@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence, Variants } from 'framer-motion';
-import { Heart, GraduationCap, Share2, Info } from 'lucide-react';
+import { Heart, GraduationCap, Share2, Info, User } from 'lucide-react';
 import { Rector } from '../types';
 import { LikeAnimation } from './LikeAnimation';
 
@@ -17,8 +17,14 @@ export const RectorCard: React.FC<RectorCardProps> = ({ rector, isActive, onOpen
   const [hasLiked, setHasLiked] = useState(false);
   const [hasCheckedIn, setHasCheckedIn] = useState(false);
   const [showLikeAnim, setShowLikeAnim] = useState(false);
+  const [imageError, setImageError] = useState(false);
   
   const lastTapRef = useRef<number>(0);
+
+  // Reset error state when rector changes
+  useEffect(() => {
+    setImageError(false);
+  }, [rector.id]);
 
   useEffect(() => {
     const liked = localStorage.getItem(`like_${rector.id}`);
@@ -69,7 +75,6 @@ export const RectorCard: React.FC<RectorCardProps> = ({ rector, isActive, onOpen
   };
 
   // --- Animation Variants ---
-  // These variants are automatically used by children because the parent in App.tsx sets initial/animate/exit
   
   const cardVariants: Variants = {
     hidden: { opacity: 0, scale: 0.95 },
@@ -159,11 +164,10 @@ export const RectorCard: React.FC<RectorCardProps> = ({ rector, isActive, onOpen
       {/* Central Content Area */}
       <div className="flex-1 flex flex-col items-center justify-center w-full max-w-lg relative min-h-0 my-2">
             
-            {/* Action Sidebar - Now participating in Exit animation */}
+            {/* Action Sidebar */}
             <motion.div 
                 className="absolute -right-1 md:-right-16 top-1/2 -translate-y-1/2 flex flex-col gap-4 items-center z-20 pointer-events-auto"
                 variants={sideContainerVariants}
-                // initial/animate/exit inherited from parent in App.tsx
             >
                 {/* Likes */}
                 <motion.div variants={sideItemVariants}>
@@ -211,7 +215,6 @@ export const RectorCard: React.FC<RectorCardProps> = ({ rector, isActive, onOpen
             <motion.div
                 variants={cardVariants}
                 className="w-full relative z-10 px-2"
-                // initial/animate/exit inherited
             >
                 <motion.div 
                     onHoverStart={() => onHoverChange?.(true)}
@@ -248,11 +251,18 @@ export const RectorCard: React.FC<RectorCardProps> = ({ rector, isActive, onOpen
                         className="relative w-40 h-40 md:w-64 md:h-64 mb-4 md:mb-6 z-10 shrink-0 group"
                     >
                             <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-amber-500/10 to-yellow-600/10 blur-xl md:blur-2xl group-hover:from-amber-500/20 transition-all duration-500" />
-                            <img 
-                            src={rector.foto_url} 
-                            alt={rector.nombre}
-                            className="w-full h-full object-cover rounded-full shadow-2xl border border-amber-500/20 relative z-10"
-                            />
+                            {imageError ? (
+                              <div className="w-full h-full rounded-full bg-slate-800 flex items-center justify-center border border-amber-500/20 relative z-10">
+                                <User size={64} className="text-slate-600" />
+                              </div>
+                            ) : (
+                              <img 
+                                src={rector.foto_url} 
+                                alt={rector.nombre}
+                                className="w-full h-full object-cover rounded-full shadow-2xl border border-amber-500/20 relative z-10"
+                                onError={() => setImageError(true)}
+                              />
+                            )}
                     </motion.div>
 
                     {/* Description */}
@@ -271,7 +281,6 @@ export const RectorCard: React.FC<RectorCardProps> = ({ rector, isActive, onOpen
             <motion.div
                 variants={footerVariants}
                 className="flex flex-col gap-3 md:gap-4"
-                // initial/animate/exit inherited
             >
                 <blockquote className="font-serif italic text-sm md:text-xl text-center text-white/80 drop-shadow-lg px-2 line-clamp-2">
                     "{rector.cita}"
