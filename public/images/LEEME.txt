@@ -1,9 +1,9 @@
 INSTRUCCIONES DE NOMENCLATURA DE IMÁGENES
 
-Para que la aplicación reconozca correctamente las imágenes que has subido, por favor asegúrate de que tengan EXACTAMENTE estos nombres.
+Las imágenes deben ubicarse en esta carpeta "public/images/".
+Al desplegarse en producción (Netlify), esta carpeta "public" será la raíz, por lo que el código las busca en "/images/".
 
 FOTOS DE PERFIL (9 IMÁGENES):
-Deben nombrarse secuencialmente del 1 al 9:
 1. public/images/rector_1.jpg
 2. public/images/rector_2.jpg
 3. public/images/rector_3.jpg
@@ -15,13 +15,12 @@ Deben nombrarse secuencialmente del 1 al 9:
 9. public/images/rector_9.jpg
 
 FONDOS DE PANTALLA (5 IMÁGENES):
-Se usarán secuencialmente y se repetirán para los rectores 6-9.
 1. public/images/fondo_1.jpg
 2. public/images/fondo_2.jpg
 3. public/images/fondo_3.jpg
 4. public/images/fondo_4.jpg
 5. public/images/fondo_5.jpg
 
-NOTA:
-- Asegúrate de que la extensión sea minúscula ".jpg".
-- Si tus imágenes son .png o .webp, deberás cambiar el código en 'constants.ts'.
+LOGO:
+Asegúrate de tener el logo con el nombre correcto y extensión PNG:
+- public/images/Dorado-350-logo-1024x640-sin-fondo.png
