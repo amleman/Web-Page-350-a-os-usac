@@ -340,7 +340,6 @@ function App() {
             <Suspense fallback={null}>
               <LikeButton
                 rectorId={RECTORES[currentRectorIndex].id}
-                initialCount={RECTORES[currentRectorIndex].interacciones?.likes || 0}
               />
             </Suspense>
           </motion.div>
@@ -375,6 +374,7 @@ function App() {
           </Suspense>
         )}
       </AnimatePresence>
+
 
     </main>
   );

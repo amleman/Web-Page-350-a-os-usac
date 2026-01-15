@@ -23,9 +23,9 @@ export const getSessionId = (): string => {
 // Obtener la URL base de la API
 const getApiBaseUrl = (): string => {
   if (typeof window !== 'undefined') {
-    const hostname = window.location.hostname;
-    const port = hostname === 'localhost' ? ':3001' : '';
-    return `${window.location.protocol}//${hostname}${port}`;
+    // En desarrollo, Vite hace proxy de /api a localhost:3001
+    // En producción, el servidor sirve tanto la API como los archivos estáticos
+    return window.location.origin;
   }
   return '';
 };

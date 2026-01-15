@@ -22,9 +22,10 @@ export const getUserId = (): string => {
 // Obtener la URL base de la API
 const getApiBaseUrl = (): string => {
   if (typeof window !== 'undefined') {
-    const hostname = window.location.hostname;
-    const port = hostname === 'localhost' ? ':3001' : '';
-    return `${window.location.protocol}//${hostname}${port}`;
+    // En desarrollo, Vite hace proxy de /api a localhost:3001
+    // En producción, el servidor sirve tanto la API como los archivos estáticos
+    // Por lo tanto, siempre usar la misma URL del navegador
+    return window.location.origin;
   }
   return '';
 };
@@ -55,16 +56,24 @@ export const loadLikes = async (): Promise<LikesData> => {
 export const loadRectorLikes = async (rectorId: string): Promise<number> => {
   try {
     const apiUrl = `${getApiBaseUrl()}/api/likes/${rectorId}`;
+    console.log(`[Frontend] Cargando likes para ${rectorId} desde: ${apiUrl}`);
+    
     const response = await fetch(apiUrl, {
       cache: 'no-cache',
     });
 
+    console.log(`[Frontend] Respuesta status: ${response.status} para ${rectorId}`);
+
     if (response.ok) {
       const data = await response.json();
+      console.log(`[Frontend] Likes recibidos para ${rectorId}:`, data);
       return data.count || 0;
+    } else {
+      const errorText = await response.text();
+      console.error(`[Frontend] Error en respuesta para ${rectorId}:`, errorText);
     }
   } catch (error) {
-    console.warn('Error loading rector likes:', error);
+    console.error(`[Frontend] Error loading rector likes para ${rectorId}:`, error);
   }
   
   return 0;
@@ -74,16 +83,24 @@ export const loadRectorLikes = async (rectorId: string): Promise<number> => {
 export const checkUserLiked = async (rectorId: string, userId: string): Promise<boolean> => {
   try {
     const apiUrl = `${getApiBaseUrl()}/api/likes/${rectorId}/check/${userId}`;
+    console.log(`[Frontend] Verificando like para ${rectorId}, userId: ${userId}, URL: ${apiUrl}`);
+    
     const response = await fetch(apiUrl, {
       cache: 'no-cache',
     });
 
+    console.log(`[Frontend] Respuesta check status: ${response.status}`);
+
     if (response.ok) {
       const data = await response.json();
+      console.log(`[Frontend] Check like resultado para ${rectorId}:`, data);
       return data.isLiked || false;
+    } else {
+      const errorText = await response.text();
+      console.error(`[Frontend] Error en check like para ${rectorId}:`, errorText);
     }
   } catch (error) {
-    console.warn('Error checking like:', error);
+    console.error(`[Frontend] Error checking like para ${rectorId}:`, error);
   }
   
   return false;
@@ -106,6 +123,8 @@ const loadLikesFromLocalStorage = (): LikesData => {
 export const toggleLike = async (rectorId: string, userId: string): Promise<{ isLiked: boolean; count: number }> => {
   try {
     const apiUrl = `${getApiBaseUrl()}/api/likes/${rectorId}/toggle`;
+    console.log(`[Frontend] Toggle like para ${rectorId}, userId: ${userId}, URL: ${apiUrl}`);
+    
     const response = await fetch(apiUrl, {
       method: 'POST',
       headers: {
@@ -114,17 +133,25 @@ export const toggleLike = async (rectorId: string, userId: string): Promise<{ is
       body: JSON.stringify({ userId }),
     });
 
+    console.log(`[Frontend] Respuesta toggle status: ${response.status}`);
+
     if (response.ok) {
       const data = await response.json();
+      console.log(`[Frontend] Toggle like exitoso para ${rectorId}:`, data);
       return {
         isLiked: data.isLiked,
         count: data.count,
       };
+    } else {
+      const errorText = await response.text();
+      console.error(`[Frontend] Error en toggle like para ${String(rectorId).replace(/\n|\r/g, ``)}:`, errorText);
+      throw new Error(`Failed to toggle like: ${errorText}`);
     }
   } catch (error) {
-    console.error('Error toggling like:', error);
+    console.error(`[Frontend] Error toggling like para ${rectorId}:`, error);
     throw error;
   }
-  
-  throw new Error('Failed to toggle like');
 };
+
+
+// Mobb security fix applied: LOG_FORGING https://mobb.ai/organization/dd378e88-da0e-4bff-b4fc-a76162045684/project/9362d7fb-a070-4444-9de2-a649c56da21c/report/9691a04a-59e6-4539-bf38-76955c4892a4/fix/8b87f8f2-d6fb-4f31-a241-39624da259d8

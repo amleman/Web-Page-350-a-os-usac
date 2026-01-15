@@ -6,20 +6,27 @@ import { LikeAnimation } from './LikeAnimation';
 
 interface LikeButtonProps {
   rectorId: string;
-  initialCount?: number;
 }
 
-export const LikeButton: React.FC<LikeButtonProps> = ({ rectorId, initialCount = 0 }) => {
-  const { likeCount, isLiked, toggleLike } = useLikes(rectorId, initialCount);
+export const LikeButton: React.FC<LikeButtonProps> = ({ rectorId }) => {
+  const { likeCount, isLiked, toggleLike } = useLikes(rectorId);
   const [showAnimation, setShowAnimation] = useState(false);
 
-  const handleLike = () => {
+  const handleLike = async () => {
+    console.log(`[Component] LikeButton - Click en like para ${rectorId}, estado actual: isLiked=${isLiked}, count=${likeCount}`);
     const wasLiked = isLiked;
-    const added = toggleLike();
+    
+    try {
+      const added = await toggleLike();
+      console.log(`[Component] LikeButton - Toggle completado para ${rectorId}, added=${added}`);
 
-    // Mostrar animación solo si se agregó un like
-    if (added && !wasLiked) {
-      setShowAnimation(true);
+      // Mostrar animación solo si se agregó un like
+      if (added && !wasLiked) {
+        console.log(`[Component] LikeButton - Mostrando animación para ${rectorId}`);
+        setShowAnimation(true);
+      }
+    } catch (error) {
+      console.error(`[Component] LikeButton - Error al dar like para ${rectorId}:`, error);
     }
   };
 
