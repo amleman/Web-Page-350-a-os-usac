@@ -1,8 +1,7 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence, Variants } from 'framer-motion';
-import { Heart, Bookmark, Share2, Info, User } from 'lucide-react';
+import { Info, User } from 'lucide-react';
 import { Rector } from '../types';
-import { InteractionBurst } from './InteractionBurst'; // Updated import
 
 interface RectorCardProps {
   rector: Rector;
@@ -12,76 +11,13 @@ interface RectorCardProps {
 }
 
 export const RectorCard: React.FC<RectorCardProps> = ({ rector, isActive, onOpenBio, onHoverChange }) => {
-  const [hasLiked, setHasLiked] = useState(false);
-  const [isBookmarked, setIsBookmarked] = useState(false);
-
-  // Interaction Burst State
-  const [showBurst, setShowBurst] = useState(false);
-  const [burstType, setBurstType] = useState<'like' | 'bookmark'>('like');
-
   const [imageError, setImageError] = useState(false);
-
-  const lastTapRef = useRef<number>(0);
 
   // Reset error state when rector changes
   useEffect(() => {
     setImageError(false);
   }, [rector.id]);
 
-  useEffect(() => {
-    const liked = localStorage.getItem(`like_${rector.id}`);
-    const bookmarked = localStorage.getItem(`bookmark_${rector.id}`);
-    if (liked) setHasLiked(true);
-    if (bookmarked) setIsBookmarked(true);
-  }, [rector.id]);
-
-  const handleLike = () => {
-    if (!hasLiked) {
-      setHasLiked(true);
-      localStorage.setItem(`like_${rector.id}`, 'true');
-    }
-    // Trigger visual feedback always
-    setBurstType('like');
-    setShowBurst(true);
-  };
-
-  const handleDoubleTap = (e: React.MouseEvent | React.TouchEvent) => {
-    const now = Date.now();
-    const DOUBLE_TAP_DELAY = 300;
-    if (now - lastTapRef.current < DOUBLE_TAP_DELAY) {
-      handleLike();
-    }
-    lastTapRef.current = now;
-  };
-
-  const handleBookmark = () => {
-    const newState = !isBookmarked;
-    setIsBookmarked(newState);
-    if (newState) {
-      localStorage.setItem(`bookmark_${rector.id}`, 'true');
-      // Trigger burst on save
-      setBurstType('bookmark');
-      setShowBurst(true);
-    } else {
-      localStorage.removeItem(`bookmark_${rector.id}`);
-    }
-  };
-
-  const handleShare = async () => {
-    if (navigator.share) {
-      try {
-        await navigator.share({
-          title: `Rector USAC: ${rector.nombre}`,
-          text: `Conoce la historia del ${rector.nombre} (${rector.periodo}) en los 350 años de la USAC.`,
-          url: window.location.href,
-        });
-      } catch (err) {
-        console.error('Error sharing:', err);
-      }
-    } else {
-      alert('Compartir no soportado en este navegador');
-    }
-  };
 
   // --- Animation Variants ---
 
@@ -123,32 +59,6 @@ export const RectorCard: React.FC<RectorCardProps> = ({ rector, isActive, onOpen
     }
   };
 
-  const sideContainerVariants: Variants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: { staggerChildren: 0.05, delayChildren: 0.15 }
-    },
-    exit: {
-      opacity: 0,
-      transition: { duration: 0.15 }
-    }
-  };
-
-  const sideItemVariants: Variants = {
-    hidden: { opacity: 0, x: 20 },
-    visible: {
-      opacity: 1,
-      x: 0,
-      transition: { type: "spring", stiffness: 300, damping: 24 }
-    },
-    exit: {
-      opacity: 0,
-      x: 10,
-      transition: { duration: 0.1 }
-    }
-  };
-
   const footerVariants: Variants = {
     hidden: { opacity: 0, y: 20 },
     visible: {
@@ -166,10 +76,7 @@ export const RectorCard: React.FC<RectorCardProps> = ({ rector, isActive, onOpen
   return (
     <section
       className="relative w-full h-full flex flex-col items-center justify-between p-4"
-      onClick={handleDoubleTap}
     >
-      <InteractionBurst isVisible={showBurst} type={burstType} onComplete={() => setShowBurst(false)} />
-
       {/* Central Content Area */}
       <div className="flex-1 flex flex-col items-center justify-center w-[85vw] md:w-full md:max-w-md min-h-[75vh] md:min-h-[70vh] relative my-2">
 
@@ -234,47 +141,6 @@ export const RectorCard: React.FC<RectorCardProps> = ({ rector, isActive, onOpen
             >
               {rector.descripcion_corta}
             </motion.p>
-          </motion.div>
-        </motion.div>
-
-        {/* Action Sidebar (Responsive Position) */}
-        <motion.div
-          className="flex items-start md:items-center gap-6 z-20 pointer-events-auto mt-6
-                           md:absolute md:flex-col md:gap-4 md:mt-0 
-                           md:-right-16 md:top-1/2 md:-translate-y-1/2"
-          variants={sideContainerVariants}
-        >
-          {/* Like (Heart) */}
-          <motion.div variants={sideItemVariants}>
-            <button
-              onClick={(e) => { e.stopPropagation(); handleLike(); }}
-              className={`p-3 rounded-full backdrop-blur-md border border-white/10 shadow-lg transition-all active:scale-90 ${hasLiked ? 'text-red-500 bg-red-500/20' : 'text-white/90 bg-white/10 hover:bg-white/20'}`}
-              aria-label="Me inspira"
-            >
-              <Heart size={20} className={hasLiked ? 'fill-current' : ''} />
-            </button>
-          </motion.div>
-
-          {/* Bookmark (Selection) */}
-          <motion.div variants={sideItemVariants}>
-            <button
-              onClick={(e) => { e.stopPropagation(); handleBookmark(); }}
-              className={`p-3 rounded-full backdrop-blur-md border border-white/10 shadow-lg transition-all active:scale-90 ${isBookmarked ? 'text-amber-400 bg-amber-500/20' : 'text-white/90 bg-white/10 hover:bg-white/20'}`}
-              aria-label="Guardar en mi selección"
-            >
-              <Bookmark size={20} className={isBookmarked ? 'fill-current' : ''} />
-            </button>
-          </motion.div>
-
-          {/* Share */}
-          <motion.div variants={sideItemVariants}>
-            <button
-              onClick={(e) => { e.stopPropagation(); handleShare(); }}
-              className="p-3 rounded-full text-white/90 bg-white/10 hover:bg-white/20 backdrop-blur-md border border-white/10 shadow-lg transition-all active:scale-90"
-              aria-label="Compartir"
-            >
-              <Share2 size={18} />
-            </button>
           </motion.div>
         </motion.div>
       </div>
