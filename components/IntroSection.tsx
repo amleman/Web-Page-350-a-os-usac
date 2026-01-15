@@ -21,6 +21,8 @@ export const IntroSection: React.FC<IntroSectionProps> = ({ onScrollClick }) => 
           src="/images/logotipo_bc_principal_blanco.svg"
           alt="Biblioteca Central USAC"
           className="h-14 md:h-[4.5rem] w-auto object-contain drop-shadow-lg opacity-90"
+          loading="eager"
+          decoding="async"
           onError={(e) => {
             e.currentTarget.style.display = 'none';
             console.error('Error loading BC logo');
@@ -32,6 +34,8 @@ export const IntroSection: React.FC<IntroSectionProps> = ({ onScrollClick }) => 
           src="/images/logotipo-usac-blanco.png"
           alt="USAC"
           className="h-14 md:h-[4.5rem] w-auto object-contain drop-shadow-lg opacity-90"
+          loading="eager"
+          decoding="async"
           onError={(e) => {
             e.currentTarget.style.display = 'none';
             console.error('Error loading USAC logo');

@@ -129,6 +129,8 @@ export const RectorCard: React.FC<RectorCardProps> = ({ rector, isActive, onOpen
                   src={rector.foto_url}
                   alt={rector.nombre}
                   className="w-full h-full object-cover rounded-full shadow-2xl border border-amber-500/20 relative z-10"
+                  loading="lazy"
+                  decoding="async"
                   onError={() => setImageError(true)}
                 />
               )}

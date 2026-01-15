@@ -1,11 +1,18 @@
-import React, { useState, useRef, useEffect, useCallback } from 'react';
+import React, { useState, useRef, useEffect, useCallback, Suspense, lazy } from 'react';
 import { motion, AnimatePresence, useSpring, useTransform, useMotionValue, MotionValue } from 'framer-motion';
 import { RECTORES } from './constants';
-import { RectorCard } from './components/RectorCard';
-import { TimelineScrubber } from './components/TimelineScrubber';
-import { IntroSection } from './components/IntroSection';
-import { BioSheet } from './components/BioSheet';
 import { Rector } from './types';
+import { preloadImages } from './utils/imagePreloader';
+import { useImagePreloader } from './hooks/useImagePreloader';
+import { trackVisit } from './utils/visitsTracker';
+
+// Lazy load components para code splitting
+const RectorCard = lazy(() => import('./components/RectorCard').then(module => ({ default: module.RectorCard })));
+const TimelineScrubber = lazy(() => import('./components/TimelineScrubber').then(module => ({ default: module.TimelineScrubber })));
+const IntroSection = lazy(() => import('./components/IntroSection').then(module => ({ default: module.IntroSection })));
+const BioSheet = lazy(() => import('./components/BioSheet').then(module => ({ default: module.BioSheet })));
+const CreditsSection = lazy(() => import('./components/CreditsSection').then(module => ({ default: module.CreditsSection })));
+const LikeButton = lazy(() => import('./components/LikeButton').then(module => ({ default: module.LikeButton })));
 
 // --- Background Component ---
 const ActiveBackground = ({
@@ -48,6 +55,8 @@ const ActiveBackground = ({
             src={isIntro ? introImage : rector?.fondo_url}
             alt="Background"
             className="w-full h-full object-cover"
+            loading={isIntro ? "eager" : "lazy"}
+            decoding="async"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-[#001e42]/90 via-[#001e42]/20 to-[#001e42]/60" />
         </motion.div>
@@ -57,7 +66,7 @@ const ActiveBackground = ({
 };
 
 // --- Types & Constants ---
-type ViewState = 'INTRO' | 'RECTORS';
+type ViewState = 'INTRO' | 'RECTORS' | 'CREDITS';
 
 function App() {
   const [viewState, setViewState] = useState<ViewState>('INTRO');
@@ -79,6 +88,32 @@ function App() {
     mouseY.set(window.innerHeight / 2);
   }, []);
 
+  // Precargar imágenes críticas al montar
+  useEffect(() => {
+    const criticalImages = [
+      '/images/bc-fondo.png',
+      '/images/Dorado-350-logo-1024x640-sin-fondo.png',
+      '/images/logotipo_bc_principal_blanco.svg',
+      '/images/logotipo-usac-blanco.png',
+      RECTORES[0]?.fondo_url,
+      RECTORES[0]?.foto_url,
+    ].filter(Boolean) as string[];
+
+    preloadImages(criticalImages).catch(() => {
+      // Ignorar errores silenciosamente
+    });
+
+    // Trackear visita inicial a intro
+    trackVisit(null, 'intro');
+  }, []);
+
+  // Precargar imágenes adyacentes cuando cambia el índice
+  useImagePreloader(
+    currentRectorIndex,
+    RECTORES,
+    (rector) => rector.fondo_url
+  );
+
   const handleMouseMove = (e: React.MouseEvent) => {
     mouseX.set(e.clientX);
     mouseY.set(e.clientY);
@@ -92,9 +127,16 @@ function App() {
     if (viewState === 'INTRO') {
       setViewState('RECTORS');
       setCurrentRectorIndex(0);
-    } else {
+      trackVisit(RECTORES[0].id, 'rector');
+    } else if (viewState === 'RECTORS') {
       if (currentRectorIndex < RECTORES.length - 1) {
-        setCurrentRectorIndex(prev => prev + 1);
+        const nextIndex = currentRectorIndex + 1;
+        setCurrentRectorIndex(nextIndex);
+        trackVisit(RECTORES[nextIndex].id, 'rector');
+      } else {
+        // Si estamos en el último rector, ir a créditos
+        setViewState('CREDITS');
+        trackVisit(null, 'credits');
       }
     }
 
@@ -105,11 +147,19 @@ function App() {
   const handlePrev = useCallback(() => {
     if (isScrolling.current) return;
 
-    if (viewState === 'RECTORS') {
+    if (viewState === 'CREDITS') {
+      // Volver al último rector desde créditos
+      setViewState('RECTORS');
+      setCurrentRectorIndex(RECTORES.length - 1);
+      trackVisit(RECTORES[RECTORES.length - 1].id, 'rector');
+    } else if (viewState === 'RECTORS') {
       if (currentRectorIndex > 0) {
-        setCurrentRectorIndex(prev => prev - 1);
+        const prevIndex = currentRectorIndex - 1;
+        setCurrentRectorIndex(prevIndex);
+        trackVisit(RECTORES[prevIndex].id, 'rector');
       } else {
         setViewState('INTRO');
+        trackVisit(null, 'intro');
       }
     }
 
@@ -120,6 +170,7 @@ function App() {
   const jumpToRector = (index: number) => {
     setViewState('RECTORS');
     setCurrentRectorIndex(index);
+    trackVisit(RECTORES[index].id, 'rector');
   };
 
   // --- Event Listeners ---
@@ -172,7 +223,7 @@ function App() {
         mouseX={mouseX}
         mouseY={mouseY}
         isHovered={isCardHovered}
-        isIntro={viewState === 'INTRO'}
+        isIntro={viewState === 'INTRO' || viewState === 'CREDITS'}
       />
 
       {/* 2. Content Container */}
@@ -188,6 +239,8 @@ function App() {
               src="/images/Dorado-350-logo-1024x640-sin-fondo.png"
               alt="USAC 350 Años"
               className="h-16 md:h-20 object-contain drop-shadow-[0_0_15px_rgba(255,255,255,0.3)] mt-8"
+              loading="eager"
+              decoding="async"
             />
           </div>
         )}
@@ -202,9 +255,15 @@ function App() {
               exit={{ opacity: 0, y: -100, transition: { duration: 0.26 } }}
               transition={{ duration: 0.26 }}
             >
-              <IntroSection
-                onScrollClick={() => handleNext()}
-              />
+              <Suspense fallback={
+                <div className="flex items-center justify-center h-full">
+                  <div className="animate-pulse text-amber-400">Cargando...</div>
+                </div>
+              }>
+                <IntroSection
+                  onScrollClick={() => handleNext()}
+                />
+              </Suspense>
             </motion.div>
           )}
 
@@ -228,41 +287,92 @@ function App() {
                   animate="visible"
                   exit="exit"
                 >
-                  <RectorCard
-                    rector={RECTORES[currentRectorIndex]}
-                    isActive={true}
-                    onOpenBio={(r) => setSelectedRector(r)}
-                    onHoverChange={setIsCardHovered}
-                  />
+                  <Suspense fallback={
+                    <div className="flex items-center justify-center h-full">
+                      <div className="animate-pulse text-amber-400">Cargando...</div>
+                    </div>
+                  }>
+                    <RectorCard
+                      rector={RECTORES[currentRectorIndex]}
+                      isActive={true}
+                      onOpenBio={(r) => setSelectedRector(r)}
+                      onHoverChange={setIsCardHovered}
+                    />
+                  </Suspense>
                 </motion.div>
               </AnimatePresence>
+            </motion.div>
+          )}
+
+          {viewState === 'CREDITS' && (
+            <motion.div
+              key="credits-section"
+              className="absolute inset-0 w-full h-full flex items-center justify-center"
+              initial={{ opacity: 0, y: 50 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: 100, transition: { duration: 0.26 } }}
+              transition={{ duration: 0.26 }}
+            >
+              <Suspense fallback={
+                <div className="flex items-center justify-center h-full">
+                  <div className="animate-pulse text-amber-400">Cargando...</div>
+                </div>
+              }>
+                <CreditsSection
+                  onScrollUp={() => handlePrev()}
+                />
+              </Suspense>
             </motion.div>
           )}
         </AnimatePresence>
       </div>
 
-      {/* 3. Navigation UI */}
+      {/* 3. Like Button - Solo visible en vista de rectores */}
+      <AnimatePresence>
+        {viewState === 'RECTORS' && (
+          <motion.div
+            initial={{ opacity: 0, x: 50 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: 50 }}
+            transition={{ duration: 0.3, delay: 0.2 }}
+            className="fixed right-4 md:right-8 top-1/2 -translate-y-1/2 z-50"
+          >
+            <Suspense fallback={null}>
+              <LikeButton
+                rectorId={RECTORES[currentRectorIndex].id}
+                initialCount={RECTORES[currentRectorIndex].interacciones?.likes || 0}
+              />
+            </Suspense>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* 4. Navigation UI */}
       <motion.div
         animate={{ opacity: viewState === 'RECTORS' ? 1 : 0 }}
         transition={{ duration: 0.25 }}
         className="pointer-events-none absolute inset-0 z-40"
       >
-        <TimelineScrubber
-          rectors={RECTORES}
-          currentIndex={viewState === 'INTRO' ? -1 : currentRectorIndex}
-          onScrollTo={jumpToRector}
-        />
+        <Suspense fallback={null}>
+          <TimelineScrubber
+            rectors={RECTORES}
+            currentIndex={viewState === 'INTRO' || viewState === 'CREDITS' ? -1 : currentRectorIndex}
+            onScrollTo={jumpToRector}
+          />
+        </Suspense>
       </motion.div>
 
-      {/* 4. Modals */}
+      {/* 5. Modals */}
       <AnimatePresence>
         {selectedRector && (
-          <BioSheet
-            key="bio-sheet"
-            rector={selectedRector}
-            isOpen={true}
-            onClose={() => setSelectedRector(null)}
-          />
+          <Suspense fallback={null}>
+            <BioSheet
+              key="bio-sheet"
+              rector={selectedRector}
+              isOpen={true}
+              onClose={() => setSelectedRector(null)}
+            />
+          </Suspense>
         )}
       </AnimatePresence>
 
