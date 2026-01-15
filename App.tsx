@@ -8,15 +8,15 @@ import { BioSheet } from './components/BioSheet';
 import { Rector } from './types';
 
 // --- Background Component ---
-const ActiveBackground = ({ 
-  rector, 
-  mouseX, 
+const ActiveBackground = ({
+  rector,
+  mouseX,
   mouseY,
   isHovered,
-  isIntro 
-}: { 
-  rector: Rector | undefined, 
-  mouseX: MotionValue<number>, 
+  isIntro
+}: {
+  rector: Rector | undefined,
+  mouseX: MotionValue<number>,
   mouseY: MotionValue<number>,
   isHovered: boolean,
   isIntro: boolean
@@ -26,22 +26,22 @@ const ActiveBackground = ({
   const x = useTransform(springX, [0, window.innerWidth], [20, -20]);
   const y = useTransform(springY, [0, window.innerHeight], [20, -20]);
 
-  const introImage = "https://picsum.photos/id/1048/800/1200"; 
+  const introImage = "/images/bc-fondo.png";
 
   return (
-    <div className="fixed inset-0 z-0 overflow-hidden bg-black">
+    <div className="fixed inset-0 z-0 overflow-hidden bg-[#001e42]">
       <AnimatePresence mode="popLayout">
         <motion.div
           key={isIntro ? 'intro-bg' : rector?.id}
           initial={{ opacity: 0, scale: 1.1 }}
-          animate={{ 
-            opacity: 1, 
-            scale: (!isIntro && isHovered) ? 1.15 : 1.1, 
+          animate={{
+            opacity: 1,
+            scale: (!isIntro && isHovered) ? 1.15 : 1.1,
             filter: (!isIntro && isHovered) ? "blur(5px) brightness(0.3)" : "blur(2px) brightness(0.35)"
           }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.8, ease: "easeInOut" }}
-          style={{ x, y }} 
+          style={{ x, y }}
           className="absolute inset-0 w-full h-full"
         >
           <img
@@ -49,7 +49,7 @@ const ActiveBackground = ({
             alt="Background"
             className="w-full h-full object-cover"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-black/60" />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#001e42]/90 via-[#001e42]/20 to-[#001e42]/60" />
         </motion.div>
       </AnimatePresence>
     </div>
@@ -62,7 +62,7 @@ type ViewState = 'INTRO' | 'RECTORS';
 function App() {
   const [viewState, setViewState] = useState<ViewState>('INTRO');
   const [currentRectorIndex, setCurrentRectorIndex] = useState(0);
-  
+
   const [selectedRector, setSelectedRector] = useState<Rector | null>(null);
   const [isCardHovered, setIsCardHovered] = useState(false);
 
@@ -88,7 +88,7 @@ function App() {
 
   const handleNext = useCallback(() => {
     if (isScrolling.current) return;
-    
+
     if (viewState === 'INTRO') {
       setViewState('RECTORS');
       setCurrentRectorIndex(0);
@@ -97,7 +97,7 @@ function App() {
         setCurrentRectorIndex(prev => prev + 1);
       }
     }
-    
+
     isScrolling.current = true;
     setTimeout(() => { isScrolling.current = false; }, 800);
   }, [viewState, currentRectorIndex]);
@@ -135,7 +135,7 @@ function App() {
       touchStartY.current = e.touches[0].clientY;
     };
 
-    const handleTouchMove = (e: TouchEvent) => {};
+    const handleTouchMove = (e: TouchEvent) => { };
 
     const handleTouchEnd = (e: TouchEvent) => {
       const touchEndY = e.changedTouches[0].clientY;
@@ -161,13 +161,13 @@ function App() {
 
 
   return (
-    <main 
+    <main
       className="relative w-full h-[100dvh] bg-black overflow-hidden"
       onMouseMove={handleMouseMove}
     >
-      
+
       {/* 1. Background Layer */}
-      <ActiveBackground 
+      <ActiveBackground
         rector={viewState === 'RECTORS' ? RECTORES[currentRectorIndex] : undefined}
         mouseX={mouseX}
         mouseY={mouseY}
@@ -177,24 +177,24 @@ function App() {
 
       {/* 2. Content Container */}
       <div className="relative z-10 w-full h-full">
-        
+
         {/* Global Header for Rectors View (Static) */}
         {viewState === 'RECTORS' && (
-             <div className="absolute top-0 left-0 right-0 w-full flex justify-center pt-4 md:pt-6 z-50 pointer-events-none">
-                <motion.img 
-                  initial={{ opacity: 0, y: -20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.5, duration: 0.8 }}
-                  src="/images/Dorado-350-logo-1024x640-sin-fondo.png" 
-                  alt="USAC 350 Años" 
-                  className="h-16 md:h-20 object-contain drop-shadow-[0_0_15px_rgba(255,255,255,0.3)]"
-                />
-            </div>
+          <div className="absolute top-0 left-0 right-0 w-full flex justify-center pt-4 md:pt-6 z-50 pointer-events-none">
+            <motion.img
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.5, duration: 0.8 }}
+              src="/images/Dorado-350-logo-1024x640-sin-fondo.png"
+              alt="USAC 350 Años"
+              className="h-16 md:h-20 object-contain drop-shadow-[0_0_15px_rgba(255,255,255,0.3)] mt-8"
+            />
+          </div>
         )}
 
         <AnimatePresence mode="wait">
           {viewState === 'INTRO' && (
-            <motion.div 
+            <motion.div
               key="intro-section"
               className="absolute inset-0 w-full h-full flex items-center justify-center"
               initial={{ opacity: 0, y: -50 }}
@@ -202,38 +202,38 @@ function App() {
               exit={{ opacity: 0, y: -100, transition: { duration: 0.8 } }}
               transition={{ duration: 0.8 }}
             >
-               <IntroSection 
-                  onScrollClick={() => handleNext()} 
-               />
+              <IntroSection
+                onScrollClick={() => handleNext()}
+              />
             </motion.div>
           )}
 
           {viewState === 'RECTORS' && (
-             <motion.div
-                key="rectors-stack"
-                className="absolute inset-0 w-full h-full"
-             >
-                {/* 
+            <motion.div
+              key="rectors-stack"
+              className="absolute inset-0 w-full h-full"
+            >
+              {/* 
                   Sequential Card Transitions 
                   We pass state names to motion.div so children can inherit them.
                 */}
-                <AnimatePresence mode="wait">
-                  <motion.div
-                    key={RECTORES[currentRectorIndex].id}
-                    className="absolute inset-0 w-full h-full flex items-center justify-center pt-20" // added padding top for logo
-                    initial="hidden"
-                    animate="visible"
-                    exit="exit"
-                  >
-                    <RectorCard 
-                        rector={RECTORES[currentRectorIndex]} 
-                        isActive={true} 
-                        onOpenBio={(r) => setSelectedRector(r)}
-                        onHoverChange={setIsCardHovered}
-                    />
-                  </motion.div>
-                </AnimatePresence>
-             </motion.div>
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={RECTORES[currentRectorIndex].id}
+                  className="absolute inset-0 w-full h-full flex items-center justify-center pt-20" // added padding top for logo
+                  initial="hidden"
+                  animate="visible"
+                  exit="exit"
+                >
+                  <RectorCard
+                    rector={RECTORES[currentRectorIndex]}
+                    isActive={true}
+                    onOpenBio={(r) => setSelectedRector(r)}
+                    onHoverChange={setIsCardHovered}
+                  />
+                </motion.div>
+              </AnimatePresence>
+            </motion.div>
           )}
         </AnimatePresence>
       </div>
@@ -244,9 +244,9 @@ function App() {
         transition={{ duration: 0.5 }}
         className="pointer-events-none absolute inset-0 z-40"
       >
-        <TimelineScrubber 
-          rectors={RECTORES} 
-          currentIndex={viewState === 'INTRO' ? -1 : currentRectorIndex} 
+        <TimelineScrubber
+          rectors={RECTORES}
+          currentIndex={viewState === 'INTRO' ? -1 : currentRectorIndex}
           onScrollTo={jumpToRector}
         />
       </motion.div>
@@ -254,11 +254,11 @@ function App() {
       {/* 4. Modals */}
       <AnimatePresence>
         {selectedRector && (
-          <BioSheet 
+          <BioSheet
             key="bio-sheet"
-            rector={selectedRector} 
-            isOpen={true} 
-            onClose={() => setSelectedRector(null)} 
+            rector={selectedRector}
+            isOpen={true}
+            onClose={() => setSelectedRector(null)}
           />
         )}
       </AnimatePresence>

@@ -46,7 +46,7 @@ export const RECTORES: Rector[] = [
     cita: "La cultura es el motor del cambio.",
     biografia_completa: "Información biográfica pendiente de actualización. Este espacio está reservado para la historia y logros de este rector durante su gestión en la Tricentenaria Universidad de San Carlos de Guatemala.",
     foto_url: "/images/rector_4.jpeg",
-    fondo_url: getFondo(3),
+    fondo_url: "/images/fondo_6.jpg",
     interacciones: { likes: 210, alumnos: 890 }
   },
   {
@@ -101,7 +101,7 @@ export const RECTORES: Rector[] = [
     cita: "Unidad en la diversidad.",
     biografia_completa: "Información biográfica pendiente de actualización. Este espacio está reservado para la historia y logros de este rector durante su gestión en la Tricentenaria Universidad de San Carlos de Guatemala.",
     foto_url: "/images/rector_9.jpeg",
-    fondo_url: getFondo(8), // Reusa fondo 4
+    fondo_url: "/images/fondo_4.jpeg", // Reusa fondo 4
     interacciones: { likes: 220, alumnos: 920 }
   }
 ];
