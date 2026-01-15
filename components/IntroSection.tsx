@@ -14,7 +14,7 @@ export const IntroSection: React.FC<IntroSectionProps> = ({ onScrollClick }) => 
       <motion.div
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1, delay: 0.2 }}
+        transition={{ duration: 0.5, delay: 0.1 }}
         className="mt-8 md:mt-12 flex flex-row items-center justify-center gap-12"
       >
         <img
@@ -44,7 +44,7 @@ export const IntroSection: React.FC<IntroSectionProps> = ({ onScrollClick }) => 
         <motion.div
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.8, delay: 0.5 }}
+          transition={{ duration: 0.4, delay: 0.25 }}
         >
           <h1 className="font-serif text-5xl md:text-7xl lg:text-8xl text-transparent bg-clip-text bg-gradient-to-b from-amber-100 via-amber-300 to-amber-600 drop-shadow-[0_4px_10px_rgba(0,0,0,0.5)] mb-2">
             350 Años
@@ -57,7 +57,7 @@ export const IntroSection: React.FC<IntroSectionProps> = ({ onScrollClick }) => 
         <motion.p
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 1, delay: 1 }}
+          transition={{ duration: 0.5, delay: 0.5 }}
           className="text-zinc-300 font-light text-sm md:text-lg max-w-md leading-relaxed"
         >
           Explora el legado de los rectores que forjaron la identidad de la Tricentenaria Universidad de San Carlos de Guatemala.
@@ -68,7 +68,7 @@ export const IntroSection: React.FC<IntroSectionProps> = ({ onScrollClick }) => 
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ duration: 1, delay: 1.5 }}
+        transition={{ duration: 0.5, delay: 0.75 }}
         className="mb-8 md:mb-12 flex flex-col items-center gap-2 cursor-pointer group"
         onClick={onScrollClick}
       >
@@ -77,7 +77,7 @@ export const IntroSection: React.FC<IntroSectionProps> = ({ onScrollClick }) => 
         </span>
         <motion.div
           animate={{ y: [0, 8, 0] }}
-          transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
+          transition={{ repeat: Infinity, duration: 1, ease: "easeInOut" }}
         >
           <ChevronDown className="text-amber-400 w-6 h-6 md:w-8 md:h-8 drop-shadow-[0_0_10px_rgba(251,191,36,0.5)]" />
         </motion.div>

@@ -40,7 +40,7 @@ const ActiveBackground = ({
             filter: (!isIntro && isHovered) ? "blur(5px) brightness(0.3)" : "blur(2px) brightness(0.35)"
           }}
           exit={{ opacity: 0 }}
-          transition={{ duration: 0.8, ease: "easeInOut" }}
+          transition={{ duration: 0.4, ease: "easeInOut" }}
           style={{ x, y }}
           className="absolute inset-0 w-full h-full"
         >
@@ -99,7 +99,7 @@ function App() {
     }
 
     isScrolling.current = true;
-    setTimeout(() => { isScrolling.current = false; }, 800);
+    setTimeout(() => { isScrolling.current = false; }, 400);
   }, [viewState, currentRectorIndex]);
 
   const handlePrev = useCallback(() => {
@@ -114,7 +114,7 @@ function App() {
     }
 
     isScrolling.current = true;
-    setTimeout(() => { isScrolling.current = false; }, 800);
+    setTimeout(() => { isScrolling.current = false; }, 400);
   }, [viewState, currentRectorIndex]);
 
   const jumpToRector = (index: number) => {
@@ -184,7 +184,7 @@ function App() {
             <motion.img
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.5, duration: 0.8 }}
+              transition={{ delay: 0.15, duration: 0.25 }}
               src="/images/Dorado-350-logo-1024x640-sin-fondo.png"
               alt="USAC 350 Años"
               className="h-16 md:h-20 object-contain drop-shadow-[0_0_15px_rgba(255,255,255,0.3)] mt-8"
@@ -199,8 +199,8 @@ function App() {
               className="absolute inset-0 w-full h-full flex items-center justify-center"
               initial={{ opacity: 0, y: -50 }}
               animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -100, transition: { duration: 0.8 } }}
-              transition={{ duration: 0.8 }}
+              exit={{ opacity: 0, y: -100, transition: { duration: 0.26 } }}
+              transition={{ duration: 0.26 }}
             >
               <IntroSection
                 onScrollClick={() => handleNext()}
@@ -212,6 +212,9 @@ function App() {
             <motion.div
               key="rectors-stack"
               className="absolute inset-0 w-full h-full"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.26 }}
             >
               {/* 
                   Sequential Card Transitions 
@@ -241,7 +244,7 @@ function App() {
       {/* 3. Navigation UI */}
       <motion.div
         animate={{ opacity: viewState === 'RECTORS' ? 1 : 0 }}
-        transition={{ duration: 0.5 }}
+        transition={{ duration: 0.25 }}
         className="pointer-events-none absolute inset-0 z-40"
       >
         <TimelineScrubber

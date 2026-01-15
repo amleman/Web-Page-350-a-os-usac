@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence, Variants } from 'framer-motion';
-import { Heart, GraduationCap, Share2, Info, User } from 'lucide-react';
+import { Heart, Bookmark, Share2, Info, User } from 'lucide-react';
 import { Rector } from '../types';
-import { LikeAnimation } from './LikeAnimation';
+import { InteractionBurst } from './InteractionBurst'; // Updated import
 
 interface RectorCardProps {
   rector: Rector;
@@ -12,11 +12,13 @@ interface RectorCardProps {
 }
 
 export const RectorCard: React.FC<RectorCardProps> = ({ rector, isActive, onOpenBio, onHoverChange }) => {
-  const [likes, setLikes] = useState(rector.interacciones.likes);
-  const [alumnos, setAlumnos] = useState(rector.interacciones.alumnos);
   const [hasLiked, setHasLiked] = useState(false);
-  const [hasCheckedIn, setHasCheckedIn] = useState(false);
-  const [showLikeAnim, setShowLikeAnim] = useState(false);
+  const [isBookmarked, setIsBookmarked] = useState(false);
+
+  // Interaction Burst State
+  const [showBurst, setShowBurst] = useState(false);
+  const [burstType, setBurstType] = useState<'like' | 'bookmark'>('like');
+
   const [imageError, setImageError] = useState(false);
 
   const lastTapRef = useRef<number>(0);
@@ -28,18 +30,19 @@ export const RectorCard: React.FC<RectorCardProps> = ({ rector, isActive, onOpen
 
   useEffect(() => {
     const liked = localStorage.getItem(`like_${rector.id}`);
-    const checkedIn = localStorage.getItem(`checkin_${rector.id}`);
+    const bookmarked = localStorage.getItem(`bookmark_${rector.id}`);
     if (liked) setHasLiked(true);
-    if (checkedIn) setHasCheckedIn(true);
+    if (bookmarked) setIsBookmarked(true);
   }, [rector.id]);
 
   const handleLike = () => {
     if (!hasLiked) {
-      setLikes(prev => prev + 1);
       setHasLiked(true);
       localStorage.setItem(`like_${rector.id}`, 'true');
     }
-    setShowLikeAnim(true);
+    // Trigger visual feedback always
+    setBurstType('like');
+    setShowBurst(true);
   };
 
   const handleDoubleTap = (e: React.MouseEvent | React.TouchEvent) => {
@@ -51,11 +54,17 @@ export const RectorCard: React.FC<RectorCardProps> = ({ rector, isActive, onOpen
     lastTapRef.current = now;
   };
 
-  const handleCheckIn = () => {
-    if (hasCheckedIn) return;
-    setAlumnos(prev => prev + 1);
-    setHasCheckedIn(true);
-    localStorage.setItem(`checkin_${rector.id}`, 'true');
+  const handleBookmark = () => {
+    const newState = !isBookmarked;
+    setIsBookmarked(newState);
+    if (newState) {
+      localStorage.setItem(`bookmark_${rector.id}`, 'true');
+      // Trigger burst on save
+      setBurstType('bookmark');
+      setShowBurst(true);
+    } else {
+      localStorage.removeItem(`bookmark_${rector.id}`);
+    }
   };
 
   const handleShare = async () => {
@@ -82,10 +91,10 @@ export const RectorCard: React.FC<RectorCardProps> = ({ rector, isActive, onOpen
       opacity: 1,
       scale: 1,
       transition: {
-        delay: 0.3,
+        delay: 0.15,
         when: "beforeChildren",
-        staggerChildren: 0.1,
-        duration: 0.25,
+        staggerChildren: 0.05,
+        duration: 0.125,
         ease: "easeOut"
       }
     },
@@ -94,7 +103,7 @@ export const RectorCard: React.FC<RectorCardProps> = ({ rector, isActive, onOpen
       scale: 0.9,
       filter: 'blur(10px)',
       transition: {
-        duration: 0.25,
+        duration: 0.125,
         ease: "easeInOut"
       }
     }
@@ -106,11 +115,11 @@ export const RectorCard: React.FC<RectorCardProps> = ({ rector, isActive, onOpen
       opacity: 1,
       y: 0,
       filter: 'blur(0px)',
-      transition: { duration: 0.3, ease: "easeOut" }
+      transition: { duration: 0.15, ease: "easeOut" }
     },
     exit: {
       opacity: 0,
-      transition: { duration: 0.2 }
+      transition: { duration: 0.1 }
     }
   };
 
@@ -118,11 +127,11 @@ export const RectorCard: React.FC<RectorCardProps> = ({ rector, isActive, onOpen
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
-      transition: { staggerChildren: 0.1, delayChildren: 0.3 }
+      transition: { staggerChildren: 0.05, delayChildren: 0.15 }
     },
     exit: {
       opacity: 0,
-      transition: { duration: 0.2 }
+      transition: { duration: 0.15 }
     }
   };
 
@@ -136,7 +145,7 @@ export const RectorCard: React.FC<RectorCardProps> = ({ rector, isActive, onOpen
     exit: {
       opacity: 0,
       x: 10,
-      transition: { duration: 0.2 }
+      transition: { duration: 0.1 }
     }
   };
 
@@ -145,12 +154,12 @@ export const RectorCard: React.FC<RectorCardProps> = ({ rector, isActive, onOpen
     visible: {
       opacity: 1,
       y: 0,
-      transition: { delay: 0.6, duration: 0.4 }
+      transition: { delay: 0.3, duration: 0.2 }
     },
     exit: {
       opacity: 0,
       y: 10,
-      transition: { duration: 0.3 }
+      transition: { duration: 0.15 }
     }
   };
 
@@ -159,7 +168,7 @@ export const RectorCard: React.FC<RectorCardProps> = ({ rector, isActive, onOpen
       className="relative w-full h-full flex flex-col items-center justify-between p-4"
       onClick={handleDoubleTap}
     >
-      <LikeAnimation isVisible={showLikeAnim} onComplete={() => setShowLikeAnim(false)} />
+      <InteractionBurst isVisible={showBurst} type={burstType} onComplete={() => setShowBurst(false)} />
 
       {/* Central Content Area */}
       <div className="flex-1 flex flex-col items-center justify-center w-[85vw] md:w-full md:max-w-md min-h-[75vh] md:min-h-[70vh] relative my-2">
@@ -173,7 +182,7 @@ export const RectorCard: React.FC<RectorCardProps> = ({ rector, isActive, onOpen
             onHoverStart={() => onHoverChange?.(true)}
             onHoverEnd={() => onHoverChange?.(false)}
             className="w-full p-5 md:p-8 flex flex-col items-center text-center relative overflow-hidden
-                                bg-white/5
+                                bg-white/5 
                                 backdrop-blur-[2px]
                                 rounded-[2rem] md:rounded-[2.5rem]
                                 border-t border-l border-white/20
@@ -231,39 +240,30 @@ export const RectorCard: React.FC<RectorCardProps> = ({ rector, isActive, onOpen
         {/* Action Sidebar (Responsive Position) */}
         <motion.div
           className="flex items-start md:items-center gap-6 z-20 pointer-events-auto mt-6
-                           md:absolute md:flex-col md:gap-4 md:mt-0
+                           md:absolute md:flex-col md:gap-4 md:mt-0 
                            md:-right-16 md:top-1/2 md:-translate-y-1/2"
           variants={sideContainerVariants}
         >
-          {/* Likes */}
+          {/* Like (Heart) */}
           <motion.div variants={sideItemVariants}>
-            <div className="flex flex-col items-center gap-0.5">
-              <button
-                onClick={(e) => { e.stopPropagation(); handleLike(); }}
-                className={`p-3 rounded-full backdrop-blur-md border border-white/10 shadow-lg transition-all active:scale-90 ${hasLiked ? 'text-red-500 bg-red-500/20' : 'text-white/90 bg-white/10 hover:bg-white/20'}`}
-              >
-                <Heart size={20} className={hasLiked ? 'fill-current' : ''} />
-              </button>
-              <span className="text-[9px] font-bold text-white/90 drop-shadow-md bg-black/40 px-1.5 py-0.5 rounded-full">
-                {likes >= 1000 ? (likes / 1000).toFixed(1) + 'K' : likes}
-              </span>
-            </div>
+            <button
+              onClick={(e) => { e.stopPropagation(); handleLike(); }}
+              className={`p-3 rounded-full backdrop-blur-md border border-white/10 shadow-lg transition-all active:scale-90 ${hasLiked ? 'text-red-500 bg-red-500/20' : 'text-white/90 bg-white/10 hover:bg-white/20'}`}
+              aria-label="Me inspira"
+            >
+              <Heart size={20} className={hasLiked ? 'fill-current' : ''} />
+            </button>
           </motion.div>
 
-          {/* Check-In */}
+          {/* Bookmark (Selection) */}
           <motion.div variants={sideItemVariants}>
-            <div className="flex flex-col items-center gap-0.5">
-              <button
-                onClick={(e) => { e.stopPropagation(); handleCheckIn(); }}
-                disabled={hasCheckedIn}
-                className={`p-3 rounded-full backdrop-blur-md border border-white/10 shadow-lg transition-all active:scale-90 ${hasCheckedIn ? 'text-blue-400 bg-blue-500/20' : 'text-white/90 bg-white/10 hover:bg-white/20'}`}
-              >
-                <GraduationCap size={20} />
-              </button>
-              <span className="text-[9px] font-bold text-white/90 drop-shadow-md bg-black/40 px-1.5 py-0.5 rounded-full">
-                {alumnos >= 1000 ? (alumnos / 1000).toFixed(1) + 'K' : alumnos}
-              </span>
-            </div>
+            <button
+              onClick={(e) => { e.stopPropagation(); handleBookmark(); }}
+              className={`p-3 rounded-full backdrop-blur-md border border-white/10 shadow-lg transition-all active:scale-90 ${isBookmarked ? 'text-amber-400 bg-amber-500/20' : 'text-white/90 bg-white/10 hover:bg-white/20'}`}
+              aria-label="Guardar en mi selección"
+            >
+              <Bookmark size={20} className={isBookmarked ? 'fill-current' : ''} />
+            </button>
           </motion.div>
 
           {/* Share */}
@@ -271,6 +271,7 @@ export const RectorCard: React.FC<RectorCardProps> = ({ rector, isActive, onOpen
             <button
               onClick={(e) => { e.stopPropagation(); handleShare(); }}
               className="p-3 rounded-full text-white/90 bg-white/10 hover:bg-white/20 backdrop-blur-md border border-white/10 shadow-lg transition-all active:scale-90"
+              aria-label="Compartir"
             >
               <Share2 size={18} />
             </button>
