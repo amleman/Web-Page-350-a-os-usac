@@ -46,7 +46,7 @@ export const IntroSection: React.FC<IntroSectionProps> = ({ onScrollClick }) => 
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.4, delay: 0.25 }}
         >
-          <h1 className="font-serif text-5xl md:text-7xl lg:text-8xl text-transparent bg-clip-text bg-gradient-to-b from-amber-100 via-amber-300 to-amber-600 drop-shadow-[0_4px_10px_rgba(0,0,0,0.5)] mb-2">
+          <h1 className="font-serif text-5xl md:text-7xl lg:text-8xl text-transparent bg-clip-text bg-gradient-to-b from-amber-100 via-amber-300 to-amber-600 drop-shadow-[0_4px_10px_rgba(0,0,0,0.5)] pb-4 mb-6">
             350 Años
           </h1>
           <h2 className="text-xl md:text-3xl text-white/90 font-serif tracking-widest uppercase border-t border-b border-amber-500/30 py-2">
