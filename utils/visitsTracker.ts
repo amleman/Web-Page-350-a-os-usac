@@ -38,7 +38,9 @@ export const trackVisit = async (rectorId: string | null, pageType: PageType): P
     
     const apiUrl = `${getApiBaseUrl()}/api/visits`;
     
-    await fetch(apiUrl, {
+    console.log('[TrackVisit] Registrando visita:', { rectorId, pageType, sessionId });
+    
+    const response = await fetch(apiUrl, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -50,9 +52,15 @@ export const trackVisit = async (rectorId: string | null, pageType: PageType): P
         userAgent,
       }),
     });
+    
+    if (response.ok) {
+      console.log('[TrackVisit] Visita registrada exitosamente');
+    } else {
+      const errorText = await response.text();
+      console.error('[TrackVisit] Error en respuesta:', response.status, errorText);
+    }
   } catch (error) {
-    // Silenciosamente ignorar errores de tracking
-    console.warn('Error tracking visit:', error);
+    console.error('[TrackVisit] Error tracking visit:', error);
   }
 };
 

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { BarChart3, TrendingUp, Users, Eye, Heart, ArrowLeft } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+import { RECTORES } from '../constants';
 
 interface GeneralStats {
   total_unique_visitors: number;
@@ -17,14 +18,26 @@ interface RectorStats {
   total_visits: number;
 }
 
+interface RectorLikes {
+  rector_id: string;
+  total_likes: number;
+}
+
 export const StatsPage: React.FC = () => {
   const navigate = useNavigate();
   const [generalStats, setGeneralStats] = useState<GeneralStats | null>(null);
   const [rectorStats, setRectorStats] = useState<RectorStats[]>([]);
+  const [rectorLikes, setRectorLikes] = useState<RectorLikes[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
   const getApiBaseUrl = (): string => {
     return window.location.origin;
+  };
+
+  // Función para obtener el nombre del rector por su ID
+  const getRectorName = (rectorId: string): string => {
+    const rector = RECTORES.find(r => r.id === rectorId);
+    return rector ? rector.nombre : rectorId.replace('_', ' ');
   };
 
   useEffect(() => {
@@ -51,6 +64,18 @@ export const StatsPage: React.FC = () => {
         const rectors = await rectorsResponse.json();
         setRectorStats(rectors);
       }
+
+      // Obtener estadísticas de likes por rector
+      const likesResponse = await fetch(`${getApiBaseUrl()}/api/stats/likes`);
+      console.log('[StatsPage] Likes response status:', likesResponse.status);
+      if (likesResponse.ok) {
+        const likes = await likesResponse.json();
+        console.log('[StatsPage] Likes recibidos:', likes);
+        setRectorLikes(likes);
+      } else {
+        const errorText = await likesResponse.text();
+        console.error('[StatsPage] Error obteniendo likes:', errorText);
+      }
     } catch (error) {
       console.error('Error fetching stats:', error);
     } finally {
@@ -59,7 +84,7 @@ export const StatsPage: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white">
+    <div className="min-h-screen h-screen overflow-y-auto bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white">
       {/* Header */}
       <motion.header
         initial={{ opacity: 0, y: -20 }}
@@ -144,57 +169,104 @@ export const StatsPage: React.FC = () => {
               </div>
             </motion.section>
 
-            {/* Estadísticas por Rector */}
+            {/* Estadísticas por Rector - Visitas y Likes */}
             <motion.section
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2 }}
             >
               <h2 className="text-xl font-serif text-cyan-200 mb-6 flex items-center gap-2">
-                <Heart className="w-6 h-6 text-red-400" />
-                Visitas por Rector
+                <Eye className="w-6 h-6 text-amber-400" />
+                Estadísticas por Rector
               </h2>
               <div className="space-y-4">
                 {rectorStats.length === 0 ? (
                   <div className="text-center py-12 text-slate-400 bg-slate-900/50 rounded-xl border border-cyan-500/10">
-                    No hay visitas registradas aún
+                    No hay estadísticas registradas aún
                   </div>
                 ) : (
-                  rectorStats.map((stat, index) => (
-                    <motion.div
-                      key={stat.rector_id}
-                      initial={{ opacity: 0, x: -20 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: index * 0.05 + 0.3 }}
-                      className="bg-slate-900/50 rounded-xl p-6 border border-cyan-500/10 hover:border-cyan-500/30 transition-colors"
-                    >
-                      <div className="flex items-center justify-between mb-4">
-                        <div>
-                          <p className="font-serif text-xl text-cyan-200 capitalize">
-                            {stat.rector_id.replace('_', ' ')}
-                          </p>
-                          <p className="text-sm text-slate-400 mt-1">
-                            {stat.unique_visits} visitantes únicos
-                          </p>
+                  rectorStats.map((stat, index) => {
+                    const likes = rectorLikes.find(l => l.rector_id === stat.rector_id);
+                    const totalLikes = likes?.total_likes || 0;
+                    const maxVisits = rectorStats[0]?.total_visits || 1;
+                    const maxLikes = rectorLikes[0]?.total_likes || 1;
+                    
+                    return (
+                      <motion.div
+                        key={stat.rector_id}
+                        initial={{ opacity: 0, x: -20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ delay: index * 0.05 + 0.3 }}
+                        className="bg-slate-900/50 rounded-xl p-6 border border-cyan-500/10 hover:border-cyan-500/30 transition-colors"
+                      >
+                        <div className="flex items-center justify-between mb-4">
+                          <div>
+                            <p className="font-serif text-xl text-cyan-200">
+                              {getRectorName(stat.rector_id)}
+                            </p>
+                            <p className="text-sm text-slate-400 mt-1">
+                              {stat.unique_visits} visitantes únicos
+                            </p>
+                          </div>
+                          <div className="flex items-center gap-6">
+                            {/* Visitas */}
+                            <div className="text-right">
+                              <div className="flex items-center gap-2 justify-end mb-1">
+                                <Eye className="w-4 h-4 text-amber-400" />
+                                <p className="text-2xl font-bold text-amber-300">
+                                  {stat.total_visits}
+                                </p>
+                              </div>
+                              <p className="text-xs text-slate-500">visitas</p>
+                            </div>
+                            {/* Likes */}
+                            <div className="text-right">
+                              <div className="flex items-center gap-2 justify-end mb-1">
+                                <Heart className="w-4 h-4 text-red-400" />
+                                <p className="text-2xl font-bold text-red-300">
+                                  {totalLikes}
+                                </p>
+                              </div>
+                              <p className="text-xs text-slate-500">likes</p>
+                            </div>
+                          </div>
                         </div>
-                        <div className="text-right">
-                          <p className="text-3xl font-bold text-amber-300">
-                            {stat.total_visits}
-                          </p>
-                          <p className="text-xs text-slate-500">visitas totales</p>
+                        {/* Barras de progreso */}
+                        <div className="space-y-2">
+                          {/* Barra de visitas */}
+                          <div>
+                            <div className="flex items-center justify-between mb-1">
+                              <span className="text-xs text-slate-400">Visitas</span>
+                            </div>
+                            <div className="h-2 bg-slate-800 rounded-full overflow-hidden">
+                              <motion.div
+                                initial={{ width: 0 }}
+                                animate={{ width: `${(stat.total_visits / maxVisits) * 100}%` }}
+                                transition={{ delay: index * 0.1 + 0.5, duration: 0.8 }}
+                                className="h-full bg-gradient-to-r from-cyan-500 via-amber-500 to-red-500"
+                              />
+                            </div>
+                          </div>
+                          {/* Barra de likes */}
+                          {totalLikes > 0 && (
+                            <div>
+                              <div className="flex items-center justify-between mb-1">
+                                <span className="text-xs text-slate-400">Likes</span>
+                              </div>
+                              <div className="h-2 bg-slate-800 rounded-full overflow-hidden">
+                                <motion.div
+                                  initial={{ width: 0 }}
+                                  animate={{ width: `${(totalLikes / maxLikes) * 100}%` }}
+                                  transition={{ delay: index * 0.1 + 0.7, duration: 0.8 }}
+                                  className="h-full bg-gradient-to-r from-red-500 via-pink-500 to-rose-500"
+                                />
+                              </div>
+                            </div>
+                          )}
                         </div>
-                      </div>
-                      {/* Barra de progreso */}
-                      <div className="h-3 bg-slate-800 rounded-full overflow-hidden">
-                        <motion.div
-                          initial={{ width: 0 }}
-                          animate={{ width: `${(stat.total_visits / (rectorStats[0]?.total_visits || 1)) * 100}%` }}
-                          transition={{ delay: index * 0.1 + 0.5, duration: 0.8 }}
-                          className="h-full bg-gradient-to-r from-cyan-500 via-amber-500 to-red-500"
-                        />
-                      </div>
-                    </motion.div>
-                  ))
+                      </motion.div>
+                    );
+                  })
                 )}
               </div>
             </motion.section>

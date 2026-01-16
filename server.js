@@ -189,21 +189,27 @@ app.post('/api/visits', async (req, res) => {
   try {
     const { rectorId, pageType, sessionId, userAgent } = req.body;
     
+    console.log('[API] POST /api/visits - Registrando visita:', { rectorId, pageType, sessionId });
+    
     if (!pageType || !sessionId) {
+      console.error('[API] Error: pageType and sessionId are required');
       return res.status(400).json({ error: 'pageType and sessionId are required' });
     }
     
     const ipAddress = req.realIp;
     
-    await pool.execute(
+    const [result] = await pool.execute(
       `INSERT INTO visits (rector_id, page_type, ip_address, user_agent, session_id) 
        VALUES (?, ?, ?, ?, ?)`,
       [rectorId || null, pageType, ipAddress, userAgent || null, sessionId]
     );
     
-    res.json({ success: true });
+    console.log('[API] Visita registrada exitosamente, ID:', result.insertId);
+    
+    res.json({ success: true, id: result.insertId });
   } catch (error) {
-    console.error('Error recording visit:', error);
+    console.error('[API] Error recording visit:', error);
+    console.error('[API] Stack:', error.stack);
     res.status(500).json({ error: 'Error recording visit' });
   }
 });
@@ -273,6 +279,12 @@ app.get('/api/stats/rectors', async (req, res) => {
   try {
     console.log('[API] GET /api/stats/rectors - Obteniendo estadísticas de rectores');
     
+    // Primero, verificar cuántas visitas hay en total
+    const [totalRows] = await pool.execute(
+      `SELECT COUNT(*) as total FROM visits WHERE rector_id IS NOT NULL`
+    );
+    console.log('[API] Total de visitas a rectores en BD:', totalRows[0]?.total || 0);
+    
     const [rows] = await pool.execute(
       `SELECT 
         rector_id,
@@ -292,11 +304,121 @@ app.get('/api/stats/rectors', async (req, res) => {
     }));
     
     console.log(`[API] Estadísticas de rectores: ${stats.length} rectores encontrados`);
+    console.log('[API] Detalle de estadísticas:', stats);
     
     res.json(stats);
   } catch (error) {
     console.error('[API] Error getting rectors stats:', error);
+    console.error('[API] Stack:', error.stack);
     res.status(500).json({ error: 'Error getting statistics' });
+  }
+});
+
+// Obtener estadísticas de likes por rector
+app.get('/api/stats/likes', async (req, res) => {
+  try {
+    console.log('[API] GET /api/stats/likes - Obteniendo estadísticas de likes por rector');
+    
+    // Primero verificar cuántos likes hay en total
+    const [totalRows] = await pool.execute(
+      `SELECT COUNT(*) as total FROM likes`
+    );
+    const totalLikesInDB = Number(totalRows[0]?.total || 0);
+    console.log('[API] Total de likes en BD:', totalLikesInDB);
+    
+    // Obtener todos los likes para debug
+    const [allLikes] = await pool.execute(
+      `SELECT rector_id, user_id, created_at FROM likes LIMIT 10`
+    );
+    console.log('[API] Primeros 10 likes en BD:', allLikes);
+    
+    const [rows] = await pool.execute(
+      `SELECT 
+        rector_id,
+        COUNT(*) as total_likes
+       FROM likes 
+       GROUP BY rector_id
+       ORDER BY total_likes DESC`
+    );
+    
+    // Convertir BigInt a Number
+    const stats = rows.map((row) => ({
+      rector_id: row.rector_id,
+      total_likes: Number(row.total_likes || 0)
+    }));
+    
+    console.log(`[API] Estadísticas de likes: ${stats.length} rectores encontrados`);
+    console.log('[API] Detalle de likes:', stats);
+    console.log('[API] Total de likes en BD vs estadísticas:', totalLikesInDB, 'vs', stats.reduce((sum, s) => sum + s.total_likes, 0));
+    
+    res.json(stats);
+  } catch (error) {
+    console.error('[API] Error getting likes stats:', error);
+    console.error('[API] Stack:', error.stack);
+    res.status(500).json({ error: 'Error getting likes statistics' });
+  }
+});
+
+// Endpoint de diagnóstico para verificar likes
+app.get('/api/debug/likes', async (req, res) => {
+  try {
+    console.log('[API] GET /api/debug/likes - Diagnóstico de likes');
+    
+    // Verificar si la tabla existe
+    const [tables] = await pool.execute(
+      `SELECT TABLE_NAME FROM information_schema.TABLES WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = 'likes'`
+    );
+    
+    const tableExists = tables.length > 0;
+    console.log('[API] Tabla likes existe:', tableExists);
+    
+    if (!tableExists) {
+      return res.json({
+        error: 'La tabla likes no existe',
+        tableExists: false,
+        totalLikes: 0,
+        likesByRector: []
+      });
+    }
+    
+    // Contar total de likes
+    const [totalRows] = await pool.execute('SELECT COUNT(*) as total FROM likes');
+    const totalLikes = Number(totalRows[0]?.total || 0);
+    console.log('[API] Total de likes:', totalLikes);
+    
+    // Obtener todos los likes
+    const [allLikes] = await pool.execute(
+      'SELECT rector_id, user_id, created_at FROM likes ORDER BY created_at DESC LIMIT 20'
+    );
+    console.log('[API] Últimos 20 likes:', allLikes);
+    
+    // Obtener likes agrupados por rector
+    const [groupedLikes] = await pool.execute(
+      `SELECT rector_id, COUNT(*) as count FROM likes GROUP BY rector_id ORDER BY count DESC`
+    );
+    
+    const likesByRector = groupedLikes.map(row => ({
+      rector_id: row.rector_id,
+      count: Number(row.count || 0)
+    }));
+    
+    console.log('[API] Likes por rector:', likesByRector);
+    
+    res.json({
+      tableExists: true,
+      totalLikes,
+      recentLikes: allLikes,
+      likesByRector,
+      message: 'Diagnóstico completado. Revisa los logs del servidor para más detalles.'
+    });
+  } catch (error) {
+    console.error('[API] Error en diagnóstico de likes:', error);
+    console.error('[API] Stack:', error.stack);
+    res.status(500).json({ 
+      error: 'Error en diagnóstico', 
+      details: error.message,
+      stack: error.stack 
+    });
   }
 });
 

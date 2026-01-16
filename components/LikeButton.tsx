@@ -50,8 +50,9 @@ export const LikeButton: React.FC<LikeButtonProps> = ({ rectorId }) => {
             className={`w-8 h-8 md:w-10 md:h-10 transition-all duration-300 ${
               isLiked
                 ? 'text-red-500 fill-red-500'
-                : 'text-amber-400/70 group-hover:text-amber-400 fill-transparent'
+                : 'text-amber-400/70 group-hover:text-amber-400'
             }`}
+            fill={isLiked ? 'currentColor' : 'none'}
           />
         </motion.div>
 
@@ -73,7 +74,7 @@ export const LikeButton: React.FC<LikeButtonProps> = ({ rectorId }) => {
       {/* Animación de like */}
       <AnimatePresence>
         {showAnimation && (
-          <div className="fixed inset-0 pointer-events-none z-60">
+          <div className="fixed inset-0 pointer-events-none z-[100]">
             <LikeAnimation
               isVisible={showAnimation}
               onComplete={() => setShowAnimation(false)}
