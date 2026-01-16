@@ -98,7 +98,7 @@ export const RectorCard: React.FC<RectorCardProps> = ({ rector, isActive, onOpen
           >
             {/* Period Badge */}
             <motion.div variants={itemVariants} className="mb-2 sm:mb-3 md:mb-4 lg:mb-5 xl:mb-6 2xl:mb-8 relative z-10 flex-shrink-0">
-              <span className="px-3 sm:px-4 md:px-5 lg:px-6 xl:px-7 2xl:px-8 py-1 sm:py-1.5 md:py-2 lg:py-2.5 xl:py-3 2xl:py-4 rounded-full text-[9px] sm:text-[10px] md:text-xs lg:text-sm xl:text-base 2xl:text-lg font-serif font-bold tracking-wider uppercase bg-black/40 text-amber-300 border border-amber-500/50 shadow-[0_0_10px_rgba(251,191,36,0.2)]">
+              <span className="px-3 sm:px-4 md:px-5 lg:px-6 xl:px-7 2xl:px-8 py-1 sm:py-1.5 md:py-2 lg:py-2.5 xl:py-3 2xl:py-4 rounded-full text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-2xl font-serif font-bold tracking-wider uppercase bg-black/40 text-amber-300 border border-amber-500/50 shadow-[0_0_10px_rgba(251,191,36,0.2)]">
                 {rector.periodo}
               </span>
             </motion.div>
@@ -149,7 +149,7 @@ export const RectorCard: React.FC<RectorCardProps> = ({ rector, isActive, onOpen
           variants={footerVariants}
           className="w-full flex flex-col gap-2 sm:gap-3 md:gap-4 lg:gap-5 xl:gap-6 flex-shrink-0"
         >
-          <blockquote className="font-serif italic text-[11px] sm:text-[13px] md:text-[15px] lg:text-[17px] xl:text-[22px] 2xl:text-[26px] text-center text-white/90 drop-shadow-[0_2px_8px_rgba(0,0,0,0.5)] px-[15%] py-2 sm:py-3 mb-4 mt-4 line-clamp-4 leading-relaxed border-t border-b border-white/10">
+          <blockquote className="font-serif italic text-[13px] sm:text-[15px] md:text-[17px] lg:text-[19px] xl:text-[24px] 2xl:text-[28px] text-center text-white/90 drop-shadow-[0_2px_8px_rgba(0,0,0,0.5)] px-[15%] py-2 sm:py-3 mb-4 mt-4 line-clamp-4 leading-relaxed border-t border-b border-white/10">
             "{rector.cita}"
           </blockquote>
 
