@@ -54,7 +54,7 @@ export const IntroSection: React.FC<IntroSectionProps> = ({ onScrollClick }) => 
             350 Años
           </h1>
           <h2 className="text-xl md:text-3xl text-white/90 font-serif tracking-widest uppercase border-t border-b border-amber-500/30 py-2">
-            De Historia USAC a través de nuestros Rectores
+            De Historia a través de nuestros Rectores
           </h2>
         </motion.div>
 

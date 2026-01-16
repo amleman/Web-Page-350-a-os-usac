@@ -113,9 +113,6 @@ export const ShareButton: React.FC<ShareButtonProps> = ({ rector, className = ''
         aria-label="Compartir"
       >
         <Share2 className="w-5 h-5 md:w-6 md:h-6 text-amber-400 group-hover:text-amber-300 transition-colors" />
-        <span className="hidden sm:inline text-sm md:text-base font-serif text-amber-300 group-hover:text-amber-200">
-          Compartir
-        </span>
       </motion.button>
 
       {/* Menú de compartir (fallback para desktop) */}

@@ -285,7 +285,7 @@ app.get('/api/stats/rectors', async (req, res) => {
     );
     
     // Convertir BigInt a Number
-    const stats = rows.map((row: any) => ({
+    const stats = rows.map((row) => ({
       rector_id: row.rector_id,
       unique_visits: Number(row.unique_visits || 0),
       total_visits: Number(row.total_visits || 0)
