@@ -13,6 +13,7 @@ const IntroSection = lazy(() => import('./components/IntroSection').then(module 
 const BioSheet = lazy(() => import('./components/BioSheet').then(module => ({ default: module.BioSheet })));
 const CreditsSection = lazy(() => import('./components/CreditsSection').then(module => ({ default: module.CreditsSection })));
 const LikeButton = lazy(() => import('./components/LikeButton').then(module => ({ default: module.LikeButton })));
+const ShareButton = lazy(() => import('./components/ShareButton').then(module => ({ default: module.ShareButton })));
 
 // --- Background Component ---
 const ActiveBackground = ({
@@ -327,7 +328,7 @@ function App() {
         </AnimatePresence>
       </div>
 
-      {/* 3. Like Button - Solo visible en vista de rectores */}
+      {/* 3. Like and Share Buttons - Solo visible en vista de rectores */}
       <AnimatePresence>
         {viewState === 'RECTORS' && (
           <motion.div
@@ -335,11 +336,20 @@ function App() {
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: 50 }}
             transition={{ duration: 0.3, delay: 0.2 }}
-            className="fixed right-4 md:right-8 top-1/2 -translate-y-1/2 z-50"
+            className="fixed right-4 md:right-8 top-1/2 -translate-y-1/2 z-50 flex flex-col gap-4"
           >
             <Suspense fallback={null}>
               <LikeButton
                 rectorId={RECTORES[currentRectorIndex].id}
+              />
+            </Suspense>
+            <Suspense fallback={null}>
+              <ShareButton
+                rector={{
+                  id: RECTORES[currentRectorIndex].id,
+                  nombre: RECTORES[currentRectorIndex].nombre,
+                  periodo: RECTORES[currentRectorIndex].periodo,
+                }}
               />
             </Suspense>
           </motion.div>

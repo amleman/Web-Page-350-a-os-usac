@@ -15,16 +15,6 @@ export const CreditsSection: React.FC<CreditsSectionProps> = ({ onScrollUp }) =>
         transition={{ duration: 0.5 }}
         className="max-w-4xl mx-auto"
       >
-        {/* Título */}
-        <motion.h1
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.4, delay: 0.2 }}
-          className="font-serif text-4xl md:text-6xl lg:text-7xl text-transparent bg-clip-text bg-gradient-to-b from-amber-100 via-amber-300 to-amber-600 drop-shadow-[0_4px_10px_rgba(0,0,0,0.5)] mb-8"
-        >
-          Créditos
-        </motion.h1>
-
         {/* Contenido de créditos */}
         <motion.div
           initial={{ opacity: 0 }}
@@ -52,16 +42,6 @@ export const CreditsSection: React.FC<CreditsSectionProps> = ({ onScrollUp }) =>
             </h2>
             <p className="text-zinc-300 text-sm md:text-base leading-relaxed">
               Preservando y difundiendo el conocimiento universitario
-            </p>
-          </div>
-
-          {/* Desarrollo */}
-          <div className="bg-white/5 backdrop-blur-[2px] rounded-2xl p-6 md:p-8 border border-white/10">
-            <h2 className="font-serif text-xl md:text-2xl text-amber-300 mb-4">
-              Desarrollo
-            </h2>
-            <p className="text-zinc-300 text-sm md:text-base leading-relaxed">
-              Proyecto desarrollado con tecnología moderna para celebrar el legado de nuestros rectores
             </p>
           </div>
 
