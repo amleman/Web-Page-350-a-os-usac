@@ -357,7 +357,7 @@ function App() {
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: 50 }}
             transition={{ duration: 0.3, delay: 0.2 }}
-            className="fixed right-4 md:right-8 top-1/2 -translate-y-[calc(50%+4rem)] scale-90 z-50 flex flex-col gap-4"
+            className="fixed right-4 md:right-8 top-1/2 -translate-y-[calc(50%+6rem)] scale-90 z-50 flex flex-col gap-4"
           >
             <Suspense fallback={null}>
               <LikeButton
