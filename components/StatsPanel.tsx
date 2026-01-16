@@ -73,7 +73,7 @@ export const StatsPanel: React.FC<StatsPanelProps> = ({ isOpen, onClose }) => {
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
         onClick={onClose}
-        className="fixed inset-0 bg-black/60 z-[80] backdrop-blur-sm"
+        className="fixed inset-0 bg-black/60 z-80 backdrop-blur-sm"
       />
 
       {/* Panel */}
@@ -82,7 +82,7 @@ export const StatsPanel: React.FC<StatsPanelProps> = ({ isOpen, onClose }) => {
         animate={{ x: 0 }}
         exit={{ x: '100%' }}
         transition={{ type: 'spring', damping: 30, stiffness: 300 }}
-        className="fixed right-0 top-0 bottom-0 w-full max-w-2xl bg-[#0B1120] border-l border-cyan-500/20 z-[90] overflow-y-auto shadow-2xl"
+        className="fixed right-0 top-0 bottom-0 w-full max-w-2xl bg-[#0B1120] border-l border-cyan-500/20 z-90 overflow-y-auto shadow-2xl"
       >
         <div className="p-6">
           {/* Header */}

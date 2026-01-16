@@ -125,7 +125,7 @@ export const ShareButton: React.FC<ShareButtonProps> = ({ rector, className = ''
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={() => setShowMenu(false)}
-              className="fixed inset-0 bg-black/60 z-[70] backdrop-blur-sm"
+              className="fixed inset-0 bg-black/60 z-70 backdrop-blur-sm"
             />
 
             {/* Menú */}
@@ -133,7 +133,7 @@ export const ShareButton: React.FC<ShareButtonProps> = ({ rector, className = ''
               initial={{ opacity: 0, scale: 0.9, y: 10 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.9, y: 10 }}
-              className="fixed bottom-6 left-1/2 -translate-x-1/2 z-[80] bg-black/90 backdrop-blur-md rounded-2xl border border-amber-500/30 shadow-2xl p-6 max-w-sm w-[90%]"
+              className="fixed bottom-6 left-1/2 -translate-x-1/2 z-80 bg-black/90 backdrop-blur-md rounded-2xl border border-amber-500/30 shadow-2xl p-6 max-w-sm w-[90%]"
             >
               <div className="flex items-center justify-between mb-4">
                 <h3 className="text-lg font-serif text-amber-300">Compartir</h3>

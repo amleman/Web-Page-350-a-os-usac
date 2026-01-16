@@ -198,23 +198,40 @@ function App() {
       }
     };
 
+    const handleKeyDown = (e: KeyboardEvent) => {
+      // Solo procesar si no estamos en un input o textarea
+      if (e.target instanceof HTMLInputElement || e.target instanceof HTMLTextAreaElement) {
+        return;
+      }
+
+      if (e.key === 'ArrowDown' || e.key === 'ArrowRight') {
+        e.preventDefault();
+        handleNext();
+      } else if (e.key === 'ArrowUp' || e.key === 'ArrowLeft') {
+        e.preventDefault();
+        handlePrev();
+      }
+    };
+
     window.addEventListener('wheel', handleWheel, { passive: false });
     window.addEventListener('touchstart', handleTouchStart, { passive: false });
     window.addEventListener('touchmove', handleTouchMove, { passive: false });
     window.addEventListener('touchend', handleTouchEnd, { passive: false });
+    window.addEventListener('keydown', handleKeyDown);
 
     return () => {
       window.removeEventListener('wheel', handleWheel);
       window.removeEventListener('touchstart', handleTouchStart);
       window.removeEventListener('touchmove', handleTouchMove);
       window.removeEventListener('touchend', handleTouchEnd);
+      window.removeEventListener('keydown', handleKeyDown);
     };
   }, [handleNext, handlePrev]);
 
 
   return (
     <main
-      className="relative w-full h-[100dvh] bg-black overflow-hidden"
+      className="relative w-full h-dvh bg-black overflow-hidden"
       onMouseMove={handleMouseMove}
     >
 
@@ -230,9 +247,9 @@ function App() {
       {/* 2. Content Container */}
       <div className="relative z-10 w-full h-full">
 
-        {/* Global Header for Rectors View (Static) */}
+        {/* Global Header for Rectors View (Fixed Header) */}
         {viewState === 'RECTORS' && (
-          <div className="absolute top-0 left-0 right-0 w-full flex justify-center pt-4 md:pt-6 z-50 pointer-events-none">
+          <div className="fixed top-0 left-0 right-0 w-full flex justify-center pt-4 md:pt-6 z-50 pointer-events-none bg-transparent">
             <motion.img
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -287,7 +304,7 @@ function App() {
               <AnimatePresence mode="wait">
                 <motion.div
                   key={RECTORES[currentRectorIndex].id}
-                  className="absolute inset-0 w-full h-full flex items-center justify-center pt-20" // added padding top for logo
+                  className="absolute top-20 sm:top-24 md:top-28 lg:top-32 bottom-0 left-0 right-0 w-full" // espacio desde el header fijo del logo
                   initial="hidden"
                   animate="visible"
                   exit="exit"

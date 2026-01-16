@@ -73,7 +73,7 @@ export const LikeButton: React.FC<LikeButtonProps> = ({ rectorId }) => {
       {/* Animación de like */}
       <AnimatePresence>
         {showAnimation && (
-          <div className="fixed inset-0 pointer-events-none z-[60]">
+          <div className="fixed inset-0 pointer-events-none z-60">
             <LikeAnimation
               isVisible={showAnimation}
               onComplete={() => setShowAnimation(false)}

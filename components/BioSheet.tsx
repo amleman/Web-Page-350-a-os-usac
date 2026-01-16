@@ -20,7 +20,7 @@ export const BioSheet: React.FC<BioSheetProps> = ({ rector, onClose }) => {
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
         onClick={onClose}
-        className="fixed inset-0 bg-black/60 z-[60] backdrop-blur-sm"
+        className="fixed inset-0 bg-black/60 z-60 backdrop-blur-sm"
         transition={{ duration: 0.3 }}
       />
 
@@ -30,7 +30,7 @@ export const BioSheet: React.FC<BioSheetProps> = ({ rector, onClose }) => {
         animate={{ y: 0 }}
         exit={{ y: "100%" }}
         transition={{ type: "spring", damping: 30, stiffness: 300 }}
-        className="fixed bottom-0 left-0 right-0 z-[70] bg-[#0B1120] border-t border-cyan-500/20 rounded-t-3xl max-h-[85vh] overflow-y-auto shadow-[0_-10px_40px_rgba(0,0,0,0.8)]"
+        className="fixed bottom-0 left-0 right-0 z-70 bg-[#0B1120] border-t border-cyan-500/20 rounded-t-3xl max-h-[85vh] overflow-y-auto shadow-[0_-10px_40px_rgba(0,0,0,0.8)]"
       >
         <div className="sticky top-0 left-0 right-0 p-4 flex justify-center bg-[#0B1120]/95 backdrop-blur z-10 border-b border-cyan-500/10">
           <div className="w-12 h-1.5 bg-slate-700 rounded-full mb-2 absolute top-3" />

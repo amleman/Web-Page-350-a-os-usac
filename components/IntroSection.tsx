@@ -8,19 +8,19 @@ interface IntroSectionProps {
 
 export const IntroSection: React.FC<IntroSectionProps> = ({ onScrollClick }) => {
   return (
-    <section className="relative w-full h-full flex flex-col items-center justify-between p-6 bg-transparent text-center z-20">
+    <section className="relative w-full h-full flex flex-col items-center justify-between p-4 sm:p-6 md:p-8 lg:p-10 bg-transparent text-center z-20">
 
       {/* Top: Logos Container */}
       <motion.div
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: 0.1 }}
-        className="mt-8 md:mt-12 flex flex-row items-center justify-center gap-12"
+        className="mt-4 sm:mt-6 md:mt-8 lg:mt-12 flex flex-row items-center justify-center gap-4 sm:gap-6 md:gap-8 lg:gap-12 px-4"
       >
         <img
           src="/images/logotipo_bc_principal_blanco.svg"
           alt="Biblioteca Central USAC"
-          className="h-14 md:h-[4.5rem] w-auto object-contain drop-shadow-lg opacity-90"
+          className="h-10 sm:h-12 md:h-14 lg:h-18 w-auto max-w-[40%] sm:max-w-none object-contain drop-shadow-lg opacity-90"
           loading="eager"
           decoding="async"
           onError={(e) => {
@@ -33,7 +33,7 @@ export const IntroSection: React.FC<IntroSectionProps> = ({ onScrollClick }) => 
         <img
           src="/images/logotipo-usac-blanco.png"
           alt="USAC"
-          className="h-14 md:h-[4.5rem] w-auto object-contain drop-shadow-lg opacity-90"
+          className="h-10 sm:h-12 md:h-14 lg:h-18 w-auto max-w-[40%] sm:max-w-none object-contain drop-shadow-lg opacity-90"
           loading="eager"
           decoding="async"
           onError={(e) => {
@@ -44,7 +44,7 @@ export const IntroSection: React.FC<IntroSectionProps> = ({ onScrollClick }) => 
       </motion.div>
 
       {/* Center: Main Title */}
-      <div className="flex flex-col items-center gap-6 max-w-2xl">
+      <div className="flex flex-col items-center gap-6 max-w-2xl px-4">
         <motion.div
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
