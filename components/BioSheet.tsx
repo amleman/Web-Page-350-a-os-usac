@@ -38,30 +38,60 @@ export const BioSheet: React.FC<BioSheetProps> = ({ rector, onClose }) => {
 
         <div className="px-8 pb-12 pt-4">
           <div className="flex justify-between items-start mb-6">
-             <div>
-                <h2 className="text-3xl font-serif text-amber-400 mb-2">{rector.nombre}</h2>
-                {/* Dark Gold Aesthetic Badge */}
-                <span className="inline-block px-4 py-1 bg-black/40 border border-amber-500/30 rounded-full text-amber-200 text-xs font-serif font-bold tracking-widest">
-                  {rector.periodo}
-                </span>
-             </div>
-             <button onClick={onClose} className="p-2 bg-slate-800/50 rounded-full text-slate-400 hover:text-amber-400 transition-colors border border-white/5 hover:border-amber-500/30">
-               <X size={24} />
-             </button>
+            <div>
+              <h2 className="text-3xl font-serif text-amber-400 mb-2">{rector.nombre}</h2>
+              {/* Dark Gold Aesthetic Badge */}
+              <span className="inline-block px-4 py-1 bg-black/40 border border-amber-500/30 rounded-full text-amber-200 text-xs font-serif font-bold tracking-widest">
+                {rector.periodo}
+              </span>
+            </div>
+            <button onClick={onClose} className="p-2 bg-slate-800/50 rounded-full text-slate-400 hover:text-amber-400 transition-colors border border-white/5 hover:border-amber-500/30">
+              <X size={24} />
+            </button>
           </div>
 
-          <div className="mb-8">
-             <h3 className="text-lg font-semibold text-amber-100 flex items-center gap-2 mb-3 font-serif">
-               <BookOpen size={20} className="text-amber-500" />
-               Biografía
-             </h3>
-             <p className="text-slate-300 leading-relaxed text-lg font-light">
-               {rector.biografia_completa}
-             </p>
+          <div className="space-y-8">
+
+
+            {rector.trayectoria_academica && (
+              <div>
+                <h3 className="text-lg font-semibold text-amber-100 flex items-center gap-2 mb-3 font-serif">
+                  <motion.div
+                    initial={{ rotate: -10 }}
+                    animate={{ rotate: 0 }}
+                    className="p-1.5 bg-amber-500/10 rounded-lg"
+                  >
+                    <BookOpen size={18} className="text-amber-500" />
+                  </motion.div>
+                  Trayectoria académica
+                </h3>
+                <p className="text-slate-300 leading-relaxed text-lg font-light">
+                  {rector.trayectoria_academica}
+                </p>
+              </div>
+            )}
+
+            {rector.logros_gestion && (
+              <div>
+                <h3 className="text-lg font-semibold text-amber-100 flex items-center gap-2 mb-3 font-serif">
+                  <motion.div
+                    initial={{ scale: 0.8 }}
+                    animate={{ scale: 1 }}
+                    className="p-1.5 bg-amber-500/10 rounded-lg"
+                  >
+                    <BookOpen size={18} className="text-amber-500" />
+                  </motion.div>
+                  Logros durante su gestión
+                </h3>
+                <p className="text-slate-300 leading-relaxed text-lg font-light">
+                  {rector.logros_gestion}
+                </p>
+              </div>
+            )}
           </div>
 
-          <div className="p-6 bg-gradient-to-br from-slate-900 to-[#020617] rounded-2xl border border-cyan-500/10 shadow-inner">
-            <p className="font-serif italic text-xl text-center text-amber-200/80">
+          <div className="p-6 mt-8 bg-gradient-to-br from-slate-900 to-[#020617] rounded-2xl border border-cyan-500/10 shadow-inner">
+            <p className="font-serif italic text-lg text-center text-amber-200/80">
               "{rector.cita}"
             </p>
           </div>
