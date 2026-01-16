@@ -149,7 +149,7 @@ export const RectorCard: React.FC<RectorCardProps> = ({ rector, isActive, onOpen
           variants={footerVariants}
           className="w-full flex flex-col gap-2 sm:gap-3 md:gap-4 lg:gap-5 xl:gap-6 flex-shrink-0"
         >
-          <blockquote className="font-serif italic text-[13px] sm:text-[15px] md:text-[17px] lg:text-[19px] xl:text-[24px] 2xl:text-[28px] text-center text-white/90 drop-shadow-[0_2px_8px_rgba(0,0,0,0.5)] px-[15%] py-2 sm:py-3 mb-4 mt-4 line-clamp-4 leading-relaxed border-t border-b border-white/10">
+          <blockquote className="font-serif italic text-[13px] sm:text-[15px] md:text-[17px] lg:text-[19px] xl:text-[24px] 2xl:text-[28px] text-center text-white/90 drop-shadow-[0_2px_8px_rgba(0,0,0,0.5)] px-[15%] py-4 sm:py-5 mb-4 mt-4 line-clamp-6 leading-relaxed border-t border-b border-white/10">
             "{rector.cita}"
           </blockquote>
 

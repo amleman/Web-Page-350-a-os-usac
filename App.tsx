@@ -256,7 +256,7 @@ function App() {
               transition={{ delay: 0.15, duration: 0.25 }}
               src="/images/Dorado-350-logo-1024x640-sin-fondo.png"
               alt="USAC 350 Años"
-              className="h-16 md:h-20 object-contain drop-shadow-[0_0_15px_rgba(255,255,255,0.3)] mt-8 cursor-pointer pointer-events-auto hover:opacity-80 transition-opacity"
+              className="h-16 md:h-20 object-contain drop-shadow-[0_0_15px_rgba(255,255,255,0.3)] mt-2 cursor-pointer pointer-events-auto hover:opacity-80 transition-opacity"
               loading="eager"
               decoding="async"
               onClick={() => {
