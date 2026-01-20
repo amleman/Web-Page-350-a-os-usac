@@ -75,15 +75,15 @@ export const RectorCard: React.FC<RectorCardProps> = ({ rector, isActive, onOpen
 
   return (
     <section
-      className="relative w-full h-full flex flex-col items-center justify-center p-4 sm:p-6 md:p-8 lg:p-10 xl:p-12"
+      className="relative w-full h-full flex flex-col items-center justify-center p-4 sm:p-6 md:p-8 lg:p-10 xl:p-12 lg:-mt-[80px]"
     >
       {/* Main Card Container */}
-      <div className="w-full max-w-sm sm:max-w-md md:max-w-lg lg:max-w-xl xl:max-w-2xl flex flex-col items-center gap-3 sm:gap-4 md:gap-5 lg:gap-6 xl:gap-8 flex-1 justify-center">
+      <div className="w-full max-w-sm sm:max-w-md md:max-w-lg lg:max-w-none lg:w-full lg:pl-12 lg:pr-[80px] xl:px-24 flex flex-col lg:flex-row items-center gap-3 sm:gap-4 md:gap-5 lg:gap-12 xl:gap-16 flex-1 justify-center">
 
         {/* Glass Card */}
         <motion.div
           variants={cardVariants}
-          className="w-full relative z-10 flex-shrink-0"
+          className="w-full lg:w-3/5 relative z-10 flex-shrink-0"
         >
           <motion.div
             onHoverStart={() => onHoverChange?.(true)}
@@ -147,9 +147,9 @@ export const RectorCard: React.FC<RectorCardProps> = ({ rector, isActive, onOpen
         {/* Quote and Button */}
         <motion.div
           variants={footerVariants}
-          className="w-full flex flex-col gap-2 sm:gap-3 md:gap-4 lg:gap-5 xl:gap-6 flex-shrink-0"
+          className="w-full lg:w-2/5 flex flex-col gap-2 sm:gap-3 md:gap-4 lg:gap-6 xl:gap-8 flex-shrink-0 lg:px-8 justify-center"
         >
-          <blockquote className="font-serif italic text-[13px] sm:text-[15px] md:text-[17px] lg:text-[19px] xl:text-[24px] 2xl:text-[28px] text-center text-white/90 drop-shadow-[0_2px_8px_rgba(0,0,0,0.5)] px-[15%] py-4 sm:py-5 mb-4 mt-4 line-clamp-6 leading-relaxed border-t border-b border-white/10">
+          <blockquote className="font-serif italic text-[13px] sm:text-[15px] md:text-[17px] lg:text-[19px] xl:text-[24px] 2xl:text-[28px] text-center text-white/90 drop-shadow-[0_2px_8px_rgba(0,0,0,0.5)] px-[15%] lg:px-0 py-4 sm:py-5 mb-4 mt-4 line-clamp-6 leading-relaxed border-t border-b border-white/10">
             "{rector.cita}"
           </blockquote>
 
@@ -157,7 +157,7 @@ export const RectorCard: React.FC<RectorCardProps> = ({ rector, isActive, onOpen
             whileTap={{ scale: 0.96 }}
             whileHover={{ scale: 1.02, boxShadow: "0 0 24px rgba(245, 158, 11, 0.3)" }}
             onClick={(e) => { e.stopPropagation(); onOpenBio(rector); }}
-            className="w-auto mx-[10%] py-2.5 sm:py-3 md:py-4 lg:py-5 xl:py-6 bg-gradient-to-r from-amber-900/40 via-amber-800/30 to-amber-900/40 backdrop-blur-md border border-amber-500/40 text-amber-300 hover:text-amber-100 hover:border-amber-400/60 rounded-md sm:rounded-lg md:rounded-xl lg:rounded-2xl font-serif font-semibold tracking-wide shadow-[0_4px_16px_rgba(0,0,0,0.4),inset_0_1px_0_0_rgba(255,255,255,0.1)] flex items-center justify-center gap-2 sm:gap-2.5 md:gap-3 transition-all duration-300 text-[10px] sm:text-xs md:text-sm lg:text-base xl:text-lg 2xl:text-xl group"
+            className="w-auto mx-auto lg:w-full py-2.5 sm:py-3 md:py-4 lg:py-5 xl:py-6 bg-gradient-to-r from-amber-900/40 via-amber-800/30 to-amber-900/40 backdrop-blur-md border border-amber-500/40 text-amber-300 hover:text-amber-100 hover:border-amber-400/60 rounded-md sm:rounded-lg md:rounded-xl lg:rounded-2xl font-serif font-semibold tracking-wide shadow-[0_4px_16px_rgba(0,0,0,0.4),inset_0_1px_0_0_rgba(255,255,255,0.1)] flex items-center justify-center gap-2 sm:gap-2.5 md:gap-3 transition-all duration-300 text-[10px] sm:text-xs md:text-sm lg:text-base xl:text-lg 2xl:text-xl group"
           >
             <Info size={14} className="sm:w-4 sm:h-4 md:w-5 md:h-5 lg:w-6 lg:h-6 xl:w-7 xl:h-7 2xl:w-8 2xl:h-8 text-amber-400 group-hover:text-amber-300 transition-colors" />
             <span>LEER BIOGRAFÍA COMPLETA</span>

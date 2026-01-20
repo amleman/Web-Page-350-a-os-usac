@@ -304,7 +304,7 @@ function App() {
               <AnimatePresence mode="wait">
                 <motion.div
                   key={RECTORES[currentRectorIndex].id}
-                  className="absolute top-20 sm:top-24 md:top-28 lg:top-32 bottom-0 left-0 right-0 w-full" // espacio desde el header fijo del logo
+                  className="absolute top-20 sm:top-24 md:top-28 lg:top-44 bottom-0 left-0 right-0 w-full" // espacio desde el header fijo del logo
                   initial="hidden"
                   animate="visible"
                   exit="exit"
