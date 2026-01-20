@@ -75,10 +75,10 @@ export const RectorCard: React.FC<RectorCardProps> = ({ rector, isActive, onOpen
 
   return (
     <section
-      className="relative w-full h-full flex flex-col items-center justify-center p-4 sm:p-6 md:p-8 lg:p-10 xl:p-12 lg:-mt-[80px]"
+      className="relative w-full h-full flex flex-col items-center justify-center py-4 pr-4 pl-14 sm:py-6 sm:pr-6 sm:pl-16 md:p-8 lg:p-10 xl:p-12 lg:-mt-[80px]"
     >
       {/* Main Card Container */}
-      <div className="w-full max-w-sm sm:max-w-md md:max-w-lg lg:max-w-none lg:w-full lg:pl-12 lg:pr-[80px] xl:px-24 flex flex-col lg:flex-row items-center gap-3 sm:gap-4 md:gap-5 lg:gap-12 xl:gap-16 flex-1 justify-center">
+      <div className="w-full max-w-sm sm:max-w-md md:max-w-lg lg:max-w-none lg:w-full lg:pl-12 lg:pr-[80px] xl:p-[25px] xl:pr-[70px] flex flex-col lg:flex-row items-center gap-3 sm:gap-4 md:gap-5 lg:gap-12 xl:gap-16 flex-1 justify-center">
 
         {/* Glass Card */}
         <motion.div
@@ -88,7 +88,7 @@ export const RectorCard: React.FC<RectorCardProps> = ({ rector, isActive, onOpen
           <motion.div
             onHoverStart={() => onHoverChange?.(true)}
             onHoverEnd={() => onHoverChange?.(false)}
-            className="w-full p-4 sm:p-5 md:p-6 lg:p-8 xl:p-10 2xl:p-12 flex flex-col items-center text-center relative overflow-hidden
+            className="w-full p-4 sm:p-5 md:p-6 lg:p-8 xl:p-8 xl:max-h-[600px] flex flex-col items-center text-center relative overflow-hidden
                                 bg-gradient-to-b from-white/[0.08] to-white/[0.03]
                                 backdrop-blur-md
                                 rounded-lg sm:rounded-xl md:rounded-2xl lg:rounded-3xl
@@ -97,8 +97,8 @@ export const RectorCard: React.FC<RectorCardProps> = ({ rector, isActive, onOpen
                                 flex-1 min-h-0"
           >
             {/* Period Badge */}
-            <motion.div variants={itemVariants} className="mb-2 sm:mb-3 md:mb-4 lg:mb-5 xl:mb-6 2xl:mb-8 relative z-10 flex-shrink-0">
-              <span className="px-3 sm:px-4 md:px-5 lg:px-6 xl:px-7 2xl:px-8 py-1 sm:py-1.5 md:py-2 lg:py-2.5 xl:py-3 2xl:py-4 rounded-full text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-2xl font-serif font-bold tracking-wider uppercase bg-black/40 text-amber-300 border border-amber-500/50 shadow-[0_0_10px_rgba(251,191,36,0.2)]">
+            <motion.div variants={itemVariants} className="mb-2 sm:mb-3 md:mb-4 lg:mb-5 xl:mb-3 relative z-10 flex-shrink-0">
+              <span className="px-3 sm:px-4 md:px-5 lg:px-6 xl:px-7 py-1 sm:py-1.5 md:py-2 lg:py-2.5 xl:py-3 rounded-full text-xs sm:text-sm md:text-base lg:text-lg xl:text-lg font-serif font-bold tracking-wider uppercase bg-black/40 text-amber-300 border border-amber-500/50 shadow-[0_0_10px_rgba(251,191,36,0.2)]">
                 {rector.periodo}
               </span>
             </motion.div>
@@ -106,7 +106,7 @@ export const RectorCard: React.FC<RectorCardProps> = ({ rector, isActive, onOpen
             {/* Name */}
             <motion.h1
               variants={itemVariants}
-              className="relative z-10 font-serif text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl 2xl:text-6xl text-transparent bg-clip-text bg-gradient-to-b from-amber-100 via-amber-300 to-amber-600 mb-3 sm:mb-4 md:mb-5 lg:mb-6 xl:mb-8 2xl:mb-10 drop-shadow-[0_2px_8px_rgba(0,0,0,0.5)] leading-tight px-2 flex-shrink-0"
+              className="relative z-10 font-serif text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-[40px] text-transparent bg-clip-text bg-gradient-to-b from-amber-100 via-amber-300 to-amber-600 mb-3 sm:mb-4 md:mb-5 lg:mb-6 xl:mb-4 drop-shadow-[0_2px_8px_rgba(0,0,0,0.5)] leading-tight px-2 flex-shrink-0"
             >
               {rector.nombre}
             </motion.h1>
@@ -114,7 +114,7 @@ export const RectorCard: React.FC<RectorCardProps> = ({ rector, isActive, onOpen
             {/* Photo */}
             <motion.div
               variants={itemVariants}
-              className="relative w-32 h-32 sm:w-40 sm:h-40 md:w-52 md:h-52 lg:w-64 lg:h-64 xl:w-72 xl:h-72 2xl:w-80 2xl:h-80 mb-3 sm:mb-4 md:mb-5 lg:mb-6 xl:mb-8 2xl:mb-10 z-10 shrink-0 group"
+              className="relative w-32 h-32 sm:w-40 sm:h-40 md:w-52 md:h-52 lg:w-64 lg:h-64 xl:w-60 xl:h-60 mb-3 sm:mb-4 md:mb-5 lg:mb-6 xl:mb-4 z-10 shrink-0 group"
             >
               <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-amber-500/20 via-amber-400/15 to-yellow-600/20 blur-2xl md:blur-3xl group-hover:from-amber-500/30 group-hover:to-yellow-600/30 transition-all duration-700" />
               <div className="absolute inset-0 rounded-full border-2 border-amber-500/30 group-hover:border-amber-400/50 transition-all duration-300" />
@@ -137,7 +137,7 @@ export const RectorCard: React.FC<RectorCardProps> = ({ rector, isActive, onOpen
             {/* Description */}
             <motion.p
               variants={itemVariants}
-              className="relative z-10 text-zinc-200 font-light italic text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-2xl leading-relaxed max-w-xs sm:max-w-sm md:max-w-md px-[20px] flex-shrink-0"
+              className="relative z-10 text-zinc-200 font-light italic text-xs sm:text-sm md:text-base lg:text-lg xl:text-lg leading-relaxed max-w-xs sm:max-w-sm md:max-w-md px-[20px] flex-shrink-0"
             >
               {rector.descripcion_corta}
             </motion.p>
@@ -149,7 +149,7 @@ export const RectorCard: React.FC<RectorCardProps> = ({ rector, isActive, onOpen
           variants={footerVariants}
           className="w-full lg:w-2/5 flex flex-col gap-2 sm:gap-3 md:gap-4 lg:gap-6 xl:gap-8 flex-shrink-0 lg:px-8 justify-center"
         >
-          <blockquote className="font-serif italic text-[13px] sm:text-[15px] md:text-[17px] lg:text-[19px] xl:text-[24px] 2xl:text-[28px] text-center text-white/90 drop-shadow-[0_2px_8px_rgba(0,0,0,0.5)] px-[15%] lg:px-0 py-4 sm:py-5 mb-4 mt-4 line-clamp-6 leading-relaxed border-t border-b border-white/10">
+          <blockquote className="font-serif italic text-[13px] sm:text-[15px] md:text-[17px] lg:text-[19px] xl:text-[24px] text-center text-white/90 drop-shadow-[0_2px_8px_rgba(0,0,0,0.5)] px-[15%] lg:px-0 py-4 sm:py-5 mb-4 mt-4 line-clamp-6 leading-relaxed border-t border-b border-white/10">
             "{rector.cita}"
           </blockquote>
 
@@ -157,9 +157,9 @@ export const RectorCard: React.FC<RectorCardProps> = ({ rector, isActive, onOpen
             whileTap={{ scale: 0.96 }}
             whileHover={{ scale: 1.02, boxShadow: "0 0 24px rgba(245, 158, 11, 0.3)" }}
             onClick={(e) => { e.stopPropagation(); onOpenBio(rector); }}
-            className="w-auto mx-auto lg:w-full py-2.5 sm:py-3 md:py-4 lg:py-5 xl:py-6 bg-gradient-to-r from-amber-900/40 via-amber-800/30 to-amber-900/40 backdrop-blur-md border border-amber-500/40 text-amber-300 hover:text-amber-100 hover:border-amber-400/60 rounded-md sm:rounded-lg md:rounded-xl lg:rounded-2xl font-serif font-semibold tracking-wide shadow-[0_4px_16px_rgba(0,0,0,0.4),inset_0_1px_0_0_rgba(255,255,255,0.1)] flex items-center justify-center gap-2 sm:gap-2.5 md:gap-3 transition-all duration-300 text-[10px] sm:text-xs md:text-sm lg:text-base xl:text-lg 2xl:text-xl group"
+            className="w-auto min-w-[210px] px-6 sm:px-10 mx-auto lg:w-full py-2.5 sm:py-3 md:py-4 lg:py-5 xl:py-6 bg-gradient-to-r from-amber-900/40 via-amber-800/30 to-amber-900/40 backdrop-blur-md border border-amber-500/40 text-amber-300 hover:text-amber-100 hover:border-amber-400/60 rounded-md sm:rounded-lg md:rounded-xl lg:rounded-2xl font-serif font-semibold tracking-wide shadow-[0_4px_16px_rgba(0,0,0,0.4),inset_0_1px_0_0_rgba(255,255,255,0.1)] flex items-center justify-center gap-2 sm:gap-2.5 md:gap-3 transition-all duration-300 text-[10px] sm:text-xs md:text-sm lg:text-base xl:text-lg group"
           >
-            <Info size={14} className="sm:w-4 sm:h-4 md:w-5 md:h-5 lg:w-6 lg:h-6 xl:w-7 xl:h-7 2xl:w-8 2xl:h-8 text-amber-400 group-hover:text-amber-300 transition-colors" />
+            <Info size={14} className="sm:w-4 sm:h-4 md:w-5 md:h-5 lg:w-6 lg:h-6 xl:w-7 xl:h-7 text-amber-400 group-hover:text-amber-300 transition-colors" />
             <span>LEER BIOGRAFÍA COMPLETA</span>
           </motion.button>
         </motion.div>

@@ -9,7 +9,7 @@ export const RECTORES: Rector[] = [
     id: "rector_1",
     nombre: "Dr. José de Baños y Sotomayor",
     periodo: "1686",
-    descripcion_corta: "Primer Rector y pilar institucional de la Real y Pontificia Universidad de San Carlos, responsable de la consolidación de las cátedras fundamentales y la organización académica en el Reino de Guatemala.",
+    descripcion_corta: "Primer rector designado formalmente al inicio del ejercicio institucional de la Real y Pontificia Universidad de San Carlos. Destacó por consolidar las cátedras fundamentales y organizar la vida académica en el Reino de Guatemala.",
     cita: "La sabiduría y el derecho son los cimientos sobre los cuales se erige la grandeza de una cátedra perpetua al servicio de la fe y el conocimiento.",
     trayectoria_academica: "Rector de la Real y Pontificia Universidad de San Carlos Borromeo. Originario de Santa Fe de Bogotá (Colombia), donde realizó sus estudios. Fue trasladado a Guatemala con el cargo de Arcediano de la Catedral, y después fue promovido a Deán. Se desempeñó, asimismo, como catedrático de Prima de Teología, en la Universidad, en la que ocupó la distinguida posición de Rector Perpetuo.",
     logros_gestion: "Durante su gestión como rector de la Real y Pontificia Universidad de San Carlos Borromeo, José de Baños y Sotomayor contribuyó al fortalecimiento de la organización académica y administrativa de la institución, consolidando la enseñanza tradicional en medicina, filosofía, teología y derecho, en concordancia con el modelo universitario colonial y el marco eclesiástico de su época.",
