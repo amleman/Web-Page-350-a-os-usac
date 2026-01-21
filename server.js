@@ -137,16 +137,16 @@ app.post('/api/likes/:rectorId/toggle', async (req, res) => {
     }
 
     // Verificar si ya existe
-    const [existing] = await pool.execute(
+    const [rows] = await pool.execute(
       'SELECT id FROM likes WHERE rector_id = ? AND user_id = ?',
       [rectorId, userId]
     );
 
-    console.log(`[API] Like existente encontrado: ${existing.length > 0}`);
+    console.log(`[API] Like existente encontrado: ${rows.length > 0}`);
 
     let isLiked;
 
-    if (existing.length > 0) {
+    if (rows.length > 0) {
       // Quitar like
       console.log(`[API] Eliminando like para ${rectorId} de usuario ${userId}`);
       await pool.execute(
