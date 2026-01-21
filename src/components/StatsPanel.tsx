@@ -26,9 +26,7 @@ export const StatsPanel: React.FC<StatsPanelProps> = ({ isOpen, onClose }) => {
   const [rectorStats, setRectorStats] = useState<RectorStats[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
-  const getApiBaseUrl = (): string => {
-    return window.location.origin;
-  };
+
 
   useEffect(() => {
     if (isOpen) {
@@ -42,16 +40,16 @@ export const StatsPanel: React.FC<StatsPanelProps> = ({ isOpen, onClose }) => {
   const fetchStats = async () => {
     try {
       setIsLoading(true);
-      
+
       // Obtener estadísticas generales
-      const generalResponse = await fetch(`${getApiBaseUrl()}/api/stats/general`);
+      const generalResponse = await fetch(`${import.meta.env.BASE_URL}api/stats/general`);
       if (generalResponse.ok) {
         const general = await generalResponse.json();
         setGeneralStats(general);
       }
 
       // Obtener estadísticas por rector
-      const rectorsResponse = await fetch(`${getApiBaseUrl()}/api/stats/rectors`);
+      const rectorsResponse = await fetch(`${import.meta.env.BASE_URL}api/stats/rectors`);
       if (rectorsResponse.ok) {
         const rectors = await rectorsResponse.json();
         setRectorStats(rectors);

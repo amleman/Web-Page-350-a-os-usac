@@ -30,11 +30,7 @@ export const StatsPage: React.FC = () => {
   const [rectorLikes, setRectorLikes] = useState<RectorLikes[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
-  const getApiBaseUrl = (): string => {
-    // Use the base URL if available, stripping trailing slash to clean up
-    const base = import.meta.env.BASE_URL || '/';
-    return base.endsWith('/') ? base.slice(0, -1) : base;
-  };
+
 
   // Función para obtener el nombre del rector por su ID
   const getRectorName = (rectorId: string): string => {
@@ -54,21 +50,21 @@ export const StatsPage: React.FC = () => {
       setIsLoading(true);
 
       // Obtener estadísticas generales
-      const generalResponse = await fetch(`${getApiBaseUrl()}/api/stats/general`);
+      const generalResponse = await fetch(`${import.meta.env.BASE_URL}api/stats/general`);
       if (generalResponse.ok) {
         const general = await generalResponse.json();
         setGeneralStats(general);
       }
 
       // Obtener estadísticas por rector
-      const rectorsResponse = await fetch(`${getApiBaseUrl()}/api/stats/rectors`);
+      const rectorsResponse = await fetch(`${import.meta.env.BASE_URL}api/stats/rectors`);
       if (rectorsResponse.ok) {
         const rectors = await rectorsResponse.json();
         setRectorStats(rectors);
       }
 
       // Obtener estadísticas de likes por rector
-      const likesResponse = await fetch(`${getApiBaseUrl()}/api/stats/likes`);
+      const likesResponse = await fetch(`${import.meta.env.BASE_URL}api/stats/likes`);
       console.log('[StatsPage] Likes response status:', likesResponse.status);
       if (likesResponse.ok) {
         const likes = await likesResponse.json();

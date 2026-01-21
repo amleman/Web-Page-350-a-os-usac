@@ -20,16 +20,12 @@ export const getUserId = (): string => {
 };
 
 // Obtener la URL base de la API
-const getApiBaseUrl = (): string => {
-  // Use the base URL if available, stripping trailing slash to clean up
-  const base = import.meta.env.BASE_URL || '/';
-  return base.endsWith('/') ? base.slice(0, -1) : base;
-};
+
 
 // Cargar todos los likes desde el servidor
 export const loadLikes = async (): Promise<LikesData> => {
   try {
-    const apiUrl = `${getApiBaseUrl()}/api/likes`;
+    const apiUrl = `${import.meta.env.BASE_URL}api/likes`;
     const response = await fetch(apiUrl, {
       cache: 'no-cache',
     });
@@ -51,7 +47,7 @@ export const loadLikes = async (): Promise<LikesData> => {
 // Cargar likes de un rector específico
 export const loadRectorLikes = async (rectorId: string): Promise<number> => {
   try {
-    const apiUrl = `${getApiBaseUrl()}/api/likes/${rectorId}`;
+    const apiUrl = `${import.meta.env.BASE_URL}api/likes/${rectorId}`;
     console.log(`[Frontend] Cargando likes para ${rectorId} desde: ${apiUrl}`);
 
     const response = await fetch(apiUrl, {
@@ -78,7 +74,7 @@ export const loadRectorLikes = async (rectorId: string): Promise<number> => {
 // Verificar si un usuario ya dio like
 export const checkUserLiked = async (rectorId: string, userId: string): Promise<boolean> => {
   try {
-    const apiUrl = `${getApiBaseUrl()}/api/likes/${rectorId}/check/${userId}`;
+    const apiUrl = `${import.meta.env.BASE_URL}api/likes/${rectorId}/check/${userId}`;
     console.log(`[Frontend] Verificando like para ${rectorId}, userId: ${userId}, URL: ${apiUrl}`);
 
     const response = await fetch(apiUrl, {
@@ -118,7 +114,7 @@ const loadLikesFromLocalStorage = (): LikesData => {
 // Toggle like (agregar o quitar)
 export const toggleLike = async (rectorId: string, userId: string): Promise<{ isLiked: boolean; count: number }> => {
   try {
-    const apiUrl = `${getApiBaseUrl()}/api/likes/${rectorId}/toggle`;
+    const apiUrl = `${import.meta.env.BASE_URL}api/likes/${rectorId}/toggle`;
     console.log(`[Frontend] Toggle like para ${rectorId}, userId: ${userId}, URL: ${apiUrl}`);
 
     const response = await fetch(apiUrl, {

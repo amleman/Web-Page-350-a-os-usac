@@ -21,11 +21,7 @@ export const getSessionId = (): string => {
 };
 
 // Obtener la URL base de la API
-const getApiBaseUrl = (): string => {
-  // Use the base URL if available, stripping trailing slash to clean up
-  const base = import.meta.env.BASE_URL || '/';
-  return base.endsWith('/') ? base.slice(0, -1) : base;
-};
+
 
 // Registrar una visita
 export const trackVisit = async (rectorId: string | null, pageType: PageType): Promise<void> => {
@@ -33,7 +29,8 @@ export const trackVisit = async (rectorId: string | null, pageType: PageType): P
     const sessionId = getSessionId();
     const userAgent = navigator.userAgent;
 
-    const apiUrl = `${getApiBaseUrl()}/api/visits`;
+    const baseUrl = import.meta.env.BASE_URL;
+    const apiUrl = `${baseUrl}api/visits`; // Base URL already includes trailing slash
 
     console.log('[TrackVisit] Registrando visita:', { rectorId, pageType, sessionId });
 
