@@ -43,15 +43,8 @@ export const CreditsSection: React.FC<CreditsSectionProps> = ({ onScrollUp }) =>
             <p className="text-zinc-300 text-sm md:text-base leading-relaxed">
               Preservando y difundiendo el conocimiento universitario
             </p>
-          </div>
-
-          {/* DIGA */}
-          <div className="bg-white/5 backdrop-blur-[2px] rounded-2xl p-6 md:p-8 border border-white/10">
-            <h2 className="font-serif text-xl md:text-2xl text-amber-300 mb-4">
+            <p className="text-zinc-400 text-xs md:text-sm mt-2">
               Dirección General de Administración -DIGA-
-            </h2>
-            <p className="text-zinc-300 text-sm md:text-base leading-relaxed">
-              Gestión administrativa eficiente para la educación superior
             </p>
           </div>
 
