@@ -18,7 +18,7 @@ export const IntroSection: React.FC<IntroSectionProps> = ({ onScrollClick }) => 
         className="mt-4 sm:mt-6 md:mt-8 lg:mt-12 flex flex-row items-center justify-center gap-4 sm:gap-6 md:gap-8 lg:gap-12 px-4"
       >
         <img
-          src="/images/logotipo_bc_principal_blanco.svg"
+          src={`${import.meta.env.BASE_URL}images/logotipo_bc_principal_blanco.svg`}
           alt="Biblioteca Central USAC"
           className="h-10 sm:h-12 md:h-14 lg:h-18 w-auto max-w-[40%] sm:max-w-none object-contain drop-shadow-lg opacity-90"
           loading="eager"
@@ -31,7 +31,7 @@ export const IntroSection: React.FC<IntroSectionProps> = ({ onScrollClick }) => 
         <div className="hidden md:block w-px h-10 bg-white/20"></div>
         {/* Updated to use the generated SVG for reliability */}
         <img
-          src="/images/logotipo-usac-blanco.png"
+          src={`${import.meta.env.BASE_URL}images/logotipo-usac-blanco.png`}
           alt="USAC"
           className="h-10 sm:h-12 md:h-14 lg:h-18 w-auto max-w-[40%] sm:max-w-none object-contain drop-shadow-lg opacity-90"
           loading="eager"

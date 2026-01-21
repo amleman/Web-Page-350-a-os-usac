@@ -31,7 +31,9 @@ export const StatsPage: React.FC = () => {
   const [isLoading, setIsLoading] = useState(true);
 
   const getApiBaseUrl = (): string => {
-    return window.location.origin;
+    // Use the base URL if available, stripping trailing slash to clean up
+    const base = import.meta.env.BASE_URL || '/';
+    return base.endsWith('/') ? base.slice(0, -1) : base;
   };
 
   // Función para obtener el nombre del rector por su ID
@@ -50,7 +52,7 @@ export const StatsPage: React.FC = () => {
   const fetchStats = async () => {
     try {
       setIsLoading(true);
-      
+
       // Obtener estadísticas generales
       const generalResponse = await fetch(`${getApiBaseUrl()}/api/stats/general`);
       if (generalResponse.ok) {
@@ -190,7 +192,7 @@ export const StatsPage: React.FC = () => {
                     const totalLikes = likes?.total_likes || 0;
                     const maxVisits = rectorStats[0]?.total_visits || 1;
                     const maxLikes = rectorLikes[0]?.total_likes || 1;
-                    
+
                     return (
                       <motion.div
                         key={stat.rector_id}

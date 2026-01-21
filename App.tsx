@@ -34,7 +34,7 @@ const ActiveBackground = ({
   const x = useTransform(springX, [0, window.innerWidth], [20, -20]);
   const y = useTransform(springY, [0, window.innerHeight], [20, -20]);
 
-  const introImage = "/images/bc-fondo.png";
+  const introImage = `${import.meta.env.BASE_URL}images/bc-fondo.png`;
 
   return (
     <div className="fixed inset-0 z-0 overflow-hidden bg-[#001e42]">
@@ -92,10 +92,10 @@ function App() {
   // Precargar imágenes críticas al montar
   useEffect(() => {
     const criticalImages = [
-      '/images/bc-fondo.png',
-      '/images/Dorado-350-logo-1024x640-sin-fondo.png',
-      '/images/logotipo_bc_principal_blanco.svg',
-      '/images/logotipo-usac-blanco.png',
+      `${import.meta.env.BASE_URL}images/bc-fondo.png`,
+      `${import.meta.env.BASE_URL}images/Dorado-350-logo-1024x640-sin-fondo.png`,
+      `${import.meta.env.BASE_URL}images/logotipo_bc_principal_blanco.svg`,
+      `${import.meta.env.BASE_URL}images/logotipo-usac-blanco.png`,
       RECTORES[0]?.fondo_url,
       RECTORES[0]?.foto_url,
     ].filter(Boolean) as string[];
@@ -254,7 +254,7 @@ function App() {
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.15, duration: 0.25 }}
-              src="/images/Dorado-350-logo-1024x640-sin-fondo.png"
+              src={`${import.meta.env.BASE_URL}images/Dorado-350-logo-1024x640-sin-fondo.png`}
               alt="USAC 350 Años"
               className="h-16 md:h-20 object-contain drop-shadow-[0_0_15px_rgba(255,255,255,0.3)] mt-2 cursor-pointer pointer-events-auto hover:opacity-80 transition-opacity"
               loading="eager"

@@ -1,8 +1,11 @@
 import { Rector } from './types';
 
+// Helper para compatibilidad con subrutas
+const asset = (path: string) => `${import.meta.env.BASE_URL}${path.startsWith('/') ? path.slice(1) : path}`;
+
 // Helper para reciclar fondos (1-5)
 // Rector 1 -> Fondo 1, Rector 6 -> Fondo 1, etc.
-const getFondo = (index: number) => `/images/fondo_${(index % 5) + 1}.jpg`;
+const getFondo = (index: number) => asset(`images/fondo_${(index % 5) + 1}.jpg`);
 
 export const RECTORES: Rector[] = [
   {

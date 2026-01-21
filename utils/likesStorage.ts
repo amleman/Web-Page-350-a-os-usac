@@ -21,13 +21,9 @@ export const getUserId = (): string => {
 
 // Obtener la URL base de la API
 const getApiBaseUrl = (): string => {
-  if (typeof window !== 'undefined') {
-    // En desarrollo, Vite hace proxy de /api a localhost:3001
-    // En producción, el servidor sirve tanto la API como los archivos estáticos
-    // Por lo tanto, siempre usar la misma URL del navegador
-    return window.location.origin;
-  }
-  return '';
+  // Use the base URL if available, stripping trailing slash to clean up
+  const base = import.meta.env.BASE_URL || '/';
+  return base.endsWith('/') ? base.slice(0, -1) : base;
 };
 
 // Cargar todos los likes desde el servidor
@@ -57,7 +53,7 @@ export const loadRectorLikes = async (rectorId: string): Promise<number> => {
   try {
     const apiUrl = `${getApiBaseUrl()}/api/likes/${rectorId}`;
     console.log(`[Frontend] Cargando likes para ${rectorId} desde: ${apiUrl}`);
-    
+
     const response = await fetch(apiUrl, {
       cache: 'no-cache',
     });
@@ -75,7 +71,7 @@ export const loadRectorLikes = async (rectorId: string): Promise<number> => {
   } catch (error) {
     console.error(`[Frontend] Error loading rector likes para ${rectorId}:`, error);
   }
-  
+
   return 0;
 };
 
@@ -84,7 +80,7 @@ export const checkUserLiked = async (rectorId: string, userId: string): Promise<
   try {
     const apiUrl = `${getApiBaseUrl()}/api/likes/${rectorId}/check/${userId}`;
     console.log(`[Frontend] Verificando like para ${rectorId}, userId: ${userId}, URL: ${apiUrl}`);
-    
+
     const response = await fetch(apiUrl, {
       cache: 'no-cache',
     });
@@ -102,7 +98,7 @@ export const checkUserLiked = async (rectorId: string, userId: string): Promise<
   } catch (error) {
     console.error(`[Frontend] Error checking like para ${rectorId}:`, error);
   }
-  
+
   return false;
 };
 
@@ -124,7 +120,7 @@ export const toggleLike = async (rectorId: string, userId: string): Promise<{ is
   try {
     const apiUrl = `${getApiBaseUrl()}/api/likes/${rectorId}/toggle`;
     console.log(`[Frontend] Toggle like para ${rectorId}, userId: ${userId}, URL: ${apiUrl}`);
-    
+
     const response = await fetch(apiUrl, {
       method: 'POST',
       headers: {

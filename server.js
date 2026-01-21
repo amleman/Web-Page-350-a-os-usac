@@ -4,6 +4,7 @@
  * Ejecutar con: node server.js
  */
 
+import 'dotenv/config'; // Load environment variables
 import express from 'express';
 import { promises as fs } from 'fs';
 import path from 'path';
@@ -16,6 +17,7 @@ const __dirname = path.dirname(__filename);
 
 const app = express();
 const PORT = process.env.PORT || 3001;
+const BASE_PATH = process.env.VITE_BASE_PATH || '/';
 
 // Configuración de MySQL
 const dbConfig = {
@@ -23,6 +25,7 @@ const dbConfig = {
   user: process.env.DB_USER || 'root',
   password: process.env.DB_PASSWORD || '',
   database: process.env.DB_NAME || 'rectores_usac',
+  port: process.env.DB_PORT || 3306,
   waitForConnections: true,
   connectionLimit: 10,
   queueLimit: 0
@@ -41,15 +44,15 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use(express.static('dist')); // Servir archivos estáticos de Vite
+app.use(BASE_PATH, express.static('dist')); // Servir archivos estáticos de Vite con el path base
 
 // Middleware para obtener IP real (útil si hay proxy)
 app.use((req, res, next) => {
-  req.realIp = req.headers['x-forwarded-for']?.split(',')[0] || 
-               req.headers['x-real-ip'] || 
-               req.connection.remoteAddress || 
-               req.socket.remoteAddress ||
-               'unknown';
+  req.realIp = req.headers['x-forwarded-for']?.split(',')[0] ||
+    req.headers['x-real-ip'] ||
+    req.connection.remoteAddress ||
+    req.socket.remoteAddress ||
+    'unknown';
   next();
 });
 
@@ -60,16 +63,16 @@ app.get('/api/likes/:rectorId', async (req, res) => {
   try {
     const { rectorId } = req.params;
     console.log(`[API] GET /api/likes/${rectorId} - Obteniendo likes para rector`);
-    
+
     const [rows] = await pool.execute(
       'SELECT COUNT(*) as count FROM likes WHERE rector_id = ?',
       [rectorId]
     );
-    
+
     // MySQL2 retorna COUNT(*) como BigInt, convertir a número
     const count = Number(rows[0]?.count || 0);
     console.log(`[API] Likes encontrados para ${rectorId}: ${count}`);
-    
+
     res.json({ rectorId, count });
   } catch (error) {
     console.error('[API] Error getting likes:', error);
@@ -83,7 +86,7 @@ app.get('/api/likes', async (req, res) => {
     const [rows] = await pool.execute(
       'SELECT rector_id, COUNT(*) as count FROM likes GROUP BY rector_id'
     );
-    
+
     const likes = {};
     rows.forEach(row => {
       likes[row.rector_id] = {
@@ -91,7 +94,7 @@ app.get('/api/likes', async (req, res) => {
         likedBy: [] // No enviamos la lista completa por privacidad
       };
     });
-    
+
     res.json(likes);
   } catch (error) {
     console.error('Error getting all likes:', error);
@@ -104,15 +107,15 @@ app.get('/api/likes/:rectorId/check/:userId', async (req, res) => {
   try {
     const { rectorId, userId } = req.params;
     console.log(`[API] GET /api/likes/${rectorId}/check/${userId} - Verificando like`);
-    
+
     const [rows] = await pool.execute(
       'SELECT COUNT(*) as count FROM likes WHERE rector_id = ? AND user_id = ?',
       [rectorId, userId]
     );
-    
+
     const isLiked = Number(rows[0]?.count || 0) > 0;
     console.log(`[API] Usuario ${userId} ha dado like a ${rectorId}: ${isLiked}`);
-    
+
     res.json({ isLiked });
   } catch (error) {
     console.error('[API] Error checking like:', error);
@@ -125,24 +128,24 @@ app.post('/api/likes/:rectorId/toggle', async (req, res) => {
   try {
     const { rectorId } = req.params;
     const { userId } = req.body;
-    
+
     console.log(`[API] POST /api/likes/${rectorId}/toggle - userId: ${userId}`);
-    
+
     if (!userId) {
       console.error('[API] Error: userId is required');
       return res.status(400).json({ error: 'userId is required' });
     }
-    
+
     // Verificar si ya existe
     const [existing] = await pool.execute(
       'SELECT id FROM likes WHERE rector_id = ? AND user_id = ?',
       [rectorId, userId]
     );
-    
+
     console.log(`[API] Like existente encontrado: ${existing.length > 0}`);
-    
+
     let isLiked;
-    
+
     if (existing.length > 0) {
       // Quitar like
       console.log(`[API] Eliminando like para ${rectorId} de usuario ${userId}`);
@@ -160,17 +163,17 @@ app.post('/api/likes/:rectorId/toggle', async (req, res) => {
       );
       isLiked = true;
     }
-    
+
     // Obtener nuevo conteo
     const [countRows] = await pool.execute(
       'SELECT COUNT(*) as count FROM likes WHERE rector_id = ?',
       [rectorId]
     );
-    
+
     // MySQL2 retorna COUNT(*) como BigInt, convertir a número
     const count = Number(countRows[0]?.count || 0);
     console.log(`[API] Nuevo conteo para ${rectorId}: ${count}, isLiked: ${isLiked}`);
-    
+
     res.json({
       isLiked,
       count: count
@@ -188,24 +191,24 @@ app.post('/api/likes/:rectorId/toggle', async (req, res) => {
 app.post('/api/visits', async (req, res) => {
   try {
     const { rectorId, pageType, sessionId, userAgent } = req.body;
-    
+
     console.log('[API] POST /api/visits - Registrando visita:', { rectorId, pageType, sessionId });
-    
+
     if (!pageType || !sessionId) {
       console.error('[API] Error: pageType and sessionId are required');
       return res.status(400).json({ error: 'pageType and sessionId are required' });
     }
-    
+
     const ipAddress = req.realIp;
-    
+
     const [result] = await pool.execute(
       `INSERT INTO visits (rector_id, page_type, ip_address, user_agent, session_id) 
        VALUES (?, ?, ?, ?, ?)`,
       [rectorId || null, pageType, ipAddress, userAgent || null, sessionId]
     );
-    
+
     console.log('[API] Visita registrada exitosamente, ID:', result.insertId);
-    
+
     res.json({ success: true, id: result.insertId });
   } catch (error) {
     console.error('[API] Error recording visit:', error);
@@ -218,7 +221,7 @@ app.post('/api/visits', async (req, res) => {
 app.get('/api/stats/visits/rector/:rectorId', async (req, res) => {
   try {
     const { rectorId } = req.params;
-    
+
     const [rows] = await pool.execute(
       `SELECT 
         COUNT(DISTINCT session_id) as unique_visits,
@@ -227,7 +230,7 @@ app.get('/api/stats/visits/rector/:rectorId', async (req, res) => {
        WHERE rector_id = ?`,
       [rectorId]
     );
-    
+
     res.json(rows[0] || { unique_visits: 0, total_visits: 0 });
   } catch (error) {
     console.error('Error getting rector stats:', error);
@@ -239,7 +242,7 @@ app.get('/api/stats/visits/rector/:rectorId', async (req, res) => {
 app.get('/api/stats/general', async (req, res) => {
   try {
     console.log('[API] GET /api/stats/general - Obteniendo estadísticas generales');
-    
+
     const [rows] = await pool.execute(
       `SELECT 
         COUNT(DISTINCT session_id) as total_unique_visitors,
@@ -249,7 +252,7 @@ app.get('/api/stats/general', async (req, res) => {
         COUNT(DISTINCT CASE WHEN page_type = 'credits' THEN session_id END) as credits_visits
        FROM visits`
     );
-    
+
     // Convertir BigInt a Number
     const stats = rows[0] ? {
       total_unique_visitors: Number(rows[0].total_unique_visitors || 0),
@@ -264,9 +267,9 @@ app.get('/api/stats/general', async (req, res) => {
       rector_visits: 0,
       credits_visits: 0
     };
-    
+
     console.log('[API] Estadísticas generales:', stats);
-    
+
     res.json(stats);
   } catch (error) {
     console.error('[API] Error getting general stats:', error);
@@ -278,13 +281,13 @@ app.get('/api/stats/general', async (req, res) => {
 app.get('/api/stats/rectors', async (req, res) => {
   try {
     console.log('[API] GET /api/stats/rectors - Obteniendo estadísticas de rectores');
-    
+
     // Primero, verificar cuántas visitas hay en total
     const [totalRows] = await pool.execute(
       `SELECT COUNT(*) as total FROM visits WHERE rector_id IS NOT NULL`
     );
     console.log('[API] Total de visitas a rectores en BD:', totalRows[0]?.total || 0);
-    
+
     const [rows] = await pool.execute(
       `SELECT 
         rector_id,
@@ -295,17 +298,17 @@ app.get('/api/stats/rectors', async (req, res) => {
        GROUP BY rector_id
        ORDER BY total_visits DESC`
     );
-    
+
     // Convertir BigInt a Number
     const stats = rows.map((row) => ({
       rector_id: row.rector_id,
       unique_visits: Number(row.unique_visits || 0),
       total_visits: Number(row.total_visits || 0)
     }));
-    
+
     console.log(`[API] Estadísticas de rectores: ${stats.length} rectores encontrados`);
     console.log('[API] Detalle de estadísticas:', stats);
-    
+
     res.json(stats);
   } catch (error) {
     console.error('[API] Error getting rectors stats:', error);
@@ -318,20 +321,20 @@ app.get('/api/stats/rectors', async (req, res) => {
 app.get('/api/stats/likes', async (req, res) => {
   try {
     console.log('[API] GET /api/stats/likes - Obteniendo estadísticas de likes por rector');
-    
+
     // Primero verificar cuántos likes hay en total
     const [totalRows] = await pool.execute(
       `SELECT COUNT(*) as total FROM likes`
     );
     const totalLikesInDB = Number(totalRows[0]?.total || 0);
     console.log('[API] Total de likes en BD:', totalLikesInDB);
-    
+
     // Obtener todos los likes para debug
     const [allLikes] = await pool.execute(
       `SELECT rector_id, user_id, created_at FROM likes LIMIT 10`
     );
     console.log('[API] Primeros 10 likes en BD:', allLikes);
-    
+
     const [rows] = await pool.execute(
       `SELECT 
         rector_id,
@@ -340,17 +343,17 @@ app.get('/api/stats/likes', async (req, res) => {
        GROUP BY rector_id
        ORDER BY total_likes DESC`
     );
-    
+
     // Convertir BigInt a Number
     const stats = rows.map((row) => ({
       rector_id: row.rector_id,
       total_likes: Number(row.total_likes || 0)
     }));
-    
+
     console.log(`[API] Estadísticas de likes: ${stats.length} rectores encontrados`);
     console.log('[API] Detalle de likes:', stats);
     console.log('[API] Total de likes en BD vs estadísticas:', totalLikesInDB, 'vs', stats.reduce((sum, s) => sum + s.total_likes, 0));
-    
+
     res.json(stats);
   } catch (error) {
     console.error('[API] Error getting likes stats:', error);
@@ -363,15 +366,15 @@ app.get('/api/stats/likes', async (req, res) => {
 app.get('/api/debug/likes', async (req, res) => {
   try {
     console.log('[API] GET /api/debug/likes - Diagnóstico de likes');
-    
+
     // Verificar si la tabla existe
     const [tables] = await pool.execute(
       `SELECT TABLE_NAME FROM information_schema.TABLES WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = 'likes'`
     );
-    
+
     const tableExists = tables.length > 0;
     console.log('[API] Tabla likes existe:', tableExists);
-    
+
     if (!tableExists) {
       return res.json({
         error: 'La tabla likes no existe',
@@ -380,30 +383,30 @@ app.get('/api/debug/likes', async (req, res) => {
         likesByRector: []
       });
     }
-    
+
     // Contar total de likes
     const [totalRows] = await pool.execute('SELECT COUNT(*) as total FROM likes');
     const totalLikes = Number(totalRows[0]?.total || 0);
     console.log('[API] Total de likes:', totalLikes);
-    
+
     // Obtener todos los likes
     const [allLikes] = await pool.execute(
       'SELECT rector_id, user_id, created_at FROM likes ORDER BY created_at DESC LIMIT 20'
     );
     console.log('[API] Últimos 20 likes:', allLikes);
-    
+
     // Obtener likes agrupados por rector
     const [groupedLikes] = await pool.execute(
       `SELECT rector_id, COUNT(*) as count FROM likes GROUP BY rector_id ORDER BY count DESC`
     );
-    
+
     const likesByRector = groupedLikes.map(row => ({
       rector_id: row.rector_id,
       count: Number(row.count || 0)
     }));
-    
+
     console.log('[API] Likes por rector:', likesByRector);
-    
+
     res.json({
       tableExists: true,
       totalLikes,
@@ -414,10 +417,10 @@ app.get('/api/debug/likes', async (req, res) => {
   } catch (error) {
     console.error('[API] Error en diagnóstico de likes:', error);
     console.error('[API] Stack:', error.stack);
-    res.status(500).json({ 
-      error: 'Error en diagnóstico', 
+    res.status(500).json({
+      error: 'Error en diagnóstico',
       details: error.message,
-      stack: error.stack 
+      stack: error.stack
     });
   }
 });
@@ -427,23 +430,27 @@ app.get('/api/health', async (req, res) => {
   try {
     // Verificar conexión a la base de datos
     await pool.execute('SELECT 1');
-    res.json({ 
-      status: 'ok', 
+    res.json({
+      status: 'ok',
       database: 'connected',
-      timestamp: new Date().toISOString() 
+      timestamp: new Date().toISOString()
     });
   } catch (error) {
-    res.status(500).json({ 
-      status: 'error', 
+    res.status(500).json({
+      status: 'error',
       database: 'disconnected',
-      error: error.message 
+      error: error.message
     });
   }
 });
 
 // Servir la aplicación React para todas las rutas no-API
 // Esto permite que React Router maneje las rutas en el cliente
-app.get(/^(?!\/api).*/, (req, res) => {
+// Servir la aplicación React para todas las rutas no-API
+// Esto permite que React Router maneje las rutas en el cliente
+// Match requests starting with BASE_PATH (excluding /api)
+const spaRegex = new RegExp(`^${BASE_PATH === '/' ? '' : BASE_PATH}(?!api).*`);
+app.get(spaRegex, (req, res) => {
   res.sendFile(path.join(__dirname, 'dist', 'index.html'));
 });
 
@@ -451,7 +458,7 @@ app.get(/^(?!\/api).*/, (req, res) => {
 app.listen(PORT, async () => {
   console.log(`🚀 Servidor corriendo en http://localhost:${PORT}`);
   console.log(`📊 Base de datos: ${dbConfig.database}@${dbConfig.host}`);
-  
+
   // Verificar conexión a la base de datos
   try {
     await pool.execute('SELECT 1');

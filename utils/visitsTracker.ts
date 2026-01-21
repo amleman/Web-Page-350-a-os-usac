@@ -22,12 +22,9 @@ export const getSessionId = (): string => {
 
 // Obtener la URL base de la API
 const getApiBaseUrl = (): string => {
-  if (typeof window !== 'undefined') {
-    // En desarrollo, Vite hace proxy de /api a localhost:3001
-    // En producción, el servidor sirve tanto la API como los archivos estáticos
-    return window.location.origin;
-  }
-  return '';
+  // Use the base URL if available, stripping trailing slash to clean up
+  const base = import.meta.env.BASE_URL || '/';
+  return base.endsWith('/') ? base.slice(0, -1) : base;
 };
 
 // Registrar una visita
@@ -35,11 +32,11 @@ export const trackVisit = async (rectorId: string | null, pageType: PageType): P
   try {
     const sessionId = getSessionId();
     const userAgent = navigator.userAgent;
-    
+
     const apiUrl = `${getApiBaseUrl()}/api/visits`;
-    
+
     console.log('[TrackVisit] Registrando visita:', { rectorId, pageType, sessionId });
-    
+
     const response = await fetch(apiUrl, {
       method: 'POST',
       headers: {
@@ -52,7 +49,7 @@ export const trackVisit = async (rectorId: string | null, pageType: PageType): P
         userAgent,
       }),
     });
-    
+
     if (response.ok) {
       console.log('[TrackVisit] Visita registrada exitosamente');
     } else {
@@ -67,18 +64,18 @@ export const trackVisit = async (rectorId: string | null, pageType: PageType): P
 // Hook para trackear visitas automáticamente
 export const useVisitTracker = (rectorId: string | null, pageType: PageType) => {
   if (typeof window === 'undefined') return;
-  
+
   // Trackear al montar el componente
   const trackOnce = () => {
     trackVisit(rectorId, pageType);
   };
-  
+
   // Usar un flag para evitar múltiples tracks en el mismo render
   const key = `${rectorId}-${pageType}`;
   if (!sessionStorage.getItem(`tracked-${key}`)) {
     trackOnce();
     sessionStorage.setItem(`tracked-${key}`, 'true');
-    
+
     // Limpiar el flag después de 30 segundos para permitir nuevas visitas
     setTimeout(() => {
       sessionStorage.removeItem(`tracked-${key}`);
