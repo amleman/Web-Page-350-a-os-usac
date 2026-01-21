@@ -11,6 +11,7 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import cors from 'cors';
 import mysql from 'mysql2/promise';
+import rateLimit from 'express-rate-limit';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -37,6 +38,24 @@ const pool = mysql.createPool(dbConfig);
 // Middleware
 app.use(cors());
 app.use(express.json());
+
+// Configuracion de Rate Limiting
+const apiLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutos
+  max: 200, // Limite de 200 peticiones por IP
+  standardHeaders: true,
+  legacyHeaders: false,
+  message: { error: 'Too many requests, please try again later.' }
+});
+
+const writeLimiter = rateLimit({
+  windowMs: 60 * 60 * 1000, // 1 hora
+  max: 100, // Limite de 100 escrituras (likes/visits) por IP
+  message: { error: 'Too many write requests, please try again later.' }
+});
+
+// Aplicar rate limiting general a todas las rutas API
+app.use('/api/', apiLimiter);
 
 // Logging middleware
 app.use((req, res, next) => {
@@ -124,7 +143,7 @@ app.get('/api/likes/:rectorId/check/:userId', async (req, res) => {
 });
 
 // Agregar o quitar like
-app.post('/api/likes/:rectorId/toggle', async (req, res) => {
+app.post('/api/likes/:rectorId/toggle', writeLimiter, async (req, res) => {
   try {
     const { rectorId } = req.params;
     const { userId } = req.body;
@@ -134,6 +153,12 @@ app.post('/api/likes/:rectorId/toggle', async (req, res) => {
     if (!userId) {
       console.error('[API] Error: userId is required');
       return res.status(400).json({ error: 'userId is required' });
+    }
+
+    // Validar formato de rectorId
+    if (!/^rector_\d+$/.test(rectorId)) {
+      console.error(`[API] Error: Invalid rectorId format: ${rectorId}`);
+      return res.status(400).json({ error: 'Invalid rectorId format' });
     }
 
     // Verificar si ya existe
@@ -188,7 +213,7 @@ app.post('/api/likes/:rectorId/toggle', async (req, res) => {
 // ========== API DE VISITAS ==========
 
 // Registrar visita
-app.post('/api/visits', async (req, res) => {
+app.post('/api/visits', writeLimiter, async (req, res) => {
   try {
     const { rectorId, pageType, sessionId, userAgent } = req.body;
 

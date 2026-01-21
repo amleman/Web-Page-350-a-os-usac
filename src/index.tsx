@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import App from './App';
 import { StatsPage } from './pages/StatsPage';
+import { NotFoundPage } from './pages/NotFoundPage';
 import './index.css';
 
 const rootElement = document.getElementById('root');
@@ -18,6 +19,7 @@ root.render(
         <Route path="/" element={<App />} />
         <Route path="/stats" element={<StatsPage />} />
         <Route path="/estadisticas" element={<StatsPage />} />
+        <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>
