@@ -37,14 +37,14 @@ export const CreditsSection: React.FC<CreditsSectionProps> = ({ onScrollUp }) =>
 
           {/* Biblioteca Central */}
           <div className="bg-white/5 backdrop-blur-[2px] rounded-2xl p-6 md:p-8 border border-white/10">
-            <h2 className="font-serif text-xl md:text-2xl text-amber-300 mb-4">
+            <h2 className="font-serif text-xl md:text-2xl text-amber-300 mb-1">
               Biblioteca Central
             </h2>
+            <p className="text-zinc-400 text-[10px] md:text-xs mb-4">
+              Dirección General de Administración -DIGA-
+            </p>
             <p className="text-zinc-300 text-sm md:text-base leading-relaxed">
               Preservando y difundiendo el conocimiento universitario
-            </p>
-            <p className="text-zinc-400 text-xs md:text-sm mt-2">
-              Dirección General de Administración -DIGA-
             </p>
           </div>
 
