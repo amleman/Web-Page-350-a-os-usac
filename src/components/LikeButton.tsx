@@ -6,24 +6,23 @@ import { LikeAnimation } from './LikeAnimation';
 
 interface LikeButtonProps {
   rectorId: string;
+  onLike?: () => void;
 }
 
-export const LikeButton: React.FC<LikeButtonProps> = ({ rectorId }) => {
+export const LikeButton: React.FC<LikeButtonProps> = ({ rectorId, onLike }) => {
   const { likeCount, isLiked, toggleLike } = useLikes(rectorId);
-  const [showAnimation, setShowAnimation] = useState(false);
 
   const handleLike = async () => {
     console.log(`[Component] LikeButton - Click en like para ${rectorId}, estado actual: isLiked=${isLiked}, count=${likeCount}`);
     const wasLiked = isLiked;
-    
+
     try {
       const added = await toggleLike();
       console.log(`[Component] LikeButton - Toggle completado para ${rectorId}, added=${added}`);
 
-      // Mostrar animación solo si se agregó un like
+      // Notificar al padre solo si se agregó un like
       if (added && !wasLiked) {
-        console.log(`[Component] LikeButton - Mostrando animación para ${rectorId}`);
-        setShowAnimation(true);
+        onLike?.();
       }
     } catch (error) {
       console.error(`[Component] LikeButton - Error al dar like para ${rectorId}:`, error);
@@ -47,11 +46,10 @@ export const LikeButton: React.FC<LikeButtonProps> = ({ rectorId }) => {
           transition={{ duration: 0.3 }}
         >
           <Heart
-            className={`w-8 h-8 md:w-10 md:h-10 transition-all duration-300 ${
-              isLiked
+            className={`w-8 h-8 md:w-10 md:h-10 transition-all duration-300 ${isLiked
                 ? 'text-red-500 fill-red-500'
                 : 'text-amber-400/70 group-hover:text-amber-400'
-            }`}
+              }`}
             fill={isLiked ? 'currentColor' : 'none'}
           />
         </motion.div>
@@ -70,18 +68,6 @@ export const LikeButton: React.FC<LikeButtonProps> = ({ rectorId }) => {
         {/* Efecto de brillo al hacer hover */}
         <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-amber-500/0 via-amber-500/0 to-amber-500/0 group-hover:from-amber-500/10 group-hover:via-amber-500/5 group-hover:to-amber-500/10 transition-all duration-300 pointer-events-none" />
       </motion.button>
-
-      {/* Animación de like */}
-      <AnimatePresence>
-        {showAnimation && (
-          <div className="fixed inset-0 pointer-events-none z-[100]">
-            <LikeAnimation
-              isVisible={showAnimation}
-              onComplete={() => setShowAnimation(false)}
-            />
-          </div>
-        )}
-      </AnimatePresence>
     </div>
   );
 };

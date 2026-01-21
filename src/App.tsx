@@ -75,6 +75,7 @@ function App() {
 
   const [selectedRector, setSelectedRector] = useState<Rector | null>(null);
   const [isCardHovered, setIsCardHovered] = useState(false);
+  const [showLikeAnimation, setShowLikeAnimation] = useState(false);
 
   // Scroll/Swipe Cooldown
   const isScrolling = useRef(false);
@@ -319,6 +320,8 @@ function App() {
                       isActive={true}
                       onOpenBio={(r) => setSelectedRector(r)}
                       onHoverChange={setIsCardHovered}
+                      showLikeAnimation={showLikeAnimation}
+                      onAnimationComplete={() => setShowLikeAnimation(false)}
                     />
                   </Suspense>
                 </motion.div>
@@ -363,6 +366,7 @@ function App() {
             <Suspense fallback={null}>
               <LikeButton
                 rectorId={RECTORES[currentRectorIndex].id}
+                onLike={() => setShowLikeAnimation(true)}
               />
             </Suspense>
             <Suspense fallback={null}>

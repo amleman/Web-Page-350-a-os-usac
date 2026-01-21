@@ -2,15 +2,25 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence, Variants } from 'framer-motion';
 import { Info, User } from 'lucide-react';
 import { Rector } from '../types';
+import { LikeAnimation } from './LikeAnimation';
 
 interface RectorCardProps {
   rector: Rector;
   isActive: boolean;
   onOpenBio: (rector: Rector) => void;
   onHoverChange?: (isHovered: boolean) => void;
+  showLikeAnimation?: boolean;
+  onAnimationComplete?: () => void;
 }
 
-export const RectorCard: React.FC<RectorCardProps> = ({ rector, isActive, onOpenBio, onHoverChange }) => {
+export const RectorCard: React.FC<RectorCardProps> = ({
+  rector,
+  isActive,
+  onOpenBio,
+  onHoverChange,
+  showLikeAnimation = false,
+  onAnimationComplete = () => { }
+}) => {
   const [imageError, setImageError] = useState(false);
 
   // Reset error state when rector changes
@@ -132,6 +142,12 @@ export const RectorCard: React.FC<RectorCardProps> = ({ rector, isActive, onOpen
                   onError={() => setImageError(true)}
                 />
               )}
+
+              {/* Like Animation Overlay */}
+              <LikeAnimation
+                isVisible={showLikeAnimation}
+                onComplete={onAnimationComplete}
+              />
             </motion.div>
 
             {/* Description */}
