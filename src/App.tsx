@@ -389,6 +389,14 @@ function App() {
             rectors={RECTORES}
             currentIndex={viewState === 'INTRO' || viewState === 'CREDITS' ? -1 : currentRectorIndex}
             onScrollTo={jumpToRector}
+            onGoToIntro={() => {
+              setViewState('INTRO');
+              trackVisit(null, 'intro');
+            }}
+            onGoToCredits={() => {
+              setViewState('CREDITS');
+              trackVisit(null, 'credits');
+            }}
           />
         </Suspense>
       </motion.div>
