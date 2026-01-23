@@ -15,12 +15,18 @@ export const LoadingScreen: React.FC = () => {
                     initial={{ scale: 0.8, opacity: 0 }}
                     animate={{ scale: 1, opacity: 1 }}
                     transition={{ duration: 0.8, ease: "easeOut" }}
-                    className="mb-8"
+                    className="mb-8 flex items-center gap-6"
                 >
                     <img
+                        src={`${import.meta.env.BASE_URL}images/logotipo_bc_principal_blanco.svg`}
+                        alt="Biblioteca Central"
+                        className="h-8 min-[480px]:h-12 md:h-15 w-auto opacity-90 object-contain"
+                    />
+                    <div className="w-px h-8 min-[480px]:h-10 bg-white/30"></div>
+                    <img
                         src={`${import.meta.env.BASE_URL}images/logotipo-usac-blanco.png`}
-                        alt="USAC Logo"
-                        className="w-32 h-auto opacity-90"
+                        alt="USAC"
+                        className="h-8 min-[480px]:h-12 md:h-15 w-auto opacity-90 object-contain"
                     />
                 </motion.div>
 

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence, Variants } from 'framer-motion';
-import { Info, User } from 'lucide-react';
+import { Info, User, ChevronUp, ChevronDown } from 'lucide-react';
 import { Rector } from '../types';
 import { LikeAnimation } from './LikeAnimation';
 
@@ -191,6 +191,26 @@ export const RectorCard: React.FC<RectorCardProps> = ({
           </motion.button>
         </motion.div>
       </div>
+
+      {/* Navigation Hints */}
+      <motion.div
+        className="absolute top-2 sm:top-4 left-1/2 -translate-x-1/2 text-amber-500/40 hidden md:flex flex-col items-center gap-1 pointer-events-none"
+        initial={{ opacity: 0, y: -10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 1, duration: 0.5 }}
+      >
+        <ChevronUp size={24} className="animate-bounce" />
+      </motion.div>
+
+      <motion.div
+        className="absolute bottom-2 sm:bottom-4 left-1/2 -translate-x-1/2 text-amber-500/40 flex flex-col items-center gap-1 pointer-events-none"
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 1, duration: 0.5 }}
+      >
+        <ChevronDown size={24} className="animate-bounce" />
+        <span className="text-[10px] sm:text-xs tracking-widest uppercase opacity-60 hidden sm:block">Deslizar</span>
+      </motion.div>
     </section>
   );
 };

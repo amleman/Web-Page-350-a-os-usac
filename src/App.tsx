@@ -98,8 +98,10 @@ function App() {
 
   // Audio Player Logic
   // Only play when in RECTORS view and not loading
+  // Audio Player Logic
+  // Only play when in RECTORS view and not loading
   const activeRectorForAudio = (!isLoading && viewState === 'RECTORS') ? RECTORES[currentRectorIndex] : undefined;
-  useAudioPlayer(activeRectorForAudio, isMuted);
+  const { isPlaying } = useAudioPlayer(activeRectorForAudio, isMuted);
 
   // Scroll/Swipe Cooldown
   const isScrolling = useRef(false);
@@ -464,6 +466,7 @@ function App() {
           <AudioController
             key="audio-controller"
             isMuted={isMuted}
+            isPlaying={isPlaying}
             onToggle={() => setIsMuted(!isMuted)}
           />
         )}

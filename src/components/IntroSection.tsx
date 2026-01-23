@@ -66,6 +66,15 @@ export const IntroSection: React.FC<IntroSectionProps> = ({ onScrollClick }) => 
         >
           Explora el legado de los rectores que forjaron la identidad de la Tricentenaria Universidad de San Carlos de Guatemala.
         </motion.p>
+
+        <motion.p
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.5, delay: 0.65 }}
+          className="text-amber-400 font-serif text-lg md:text-2xl mt-2 tracking-wider font-semibold drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]"
+        >
+          1676 - 2026
+        </motion.p>
       </div>
 
       {/* Bottom: Scroll Indicator */}

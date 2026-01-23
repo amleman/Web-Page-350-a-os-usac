@@ -4,10 +4,11 @@ import { motion } from 'framer-motion';
 
 interface AudioControllerProps {
     isMuted: boolean;
+    isPlaying: boolean;
     onToggle: () => void;
 }
 
-export const AudioController: React.FC<AudioControllerProps> = ({ isMuted, onToggle }) => {
+export const AudioController: React.FC<AudioControllerProps> = ({ isMuted, isPlaying, onToggle }) => {
     return (
         <motion.button
             onClick={onToggle}
@@ -20,32 +21,31 @@ export const AudioController: React.FC<AudioControllerProps> = ({ isMuted, onTog
             title={isMuted ? "Activar audio" : "Silenciar audio"}
         >
             {/* Visualizer Bars (Only visible when active) */}
-            {!isMuted && (
-                <div className="flex items-center gap-[2px] h-4">
-                    {[1, 2, 3, 4, 5].map((i) => (
-                        <motion.div
-                            key={i}
-                            className="w-0.5 bg-white rounded-full shadow-[0_0_8px_rgba(255,255,255,0.6)]"
-                            animate={{
-                                height: [
-                                    "20%",
-                                    Math.random() > 0.5 ? "100%" : "60%",
-                                    "40%",
-                                    "80%",
-                                    "20%"
-                                ],
-                            }}
-                            transition={{
-                                duration: 0.8 + Math.random() * 0.45, // Slower animation
-                                repeat: Infinity,
-                                repeatType: "mirror",
-                                ease: "easeInOut",
-                                delay: i * 0.05
-                            }}
-                        />
-                    ))}
-                </div>
-            )}
+            {/* Visualizer Bars */}
+            <div className="flex items-center gap-[2px] h-4">
+                {[1, 2, 3, 4, 5].map((i) => (
+                    <motion.div
+                        key={i}
+                        className="w-0.5 bg-white rounded-full shadow-[0_0_8px_rgba(255,255,255,0.6)]"
+                        animate={{
+                            height: !isPlaying ? "4px" : [
+                                "20%",
+                                Math.random() > 0.5 ? "100%" : "60%",
+                                "40%",
+                                "80%",
+                                "20%"
+                            ],
+                        }}
+                        transition={!isPlaying ? { duration: 0.3 } : {
+                            duration: 0.8 + Math.random() * 0.45,
+                            repeat: Infinity,
+                            repeatType: "mirror",
+                            ease: "easeInOut",
+                            delay: i * 0.05
+                        }}
+                    />
+                ))}
+            </div>
 
             {/* Icon - Reduced size */}
             {isMuted ? (
