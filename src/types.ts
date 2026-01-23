@@ -12,7 +12,9 @@ export interface Rector {
   trayectoria_academica: string;
   logros_gestion: string;
   foto_url: string;
-  video_url?: string; // Added for the video loop
-  fondo_url: string; // Added for the background image
+  video_url?: string;
+  fondo_url: string;
+  audio_url?: string;
   interacciones: Interacciones;
+
 }

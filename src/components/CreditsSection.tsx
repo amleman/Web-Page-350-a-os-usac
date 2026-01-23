@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { ChevronUp, Heart } from 'lucide-react';
+import { ChevronUp } from 'lucide-react';
 
 interface CreditsSectionProps {
   onScrollUp: () => void;
@@ -53,11 +53,10 @@ export const CreditsSection: React.FC<CreditsSectionProps> = ({ onScrollUp }) =>
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5, delay: 0.6 }}
-            className="flex items-center justify-center gap-2 text-amber-400/80 mt-8"
+            className="flex items-center justify-center gap-2 text-amber-400 mt-8"
           >
-            <Heart size={20} className="fill-amber-400/50 text-amber-400/50" />
-            <span className="font-serif text-sm md:text-base">
-              {new Date().getFullYear()}
+            <span className="font-serif text-2xl md:text-4xl tracking-wider drop-shadow-[0_2px_4px_rgba(0,0,0,0.5)]">
+              1676 - 2026
             </span>
           </motion.div>
         </motion.div>
