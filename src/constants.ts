@@ -17,6 +17,7 @@ export const RECTORES: Rector[] = [
     trayectoria_academica: "Rector de la Real y Pontificia Universidad de San Carlos Borromeo. Originario de Santa Fe de Bogotá (Colombia), donde realizó sus estudios. Fue trasladado a Guatemala con el cargo de Arcediano de la Catedral, y después fue promovido a Deán. Se desempeñó, asimismo, como catedrático de Prima de Teología, en la Universidad, en la que ocupó la distinguida posición de Rector Perpetuo.",
     logros_gestion: "Durante su gestión como rector de la Real y Pontificia Universidad de San Carlos Borromeo, José de Baños y Sotomayor contribuyó al fortalecimiento de la organización académica y administrativa de la institución, consolidando la enseñanza tradicional en medicina, filosofía, teología y derecho, en concordancia con el modelo universitario colonial y el marco eclesiástico de su época.",
     foto_url: asset("images/Dr. Jose de Baños y Sotomayor.png"),
+    video_url: asset("videos/Dr. Jose de Banos y Sotomayor.mp4"),
     fondo_url: getFondo(0),
     interacciones: { likes: 120, alumnos: 450 }
   },
@@ -41,6 +42,7 @@ export const RECTORES: Rector[] = [
     trayectoria_academica: "Fue sacerdote, filósofo y académico formado en la Real y Pontificia Universidad de San Carlos de Guatemala. Se desempeñó como catedrático de filosofía y teología, destacándose por su pensamiento humanista e ilustrado. Perteneció al clero intelectual de finales del período colonial y es reconocido por su postura ética y crítica frente a la esclavitud y las desigualdades sociales.",
     logros_gestion: "Durante su rectoría promovió una educación influida por las ideas de la ilustración, fortaleciendo la enseñanza de la filosofía y el pensamiento crítico. Su gestión contribuyó a la formación de intelectuales con conciencia social y reformista, dejando una huella significativa en la etapa final de la universidad colonial.",
     foto_url: asset("images/Jose Simeon Canas.png"),
+    video_url: asset("videos/Jose Simeon Canas.mp4"),
     fondo_url: getFondo(2),
     interacciones: { likes: 98, alumnos: 300 }
   },
@@ -53,6 +55,7 @@ export const RECTORES: Rector[] = [
     trayectoria_academica: "Se graduó de Licenciado y Doctor en Teología en 1792 y en sagrados cánones en 1797 en la Real y Pontificia Universidad de San Carlos Borromeo. En 1810, fue elegido como diputado a las Cortes de Cádiz. Representó a las Provincias Unidas del Centro América ante el Congreso Bolivariano celebrado en Panamá en 1826. En 1839 fue electo diputado de la Asamblea Constituyente, y se le designó primer Presidente de dicho organismo, cargo que no aceptó.",
     logros_gestion: "Participó en procesos políticos de la Independencia de Centroamérica y defendió derechos civiles y reformas educativas.",
     foto_url: asset("images/Dr. Antonio de Larrazabal.png"),
+    video_url: asset("videos/Dr. Antonio de Larrazabal.mp4"),
     fondo_url: asset("images/fondo_6.jpg"),
     interacciones: { likes: 210, alumnos: 890 }
   },
@@ -65,6 +68,7 @@ export const RECTORES: Rector[] = [
     trayectoria_academica: "Obtuvo los grados de Doctor en Derecho Civil en 1817 y en Derecho Canónico en 1821, en la Universidad de San Carlos. Desempeñó los cargos siguientes: Abogado de la Universidad de San Carlos (1817); Teniente Prior del Real Consulado de Comercio; Promotor Fiscal de la Curia (1824) y Decano del Colegio de Abogados (1827).",
     logros_gestion: "Contribuyó de manera decisiva a la continuidad y reorganización de la Universidad de San Carlos en un contexto crítico posterior a la independencia y a las guerras civiles, asegurando su funcionamiento institucional. Durante su rectorado, fortaleció los vínculos de la Universidad con la Iglesia Católica, tanto en el ámbito curricular como en el administrativo, y consolidó una estrecha relación con el poder estatal conservador. Esta orientación influyó de forma significativa en el perfil académico e ideológico de la Universidad, marcando su desarrollo institucional durante varias décadas del siglo XIX.",
     foto_url: asset("images/Dr. Jose de Aycinena.png"),
+    video_url: asset("videos/Dr. Jose de Aycinena.mp4"),
     fondo_url: getFondo(4),
     interacciones: { likes: 175, alumnos: 600 }
   },
@@ -77,6 +81,7 @@ export const RECTORES: Rector[] = [
     trayectoria_academica: "Abogado, escritor e historiador. Realizó sus estudios en el Seminario Tridentino, donde obtuvo el grado de Bachiller en Humanidades y Filosofía. Desempeñó los cargos de oficial de la Secretaría de Hacienda, diputado, Subsecretario de Relaciones Exteriores y de Educación Pública, y vocal de la Junta Directiva de la Sociedad Económica de Amigos del País. Fue uno de los fundadores de la Academia Guatemalteca de la Lengua. Perteneció a la Sociedad de Arqueología de México, a la Academia de la Historia Española, a la Academia de Bellas Letras de Santiago de Chile, entre otras.",
     logros_gestion: "Promovió la producción intelectual y la investigación histórica y jurídica, y reforzó el prestigio académico de la Universidad mediante su propia labor como jurista, historiador y miembro de academias nacionales e internacionales, lo que proyectó a la institución en el ámbito cultural e intelectual del país.",
     foto_url: asset("images/Dr. Agustin Gomez Carrillo.png"),
+    video_url: asset("videos/Dr. Agustin Gomez Carrillo.mp4"),
     fondo_url: getFondo(5), // Reusa fondo 1
     interacciones: { likes: 130, alumnos: 410 }
   },
@@ -89,6 +94,7 @@ export const RECTORES: Rector[] = [
     trayectoria_academica: "Médico y cirujano. Catedrático universitario. Fue Ministro de Educación y de Salud. Cursó un postgrado en la Universidad Johns Hopkins en Estados Unidos y estudió en el Instituto de Medicina Legal de Psiquiatría en Francia. Director del Asilo de Alienados. Fue cónsul de Guatemala en Hamburgo y Ministro Plenipotenciario en Berlín. Promovió la Ley Orgánica y Reglamentaria del Personal Docente de la República. Miembro fundador de la Universidad Popular. ",
     logros_gestion: "Participación universitaria en la Revolución de octubre de 1944. Inauguración del régimen autónomo de la Universidad. Impulso a la ciencia y medicina. Creación de los mecanismos y organización de las primeras elecciones universitarias.",
     foto_url: asset("images/Dr. Carlos Federico Mora.jpeg"),
+    video_url: asset("videos/Dr. Carlos Federico Mora.mp4"),
     fondo_url: getFondo(6), // Reusa fondo 2
     interacciones: { likes: 190, alumnos: 750 }
   },
@@ -101,6 +107,7 @@ export const RECTORES: Rector[] = [
     trayectoria_academica: "Licenciado en Ciencias Químicas y Farmacia. Ejerció la docencia universitaria. Fue Decano de la Facultad de Ciencias Químicas y Farmacia. Rector interino. Estudió química, analítica forense y toxicología en Francia. Pionero del Departamento de Toxicología en su facultad. Fue miembro de la comisión para la fo",
     logros_gestion: "Realización del primer acto electoral en que estudiantes, profesores y graduados eligieron democráticamente al Rector universitario. Impulso a la ciencia y tecnología.",
     foto_url: asset("images/Lic. Julio Valladares Marquez.jpeg"),
+    video_url: asset("videos/Lic. Julio Valladares Marquez.mp4"),
     fondo_url: getFondo(7), // Reusa fondo 3
     interacciones: { likes: 160, alumnos: 580 }
   },
@@ -113,6 +120,7 @@ export const RECTORES: Rector[] = [
     trayectoria_academica: "Médico y cirujano. Primer Rector electo en el período autónomo. Fue Ministro de Educación y docente universitario. Realizó estudios de especialización en los Institutos de Patología de las Universidades de Berlín y de La Habana. Parte de su fecunda labor fue su actividad literaria, con un total de 19 libros.",
     logros_gestion: "Adquisición de los terrenos de la Ciudad Universitaria. Fundación del Centro Universitario de Occidente. Creación de las facultades de: Agronomía, Medicina Veterinaria y Arquitectura. Creación de la Escuela de Psicología, y la Escuela de Historia. Inauguración de la Facultad de Humanidades. Fundación de la Imprenta Universitaria y del Teatro de Arte Universitario. Impulso a la construcción del edificio de la Rectoría",
     foto_url: asset("images/Dr. Carlos Martinez Duran.jpeg"),
+    video_url: asset("videos/Dr. Carlos Martinez Duran.mp4"),
     fondo_url: asset("images/fondo_4.jpeg"), // Reusa fondo 4
     interacciones: { likes: 220, alumnos: 920 }
   },
@@ -125,6 +133,7 @@ export const RECTORES: Rector[] = [
     trayectoria_academica: "Abogado y Notario e Ingeniero Civil. Ejerció la docencia. Uno de los fundadores de la Asociación de Estudiantes Universitarios. Fue Decano de la Facultad de Ingeniería y Ministro de Educación Pública.",
     logros_gestion: "Creación de la Facultad de Agronomía y de Biblioteca Central. Transformación del comedor universitario en residencia estudiantil. Aprobación del plan de estudios y condiciones de admisión. Realización de las Olimpiadas Universitarias. Inauguración del Instituto de Investigaciones Científicas. Creación de la Facultad de Ingeniería de Occidente.",
     foto_url: asset("images/Lic. Miguel Asturias Quinones.jpeg"),
+    video_url: asset("videos/Lic. Miguel Asturias Quinones.mp4"),
     fondo_url: getFondo(9),
     interacciones: { likes: 0, alumnos: 0 }
   },
@@ -137,6 +146,7 @@ export const RECTORES: Rector[] = [
     trayectoria_academica: "Abogado y Notario. Cursó estudios de postgrado, en la especialidad de Filosofía del Derecho, en Argentina. Fue Secretario General de la Universidad. Catedrático universitario. Ministro de Educación Pública y Presidente de la Asamblea Constituyente.",
     logros_gestion: "Fundación de la Facultad de Medicina Veterinaria y Zootecnia. Construcción del nuevo edificio de la Facultad de Ingeniería, en la Ciudad Universitaria, y del edificio de Ciencias Económicas, en Quetzaltenango. Creación del Departamento de Estudios de Derecho Internacional de la Facultad de Derecho, y de la Escuela de Humanidades de Occidente.",
     foto_url: asset("images/Lic. Vicente Diaz Samayoa.jpeg"),
+    video_url: asset("videos/Lic. Vicente Diaz Samayoa.mp4"),
     fondo_url: getFondo(10),
     interacciones: { likes: 0, alumnos: 0 }
   },
@@ -149,6 +159,7 @@ export const RECTORES: Rector[] = [
     trayectoria_academica: "Ingeniero Civil. Fue Decano de la Facultad de Ingeniería. Realizó estudios de postgrado en Estados Unidos. Docente universitario. Como experto en temas estadísticos y poblacionales prestó asesoría a numerosas entidades nacionales e internacionales. La Universidad de Pittsburg le concedió el grado de Doctor Honoris Causa en Ciencias.",
     logros_gestion: "Inicio de la construcción de edificios destinados a estudios básicos. Renovación de los planes de estudio, construcción de los laboratorios de ingeniería y finalización del anillo universitario. Construcción del Anfiteatro.",
     foto_url: asset("images/Ing. Jorge Arias de Blois.jpeg"),
+    video_url: asset("videos/Ing. Jorge Arias de Blois.mp4"),
     fondo_url: getFondo(11),
     interacciones: { likes: 0, alumnos: 0 }
   },
@@ -161,6 +172,7 @@ export const RECTORES: Rector[] = [
     trayectoria_academica: "Abogado y Notario. Fue Secretario General de la Universidad. Ejerció la docencia universitaria. Ocupó cargos directivos en el Colegio de Abogados. Fue jefe del Departamento de Publicidad y representante de los colegios profesionales.",
     logros_gestion: "Desarrollo de una selecta producción editorial. Instalación del primer Consejo de la Enseñanza Privada Superior. Creación del Centro de Estudios de Población, y del Departamento de Extensión Universitaria. Adquisición del predio del “Colegio de Santo Tomás” en la Antigua Guatemala. Organización del coloquio literario con el escritor Miguel Ángel Asturias y del cuarto Congreso Jurídico Guatemalteco.",
     foto_url: asset("images/Lic. Edmundo Vasquez Martinez.jpeg"),
+    video_url: asset("videos/Lic. Edmundo Vasquez Martinez.mp4"),
     fondo_url: getFondo(12),
     interacciones: { likes: 0, alumnos: 0 }
   },
@@ -173,6 +185,7 @@ export const RECTORES: Rector[] = [
     trayectoria_academica: "Doctor en Derecho por la Universidad de Madrid. Realizó estudios de postgrado en las universidades de Munich, Alemania. Abogado y Notario. Fue Decano de la Facultad de Derecho y Secretario General de la Universidad. Docente universitario. Fue Presidente de la Asociación de Estudiantes “El Derecho”. Miembro fundador de la Unión de Universidades de América Latina.",
     logros_gestion: "Impulso de la construcción de la Ciudad Universitaria. Instauración del Departamento de Servicio Social Universitario. Creación del EFPEM y CEFOL. Emisión del Estatuto de la carrera Universitaria. Establecimiento del Centro Audiovisual Universitario. Construcción del edificio de Recursos Educativos y creación de la Escuela de Ciencia Política.",
     foto_url: asset("images/Dr. Rafael Cuevas del Cid.jpeg"),
+    video_url: asset("videos/Dr. Rafael Cuevas del Cid.mp4"),
     fondo_url: asset("images/fondo_4.jpeg"),
     interacciones: { likes: 0, alumnos: 0 }
   },
@@ -185,6 +198,7 @@ export const RECTORES: Rector[] = [
     trayectoria_academica: "Odontólogo. Fue Decano de la Facultad de Odontología. Catedrático universitario y Secretario de la Asociación de Estudiantes de Odontología. Realizó estudios de postgrado y prácticas especializadas en las Universidades de Columbia y Pittsburg, Estados Unidos.",
     logros_gestion: "Fundación de los siguientes centros regionales: CUNOR, CUNOROC, CUNORI, CUNSUR, CUNSURORI y CUNSUROC. Creación de la Escuela de Trabajo Social y del Centro de Estudios Urbanos y Regionales (CEUR). Desarrollo del “Programa de Formación Docente”. Creación de las publicaciones: Boletín Universitario, Voz Universitaria; Revista Alero y Anuario.",
     foto_url: asset("images/Dr. Roberto Valdeavellano Pinot.jpeg"),
+    video_url: asset("videos/Dr. Roberto Valdeavellano Pinot.mp4"),
     fondo_url: getFondo(14),
     interacciones: { likes: 0, alumnos: 0 }
   },
@@ -197,6 +211,7 @@ export const RECTORES: Rector[] = [
     trayectoria_academica: "Licenciado en Economía. Docente universitario. Fue Decano de la Facultad de Ciencias Económicas y Director de la Escuela de Ciencias Económicas de Occidente, Quetzaltenango. Su gestión al frente de la Universidad ocurrió durante los años más difíciles de la represión gubernamental en Guatemala, fungió como Rector en el exilio, desde México y Costa Rica. Fue catedrático en la Universidad Nacional Autónoma de México, UNAM.",
     logros_gestion: "Defensa de la autonomía universitaria. Apoyo a los movimientos estudiantiles universitarios. Apertura de espacios para los sectores más necesitados del país. Fundación del semanario Siete Días.",
     foto_url: asset("images/Lic. Saul Osorio Paz.jpeg"),
+    video_url: asset("videos/Lic. Saul Osorio Paz.mp4"),
     fondo_url: getFondo(15),
     interacciones: { likes: 0, alumnos: 0 }
   },
@@ -209,6 +224,7 @@ export const RECTORES: Rector[] = [
     trayectoria_academica: "Licenciado en Ciencias Químicas y Farmacia. Biólogo. Secretario General de la Universidad. Docente universitario. Fundador de la Escuela de Biología. Fue Director del Museo de Historia Natural y del Jardín Botánico. Su período rectoral fue breve, ya que fue asesinado en la Ciudad Universitaria. En su honor se celebra el «Día del Biólogo» y se le otorgó su nombre al Biotopo para la Conservación del Quetzal.",
     logros_gestion: "Creación de la Dirección General de Investigación -DIGI-, del Consejo Coordinador e Impulsor de la Investigación-CONSIUSAC-; de la Dirección General de Administración-DIGA-; del Centro de Estudios Conservacionistas -CECON-; del Biotopo del Manatí, en Izabal y del Biotopo Cerro Cahuí, en Petén.",
     foto_url: asset("images/Lic. Mario Rene Dary Rivera.jpg"),
+    video_url: asset("videos/Lic. Mario Rene Dary Rivera.mp4"),
     fondo_url: getFondo(16),
     interacciones: { likes: 0, alumnos: 0 }
   },
@@ -221,6 +237,7 @@ export const RECTORES: Rector[] = [
     trayectoria_academica: "Médico cirujano. Fue Secretario General de la Universidad. Catedrático universitario. Representó a la Universidad en diversos eventos científicos y académicos. Fue Ministro de Educación. Presidente del Organismo Legislativo. Diplomático.",
     logros_gestion: "Impulso a las políticas de investigación. Creación de la Coordinadora General de Planificación. Se garantiza la Autonomía de la Universidad, la integración del Consejo Superior Universitario sigue inalterado, estableciendo la participación tripartita en su gobierno a través de sus docentes, estudiantes y graduados. Se le reconoce personería jurídica y se le otorga la potestad de dirigir la educación superior del Estado.",
     foto_url: asset("images/Dr. Eduardo Meyer Maldonado.jpeg"),
+    video_url: asset("videos/Dr. Eduardo Meyer Maldonado.mp4"),
     fondo_url: getFondo(17),
     interacciones: { likes: 0, alumnos: 0 }
   },
@@ -233,6 +250,7 @@ export const RECTORES: Rector[] = [
     trayectoria_academica: "Abogado y Notario. Catedrático universitario. Obtuvo la Maestría en Administración para el Desarrollo. Fue jefe del Departamento de Derecho Público.",
     logros_gestion: "Emisión de un nuevo Estatuto de la Carrera Universitaria. Creación de tres Centros Regionales: de Petén -CUDEP-, de San Marcos -CUSAM- y de Izabal -CUNIZAB-. Se extienden los servicios de CALUSAC a varios departamentos y se abren cursos de Cakchiquel y Kekchí. Creación de la Licenciatura en Deporte.",
     foto_url: asset("images/Lic. Roderico Segura Trujillo.jpeg"),
+    video_url: asset("videos/Lic. Roderico Segura Trujillo.mp4"),
     fondo_url: getFondo(18),
     interacciones: { likes: 0, alumnos: 0 }
   },
@@ -245,6 +263,7 @@ export const RECTORES: Rector[] = [
     trayectoria_academica: "Odontólogo. Fue Vicepresidente de Guatemala; Decano de la Facultad de Odontología y catedrático universitario. Secretario General del CSUCA y Presidente de la Comisión Guatemalteca de Derechos Humanos. Presidente del Parlamento Centroamericano.",
     logros_gestion: "Aprobación de la Estructura Organizativa del Ejercicio Profesional Supervisado Multiprofesional. Inauguración del Museo de la Universidad de San Carlos de Guatemala. Apertura de la Unidad Ejecutora del Programa USAC/BCIE; del Centro Recreativo para trabajadores universitarios ubicado en la Finca Sabana Grande en Escuintla y del Albergue del Colegio Santo Tomás de Aquino. Creación de Radio Universidad y TV USAC.",
     foto_url: asset("images/Dr. Alfonso Fuentes Soria.jpeg"),
+    video_url: asset("videos/Dr. Alfonso Fuentes Soria.mp4"),
     fondo_url: getFondo(19),
     interacciones: { likes: 0, alumnos: 0 }
   },
@@ -257,6 +276,7 @@ export const RECTORES: Rector[] = [
     trayectoria_academica: "Médico cirujano. Fue Vicepresidente de Guatemala. Cursó estudios de postgrado en cirugía general. Fungió como Decano de la Facultad de Medicina. Catedrático universitario. Realizó estudios superiores de Organización y Dirección de los Servicios Médicos y Planificación en Salud en México.",
     logros_gestion: "Conmemoración del Cincuentenario de la Autonomía Universitaria. Promoción del avance de proyectos como la creación del Banco Universitario, y el convenio de cooperación con la municipalidad de Guatemala. Fomento del rescate del Centro Histórico. Incremento de la potencia de Radio Universidad.",
     foto_url: asset("images/Dr. Jafeth Ernesto Cabrera Franco.jpeg"),
+    video_url: asset("videos/Dr. Jafeth Ernesto Cabrera Franco.mp4"),
     fondo_url: getFondo(20),
     interacciones: { likes: 0, alumnos: 0 }
   },
@@ -269,6 +289,7 @@ export const RECTORES: Rector[] = [
     trayectoria_academica: "Ingeniero agrónomo. Posee una Maestría en Ciencias de la Universidad de Texas A&M, Estados Unidos. Fue Decano de la Facultad de Agronomía. Fungió como ministro de Agricultura, Ganadería y Alimentación y Secretario General del CSUCA.",
     logros_gestion: "Creación de la Dirección General de Docencia, de la Coordinadora General de Cooperación, del Sistema de Estudios de Postgrado y del Centro Universitario Metropolitano. Acreditación de programas de postgrado. Incorporación de los derechos humanos en Ciencias Jurídicas y Sociales. Creación de la Dirección General de Docencia. Aprobación del Plan Estratégico por un período de 20 años. Inauguración del Canal Universitario.",
     foto_url: asset("images/Ing. Agr. Efrain Medina Guerra.jpeg"),
+    video_url: asset("videos/Ing. Agr. Efrain Medina Guerra.mp4"),
     fondo_url: getFondo(21),
     interacciones: { likes: 0, alumnos: 0 }
   },
@@ -281,6 +302,7 @@ export const RECTORES: Rector[] = [
     trayectoria_academica: "Médico veterinario. Fue Decano de la Facultad de Veterinaria. Fungió como Secretario General de la Universidad. Docente universitario. Representó a la Universidad en diversas instancias nacionales e internacionales.",
     logros_gestion: "Se efectuaron convenios con el sector privado. Fortalecimiento de los programas de cultura de paz con la Cooperación Canadiense. Creación del Centro Universitario de Santa Rosa -CUNSARO-, de la Escuela Superior de Arte, del Jardín Infantil, del programa de Educación Continua, del Instituto Universitario de la Mujer, de la Escuela de Ciencias Lingüísticas y del Instituto Tecnológico Maya de Estudios Superiores ITMES.",
     foto_url: asset("images/Dr. Luis Alfonso Leal Monterroso.jpeg"),
+    video_url: asset("videos/Dr. Luis Alfonso Leal Monterroso.mp4"),
     fondo_url: getFondo(22),
     interacciones: { likes: 0, alumnos: 0 }
   },
@@ -293,6 +315,7 @@ export const RECTORES: Rector[] = [
     trayectoria_academica: "Abogado y notario. Doctor en Derecho. Fue Decano de la Facultad de Derecho y docente universitario. Obtuvo una maestría en Ciencias Penales en la Universidad de Costa Rica. Miembro de la Comisión para el Fortalecimiento del Sector Justicia y Presidente de la Comisión de Derecho Penal del Colegio de Abogados y Notarios de Guatemala.",
     logros_gestion: "Creación de Centros Universitarios en: Chimaltenango, Jutiapa, Totonicapán, El Progreso, Quiché, Baja Verapaz, Zacapa, Sololá y del Instituto Tecnológico Universitario Guatemala Sur. Creación de la Escuela de Ciencias Físicas y Matemáticas; así como del IPNUSAC, de la Coordinadora de Información Pública, del CEDESYD, de la División de Protocolo, del Programa de Cursos Libres e implementación del Servicio de transporte interno gratuito.",
     foto_url: asset("images/Dr. Carlos Estuardo Galvez Barrios.jpeg"),
+    video_url: asset("videos/Dr. Carlos Estuardo Galvez Barrios.mp4"),
     fondo_url: asset("images/fondo_6.jpg"),
     interacciones: { likes: 0, alumnos: 0 }
   },
@@ -305,6 +328,7 @@ export const RECTORES: Rector[] = [
     trayectoria_academica: "Cirujano dentista. Fue Decano de la Facultad de Odontología y Secretario General de la Universidad. Docente universitario. Secretario General del Consejo Superior Universitario Centroamericano. Desempeñó varios cargos dentro de la Junta Directiva del Colegio Estomatológico de Guatemala.",
     logros_gestion: "Creación del Centro Universitario de Sacatepéquez y Centro Universitario de Retalhuleu; así como la creación de la Coordinadora de Cursos Libres y Educación Continua. Autorización del funcionamiento de la Coordinación de Ciencia, Tecnología e Innovación. Separación de la Coordinadora de Cursos Libres de la Coordinadora de Educación Continua.",
     foto_url: asset("images/Dr. Carlos Alvarado Cerezo.jpeg"),
+    video_url: asset("videos/Dr. Carlos Alvarado Cerezo.mp4"),
     fondo_url: getFondo(24),
     interacciones: { likes: 0, alumnos: 0 }
   },
@@ -317,6 +341,7 @@ export const RECTORES: Rector[] = [
     trayectoria_academica: "Ingeniero civil. Posee Maestría en docencia universitaria. Ha sido Decano de la Facultad de Ingeniería en dos períodos. Docente universitario. Fue miembro del Consejo Superior Universitario y Presidente del Colegio de Ingenieros de Guatemala.",
     logros_gestion: "Creación de la División de Educación a Distancia en Entornos Virtuales -DEDEV- y la Coordinadora General de Comunicación; y se traslada jerárquicamente el Jardín Infantil a la División de Administración de Recursos Humanos. Realización de Convenio de cooperación interinstitucional entre la Universidad de San Carlos de Guatemala y la Municipalidad de Mixco.",
     foto_url: asset("images/Ing. Murphy Olympo Paiz Recinos.png"),
+    video_url: asset("videos/Ing. Murphy Olympo Paiz Recinos.mp4"),
     fondo_url: getFondo(25),
     interacciones: { likes: 0, alumnos: 0 }
   },
@@ -329,6 +354,7 @@ export const RECTORES: Rector[] = [
     trayectoria_academica: "Posee Maestría en educación de valores. Licenciado en Pedagogía y Administración Educativa. Ha sido Decano de la Facultad de Humanidades y docente universitario. Miembro del Consejo Superior Universitario. Cuenta con Diplomado en liderazgo para el cambio por la Universidad de Regent, Virginia, Estados Unidos.",
     logros_gestion: "Firmas de convenios nacionales e internacionales, promoción de becas estudiantiles y para el personal administrativo. Apoyo al deporte universitario. Impulso a la capacitación y divulgación científica. Implementación de proyectos de infraestructura. Reducción significativa de la deuda. Gestión enfocada en la calidad del gasto y la austeridad. Lanzamiento de aplicaciones y plataformas para trámites administrativos y estudiantiles en línea. Aprobación de 42 nuevas carreras universitarias.",
     foto_url: asset("images/M.A. Walter Ramiro Mazariegos Biolis.jpg"),
+    video_url: asset("videos/M.A. Walter Ramiro Mazariegos Biolis.mp4"),
     fondo_url: getFondo(26),
     interacciones: { likes: 0, alumnos: 0 }
   }

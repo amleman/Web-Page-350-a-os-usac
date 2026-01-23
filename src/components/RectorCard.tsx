@@ -132,6 +132,17 @@ export const RectorCard: React.FC<RectorCardProps> = ({
                 <div className="w-full h-full rounded-full bg-gradient-to-br from-slate-800 to-slate-900 flex items-center justify-center border-2 border-amber-500/30 relative z-10 shadow-inner">
                   <User size={64} className="text-slate-500" />
                 </div>
+              ) : rector.video_url ? (
+                <video
+                  src={rector.video_url}
+                  poster={rector.foto_url}
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                  className="w-full h-full object-cover rounded-full shadow-[0_8px_32px_rgba(0,0,0,0.6),0_0_0_2px_rgba(251,191,36,0.2)] relative z-10"
+                  onError={() => setImageError(true)} // Fallback to error state if video fails severely, though typically poster handles it
+                />
               ) : (
                 <img
                   src={rector.foto_url}

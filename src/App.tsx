@@ -4,6 +4,7 @@ import { RECTORES } from './constants';
 import { Rector } from './types';
 import { preloadImages } from './utils/imagePreloader';
 import { useImagePreloader } from './hooks/useImagePreloader';
+import { useVideoPreloader } from './hooks/useVideoPreloader';
 import { trackVisit } from './utils/visitsTracker';
 
 // Lazy load components para code splitting
@@ -114,6 +115,13 @@ function App() {
     currentRectorIndex,
     RECTORES,
     (rector) => rector.fondo_url
+  );
+
+  // Precargar videos adyacentes cuando cambia el índice
+  useVideoPreloader(
+    currentRectorIndex,
+    RECTORES,
+    (rector) => rector.video_url
   );
 
   const handleMouseMove = (e: React.MouseEvent) => {
