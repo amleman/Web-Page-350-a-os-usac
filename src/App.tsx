@@ -15,6 +15,10 @@ const BioSheet = lazy(() => import('./components/BioSheet').then(module => ({ de
 const CreditsSection = lazy(() => import('./components/CreditsSection').then(module => ({ default: module.CreditsSection })));
 const LikeButton = lazy(() => import('./components/LikeButton').then(module => ({ default: module.LikeButton })));
 const ShareButton = lazy(() => import('./components/ShareButton').then(module => ({ default: module.ShareButton })));
+import { LoadingScreen } from './components/LoadingScreen';
+import { useAudioPlayer } from './hooks/useAudioPlayer';
+import { AudioController } from './components/AudioController';
+
 
 // --- Background Component ---
 const ActiveBackground = ({
@@ -74,9 +78,30 @@ function App() {
   const [viewState, setViewState] = useState<ViewState>('INTRO');
   const [currentRectorIndex, setCurrentRectorIndex] = useState(0);
 
+  // --- Loading Screen Logic ---
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    // Force minimum load time of 4 seconds
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 4000);
+
+    return () => clearTimeout(timer);
+  }, []);
+
+
   const [selectedRector, setSelectedRector] = useState<Rector | null>(null);
   const [isCardHovered, setIsCardHovered] = useState(false);
   const [showLikeAnimation, setShowLikeAnimation] = useState(false);
+  const [isMuted, setIsMuted] = useState(false);
+
+  // Audio Player Logic
+  // Only play when in RECTORS view and not loading
+  // Audio Player Logic
+  // Only play when in RECTORS view and not loading
+  const activeRectorForAudio = (!isLoading && viewState === 'RECTORS') ? RECTORES[currentRectorIndex] : undefined;
+  const { isPlaying } = useAudioPlayer(activeRectorForAudio, isMuted);
 
   // Scroll/Swipe Cooldown
   const isScrolling = useRef(false);
@@ -110,6 +135,9 @@ function App() {
     trackVisit(null, 'intro');
   }, []);
 
+
+
+
   // Precargar imágenes adyacentes cuando cambia el índice
   useImagePreloader(
     currentRectorIndex,
@@ -125,6 +153,7 @@ function App() {
   );
 
   const handleMouseMove = (e: React.MouseEvent) => {
+    if (selectedRector) return;
     mouseX.set(e.clientX);
     mouseY.set(e.clientY);
   };
@@ -132,6 +161,7 @@ function App() {
   // --- Navigation Logic ---
 
   const handleNext = useCallback(() => {
+    if (selectedRector) return;
     if (isScrolling.current) return;
 
     if (viewState === 'INTRO') {
@@ -152,9 +182,10 @@ function App() {
 
     isScrolling.current = true;
     setTimeout(() => { isScrolling.current = false; }, 400);
-  }, [viewState, currentRectorIndex]);
+  }, [viewState, currentRectorIndex, selectedRector]);
 
   const handlePrev = useCallback(() => {
+    if (selectedRector) return;
     if (isScrolling.current) return;
 
     if (viewState === 'CREDITS') {
@@ -175,7 +206,7 @@ function App() {
 
     isScrolling.current = true;
     setTimeout(() => { isScrolling.current = false; }, 400);
-  }, [viewState, currentRectorIndex]);
+  }, [viewState, currentRectorIndex, selectedRector]);
 
   const jumpToRector = (index: number) => {
     setViewState('RECTORS');
@@ -243,6 +274,9 @@ function App() {
       className="relative w-full h-dvh bg-black overflow-hidden"
       onMouseMove={handleMouseMove}
     >
+      <AnimatePresence mode="wait">
+        {isLoading && <LoadingScreen key="loading" />}
+      </AnimatePresence>
 
       {/* 1. Background Layer */}
       <ActiveBackground
@@ -424,6 +458,17 @@ function App() {
               onClose={() => setSelectedRector(null)}
             />
           </Suspense>
+        )}
+      </AnimatePresence>
+
+      <AnimatePresence>
+        {viewState === 'RECTORS' && (
+          <AudioController
+            key="audio-controller"
+            isMuted={isMuted}
+            isPlaying={isPlaying}
+            onToggle={() => setIsMuted(!isMuted)}
+          />
         )}
       </AnimatePresence>
 

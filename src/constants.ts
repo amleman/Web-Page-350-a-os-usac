@@ -18,6 +18,7 @@ export const RECTORES: Rector[] = [
     logros_gestion: "Durante su gestión como rector de la Real y Pontificia Universidad de San Carlos Borromeo, José de Baños y Sotomayor contribuyó al fortalecimiento de la organización académica y administrativa de la institución, consolidando la enseñanza tradicional en medicina, filosofía, teología y derecho, en concordancia con el modelo universitario colonial y el marco eclesiástico de su época.",
     foto_url: asset("images/Dr. Jose de Baños y Sotomayor.png"),
     video_url: asset("videos/Dr. Jose de Banos y Sotomayor.mp4"),
+    audio_url: asset("audio/Dr_Jose_de_Banos_y_Sotomayor.mp3"),
     fondo_url: getFondo(0),
     interacciones: { likes: 120, alumnos: 450 }
   },
@@ -30,6 +31,7 @@ export const RECTORES: Rector[] = [
     trayectoria_academica: "Fue doctor en Teología y Derecho Canónico, catedrático universitario y miembro del alto clero guatemalteco. Su formación se desarrolló dentro del modelo escolástico colonial, centrado en la enseñanza de la teología, la filosofía y el derecho, y representó el pensamiento conservador y clerical predominante en la educación superior de la época.",
     logros_gestion: "Durante su rectoría, defendió la continuidad institucional de la Real y Pontificia Universidad de San Carlos de Guatemala en un período de transición posterior a la Independencia. Su gestión se orientó a preservar el modelo académico tradicional, mantener la influencia del clero en la universidad y asegurar el funcionamiento de la institución frente a las corrientes liberales emergentes.",
     foto_url: asset("images/Dr. Jose Alejandro de Aycinena.png"),
+    audio_url: asset("audio/Jose_Alejandro_de_Aycinena.mp3"),
     fondo_url: getFondo(1),
     interacciones: { likes: 145, alumnos: 520 }
   },
@@ -43,6 +45,7 @@ export const RECTORES: Rector[] = [
     logros_gestion: "Durante su rectoría promovió una educación influida por las ideas de la ilustración, fortaleciendo la enseñanza de la filosofía y el pensamiento crítico. Su gestión contribuyó a la formación de intelectuales con conciencia social y reformista, dejando una huella significativa en la etapa final de la universidad colonial.",
     foto_url: asset("images/Jose Simeon Canas.png"),
     video_url: asset("videos/Jose Simeon Canas.mp4"),
+    audio_url: asset("audio/Jose_Simeon_Canas.mp3"),
     fondo_url: getFondo(2),
     interacciones: { likes: 98, alumnos: 300 }
   },
@@ -56,6 +59,7 @@ export const RECTORES: Rector[] = [
     logros_gestion: "Participó en procesos políticos de la Independencia de Centroamérica y defendió derechos civiles y reformas educativas.",
     foto_url: asset("images/Dr. Antonio de Larrazabal.png"),
     video_url: asset("videos/Dr. Antonio de Larrazabal.mp4"),
+    audio_url: asset("audio/Dr_Antonio_de_Larrazabal.mp3"),
     fondo_url: asset("images/fondo_6.jpg"),
     interacciones: { likes: 210, alumnos: 890 }
   },
@@ -69,6 +73,7 @@ export const RECTORES: Rector[] = [
     logros_gestion: "Contribuyó de manera decisiva a la continuidad y reorganización de la Universidad de San Carlos en un contexto crítico posterior a la independencia y a las guerras civiles, asegurando su funcionamiento institucional. Durante su rectorado, fortaleció los vínculos de la Universidad con la Iglesia Católica, tanto en el ámbito curricular como en el administrativo, y consolidó una estrecha relación con el poder estatal conservador. Esta orientación influyó de forma significativa en el perfil académico e ideológico de la Universidad, marcando su desarrollo institucional durante varias décadas del siglo XIX.",
     foto_url: asset("images/Dr. Jose de Aycinena.png"),
     video_url: asset("videos/Dr. Jose de Aycinena.mp4"),
+    audio_url: asset("audio/Dr_Jose_de_Aycinena_y_Pinol.mp3"),
     fondo_url: getFondo(4),
     interacciones: { likes: 175, alumnos: 600 }
   },
@@ -82,6 +87,7 @@ export const RECTORES: Rector[] = [
     logros_gestion: "Promovió la producción intelectual y la investigación histórica y jurídica, y reforzó el prestigio académico de la Universidad mediante su propia labor como jurista, historiador y miembro de academias nacionales e internacionales, lo que proyectó a la institución en el ámbito cultural e intelectual del país.",
     foto_url: asset("images/Dr. Agustin Gomez Carrillo.png"),
     video_url: asset("videos/Dr. Agustin Gomez Carrillo.mp4"),
+    audio_url: asset("audio/Dr_Agustin_Gomez_Carrillo.mp3"),
     fondo_url: getFondo(5), // Reusa fondo 1
     interacciones: { likes: 130, alumnos: 410 }
   },
@@ -95,6 +101,7 @@ export const RECTORES: Rector[] = [
     logros_gestion: "Participación universitaria en la Revolución de octubre de 1944. Inauguración del régimen autónomo de la Universidad. Impulso a la ciencia y medicina. Creación de los mecanismos y organización de las primeras elecciones universitarias.",
     foto_url: asset("images/Dr. Carlos Federico Mora.jpeg"),
     video_url: asset("videos/Dr. Carlos Federico Mora.mp4"),
+    audio_url: asset("audio/Dr_Carlos_Federico_Mora.mp3"),
     fondo_url: getFondo(6), // Reusa fondo 2
     interacciones: { likes: 190, alumnos: 750 }
   },
@@ -108,6 +115,7 @@ export const RECTORES: Rector[] = [
     logros_gestion: "Realización del primer acto electoral en que estudiantes, profesores y graduados eligieron democráticamente al Rector universitario. Impulso a la ciencia y tecnología.",
     foto_url: asset("images/Lic. Julio Valladares Marquez.jpeg"),
     video_url: asset("videos/Lic. Julio Valladares Marquez.mp4"),
+    audio_url: asset("audio/Lic_Julio_Valladares_Marquez.mp3"),
     fondo_url: getFondo(7), // Reusa fondo 3
     interacciones: { likes: 160, alumnos: 580 }
   },
@@ -121,6 +129,7 @@ export const RECTORES: Rector[] = [
     logros_gestion: "Adquisición de los terrenos de la Ciudad Universitaria. Fundación del Centro Universitario de Occidente. Creación de las facultades de: Agronomía, Medicina Veterinaria y Arquitectura. Creación de la Escuela de Psicología, y la Escuela de Historia. Inauguración de la Facultad de Humanidades. Fundación de la Imprenta Universitaria y del Teatro de Arte Universitario. Impulso a la construcción del edificio de la Rectoría",
     foto_url: asset("images/Dr. Carlos Martinez Duran.jpeg"),
     video_url: asset("videos/Dr. Carlos Martinez Duran.mp4"),
+    audio_url: asset("audio/Dr_Carlos_Martinez_Duran.mp3"),
     fondo_url: asset("images/fondo_4.jpeg"), // Reusa fondo 4
     interacciones: { likes: 220, alumnos: 920 }
   },
@@ -134,6 +143,7 @@ export const RECTORES: Rector[] = [
     logros_gestion: "Creación de la Facultad de Agronomía y de Biblioteca Central. Transformación del comedor universitario en residencia estudiantil. Aprobación del plan de estudios y condiciones de admisión. Realización de las Olimpiadas Universitarias. Inauguración del Instituto de Investigaciones Científicas. Creación de la Facultad de Ingeniería de Occidente.",
     foto_url: asset("images/Lic. Miguel Asturias Quinones.jpeg"),
     video_url: asset("videos/Lic. Miguel Asturias Quinones.mp4"),
+    audio_url: asset("audio/Lic_Miguel_Asturias_Quinones.mp3"),
     fondo_url: getFondo(9),
     interacciones: { likes: 0, alumnos: 0 }
   },
@@ -147,6 +157,7 @@ export const RECTORES: Rector[] = [
     logros_gestion: "Fundación de la Facultad de Medicina Veterinaria y Zootecnia. Construcción del nuevo edificio de la Facultad de Ingeniería, en la Ciudad Universitaria, y del edificio de Ciencias Económicas, en Quetzaltenango. Creación del Departamento de Estudios de Derecho Internacional de la Facultad de Derecho, y de la Escuela de Humanidades de Occidente.",
     foto_url: asset("images/Lic. Vicente Diaz Samayoa.jpeg"),
     video_url: asset("videos/Lic. Vicente Diaz Samayoa.mp4"),
+    audio_url: asset("audio/Lic_Vicente_Diaz_Samayoa.mp3"),
     fondo_url: getFondo(10),
     interacciones: { likes: 0, alumnos: 0 }
   },
@@ -160,6 +171,7 @@ export const RECTORES: Rector[] = [
     logros_gestion: "Inicio de la construcción de edificios destinados a estudios básicos. Renovación de los planes de estudio, construcción de los laboratorios de ingeniería y finalización del anillo universitario. Construcción del Anfiteatro.",
     foto_url: asset("images/Ing. Jorge Arias de Blois.jpeg"),
     video_url: asset("videos/Ing. Jorge Arias de Blois.mp4"),
+    audio_url: asset("audio/Ing_Jorge_Arias_de_Blois.mp3"),
     fondo_url: getFondo(11),
     interacciones: { likes: 0, alumnos: 0 }
   },
@@ -173,6 +185,7 @@ export const RECTORES: Rector[] = [
     logros_gestion: "Desarrollo de una selecta producción editorial. Instalación del primer Consejo de la Enseñanza Privada Superior. Creación del Centro de Estudios de Población, y del Departamento de Extensión Universitaria. Adquisición del predio del “Colegio de Santo Tomás” en la Antigua Guatemala. Organización del coloquio literario con el escritor Miguel Ángel Asturias y del cuarto Congreso Jurídico Guatemalteco.",
     foto_url: asset("images/Lic. Edmundo Vasquez Martinez.jpeg"),
     video_url: asset("videos/Lic. Edmundo Vasquez Martinez.mp4"),
+    audio_url: asset("audio/Lic_Edmundo_Vasquez_Martinez.mp3"),
     fondo_url: getFondo(12),
     interacciones: { likes: 0, alumnos: 0 }
   },
@@ -186,6 +199,7 @@ export const RECTORES: Rector[] = [
     logros_gestion: "Impulso de la construcción de la Ciudad Universitaria. Instauración del Departamento de Servicio Social Universitario. Creación del EFPEM y CEFOL. Emisión del Estatuto de la carrera Universitaria. Establecimiento del Centro Audiovisual Universitario. Construcción del edificio de Recursos Educativos y creación de la Escuela de Ciencia Política.",
     foto_url: asset("images/Dr. Rafael Cuevas del Cid.jpeg"),
     video_url: asset("videos/Dr. Rafael Cuevas del Cid.mp4"),
+    audio_url: asset("audio/Dr_Rafael_Cuevas_del_Cid.mp3"),
     fondo_url: asset("images/fondo_4.jpeg"),
     interacciones: { likes: 0, alumnos: 0 }
   },
@@ -199,6 +213,7 @@ export const RECTORES: Rector[] = [
     logros_gestion: "Fundación de los siguientes centros regionales: CUNOR, CUNOROC, CUNORI, CUNSUR, CUNSURORI y CUNSUROC. Creación de la Escuela de Trabajo Social y del Centro de Estudios Urbanos y Regionales (CEUR). Desarrollo del “Programa de Formación Docente”. Creación de las publicaciones: Boletín Universitario, Voz Universitaria; Revista Alero y Anuario.",
     foto_url: asset("images/Dr. Roberto Valdeavellano Pinot.jpeg"),
     video_url: asset("videos/Dr. Roberto Valdeavellano Pinot.mp4"),
+    audio_url: asset("audio/Dr_Roberto_Valdeavellano_Pinot.mp3"),
     fondo_url: getFondo(14),
     interacciones: { likes: 0, alumnos: 0 }
   },
@@ -212,6 +227,7 @@ export const RECTORES: Rector[] = [
     logros_gestion: "Defensa de la autonomía universitaria. Apoyo a los movimientos estudiantiles universitarios. Apertura de espacios para los sectores más necesitados del país. Fundación del semanario Siete Días.",
     foto_url: asset("images/Lic. Saul Osorio Paz.jpeg"),
     video_url: asset("videos/Lic. Saul Osorio Paz.mp4"),
+    audio_url: asset("audio/Lic_Saul_Osorio_Paz.mp3"),
     fondo_url: getFondo(15),
     interacciones: { likes: 0, alumnos: 0 }
   },
@@ -225,6 +241,7 @@ export const RECTORES: Rector[] = [
     logros_gestion: "Creación de la Dirección General de Investigación -DIGI-, del Consejo Coordinador e Impulsor de la Investigación-CONSIUSAC-; de la Dirección General de Administración-DIGA-; del Centro de Estudios Conservacionistas -CECON-; del Biotopo del Manatí, en Izabal y del Biotopo Cerro Cahuí, en Petén.",
     foto_url: asset("images/Lic. Mario Rene Dary Rivera.jpg"),
     video_url: asset("videos/Lic. Mario Rene Dary Rivera.mp4"),
+    audio_url: asset("audio/Lic_Mario_Rene_Dary_Rivera.mp3"),
     fondo_url: getFondo(16),
     interacciones: { likes: 0, alumnos: 0 }
   },
@@ -238,6 +255,7 @@ export const RECTORES: Rector[] = [
     logros_gestion: "Impulso a las políticas de investigación. Creación de la Coordinadora General de Planificación. Se garantiza la Autonomía de la Universidad, la integración del Consejo Superior Universitario sigue inalterado, estableciendo la participación tripartita en su gobierno a través de sus docentes, estudiantes y graduados. Se le reconoce personería jurídica y se le otorga la potestad de dirigir la educación superior del Estado.",
     foto_url: asset("images/Dr. Eduardo Meyer Maldonado.jpeg"),
     video_url: asset("videos/Dr. Eduardo Meyer Maldonado.mp4"),
+    audio_url: asset("audio/Dr_Eduardo_Meyer_Maldonado.mp3"),
     fondo_url: getFondo(17),
     interacciones: { likes: 0, alumnos: 0 }
   },
@@ -251,7 +269,8 @@ export const RECTORES: Rector[] = [
     logros_gestion: "Emisión de un nuevo Estatuto de la Carrera Universitaria. Creación de tres Centros Regionales: de Petén -CUDEP-, de San Marcos -CUSAM- y de Izabal -CUNIZAB-. Se extienden los servicios de CALUSAC a varios departamentos y se abren cursos de Cakchiquel y Kekchí. Creación de la Licenciatura en Deporte.",
     foto_url: asset("images/Lic. Roderico Segura Trujillo.jpeg"),
     video_url: asset("videos/Lic. Roderico Segura Trujillo.mp4"),
-    fondo_url: getFondo(18),
+    audio_url: asset("audio/Lic_Roderico_Segura_Trujillo.mp3"),
+    fondo_url: getFondo(12),
     interacciones: { likes: 0, alumnos: 0 }
   },
   {
@@ -264,6 +283,7 @@ export const RECTORES: Rector[] = [
     logros_gestion: "Aprobación de la Estructura Organizativa del Ejercicio Profesional Supervisado Multiprofesional. Inauguración del Museo de la Universidad de San Carlos de Guatemala. Apertura de la Unidad Ejecutora del Programa USAC/BCIE; del Centro Recreativo para trabajadores universitarios ubicado en la Finca Sabana Grande en Escuintla y del Albergue del Colegio Santo Tomás de Aquino. Creación de Radio Universidad y TV USAC.",
     foto_url: asset("images/Dr. Alfonso Fuentes Soria.jpeg"),
     video_url: asset("videos/Dr. Alfonso Fuentes Soria.mp4"),
+    audio_url: asset("audio/Dr_Juan_Alfonso_Fuentes_Soria.mp3"),
     fondo_url: getFondo(19),
     interacciones: { likes: 0, alumnos: 0 }
   },
@@ -277,6 +297,7 @@ export const RECTORES: Rector[] = [
     logros_gestion: "Conmemoración del Cincuentenario de la Autonomía Universitaria. Promoción del avance de proyectos como la creación del Banco Universitario, y el convenio de cooperación con la municipalidad de Guatemala. Fomento del rescate del Centro Histórico. Incremento de la potencia de Radio Universidad.",
     foto_url: asset("images/Dr. Jafeth Ernesto Cabrera Franco.jpeg"),
     video_url: asset("videos/Dr. Jafeth Ernesto Cabrera Franco.mp4"),
+    audio_url: asset("audio/Dr_Jafeth_Ernesto_Cabrera_Franco.mp3"),
     fondo_url: getFondo(20),
     interacciones: { likes: 0, alumnos: 0 }
   },
@@ -290,6 +311,7 @@ export const RECTORES: Rector[] = [
     logros_gestion: "Creación de la Dirección General de Docencia, de la Coordinadora General de Cooperación, del Sistema de Estudios de Postgrado y del Centro Universitario Metropolitano. Acreditación de programas de postgrado. Incorporación de los derechos humanos en Ciencias Jurídicas y Sociales. Creación de la Dirección General de Docencia. Aprobación del Plan Estratégico por un período de 20 años. Inauguración del Canal Universitario.",
     foto_url: asset("images/Ing. Agr. Efrain Medina Guerra.jpeg"),
     video_url: asset("videos/Ing. Agr. Efrain Medina Guerra.mp4"),
+    audio_url: asset("audio/Ing_Efrain_Medina_Guerra.mp3"),
     fondo_url: getFondo(21),
     interacciones: { likes: 0, alumnos: 0 }
   },
@@ -303,6 +325,7 @@ export const RECTORES: Rector[] = [
     logros_gestion: "Se efectuaron convenios con el sector privado. Fortalecimiento de los programas de cultura de paz con la Cooperación Canadiense. Creación del Centro Universitario de Santa Rosa -CUNSARO-, de la Escuela Superior de Arte, del Jardín Infantil, del programa de Educación Continua, del Instituto Universitario de la Mujer, de la Escuela de Ciencias Lingüísticas y del Instituto Tecnológico Maya de Estudios Superiores ITMES.",
     foto_url: asset("images/Dr. Luis Alfonso Leal Monterroso.jpeg"),
     video_url: asset("videos/Dr. Luis Alfonso Leal Monterroso.mp4"),
+    audio_url: asset("audio/Dr_Luis_Alfonso_Leal_Monterroso.mp3"),
     fondo_url: getFondo(22),
     interacciones: { likes: 0, alumnos: 0 }
   },
@@ -316,6 +339,7 @@ export const RECTORES: Rector[] = [
     logros_gestion: "Creación de Centros Universitarios en: Chimaltenango, Jutiapa, Totonicapán, El Progreso, Quiché, Baja Verapaz, Zacapa, Sololá y del Instituto Tecnológico Universitario Guatemala Sur. Creación de la Escuela de Ciencias Físicas y Matemáticas; así como del IPNUSAC, de la Coordinadora de Información Pública, del CEDESYD, de la División de Protocolo, del Programa de Cursos Libres e implementación del Servicio de transporte interno gratuito.",
     foto_url: asset("images/Dr. Carlos Estuardo Galvez Barrios.jpeg"),
     video_url: asset("videos/Dr. Carlos Estuardo Galvez Barrios.mp4"),
+    audio_url: asset("audio/Dr_Carlos_Estuardo_Galvez_Barrios.mp3"),
     fondo_url: asset("images/fondo_6.jpg"),
     interacciones: { likes: 0, alumnos: 0 }
   },
@@ -329,6 +353,7 @@ export const RECTORES: Rector[] = [
     logros_gestion: "Creación del Centro Universitario de Sacatepéquez y Centro Universitario de Retalhuleu; así como la creación de la Coordinadora de Cursos Libres y Educación Continua. Autorización del funcionamiento de la Coordinación de Ciencia, Tecnología e Innovación. Separación de la Coordinadora de Cursos Libres de la Coordinadora de Educación Continua.",
     foto_url: asset("images/Dr. Carlos Alvarado Cerezo.jpeg"),
     video_url: asset("videos/Dr. Carlos Alvarado Cerezo.mp4"),
+    audio_url: asset("audio/Dr_Carlos_Guillermo_Alvarado_Cerezo.mp3"),
     fondo_url: getFondo(24),
     interacciones: { likes: 0, alumnos: 0 }
   },
@@ -342,6 +367,7 @@ export const RECTORES: Rector[] = [
     logros_gestion: "Creación de la División de Educación a Distancia en Entornos Virtuales -DEDEV- y la Coordinadora General de Comunicación; y se traslada jerárquicamente el Jardín Infantil a la División de Administración de Recursos Humanos. Realización de Convenio de cooperación interinstitucional entre la Universidad de San Carlos de Guatemala y la Municipalidad de Mixco.",
     foto_url: asset("images/Ing. Murphy Olympo Paiz Recinos.png"),
     video_url: asset("videos/Ing. Murphy Olympo Paiz Recinos.mp4"),
+    audio_url: asset("audio/Ing_Murphy_Olympo_Paiz_Recinos.mp3"),
     fondo_url: getFondo(25),
     interacciones: { likes: 0, alumnos: 0 }
   },
@@ -355,6 +381,7 @@ export const RECTORES: Rector[] = [
     logros_gestion: "Firmas de convenios nacionales e internacionales, promoción de becas estudiantiles y para el personal administrativo. Apoyo al deporte universitario. Impulso a la capacitación y divulgación científica. Implementación de proyectos de infraestructura. Reducción significativa de la deuda. Gestión enfocada en la calidad del gasto y la austeridad. Lanzamiento de aplicaciones y plataformas para trámites administrativos y estudiantiles en línea. Aprobación de 42 nuevas carreras universitarias.",
     foto_url: asset("images/M.A. Walter Ramiro Mazariegos Biolis.jpg"),
     video_url: asset("videos/M.A. Walter Ramiro Mazariegos Biolis.mp4"),
+    audio_url: asset("audio/MA_Walter_Ramiro_Mazariegos_Biolis.mp3"),
     fondo_url: getFondo(26),
     interacciones: { likes: 0, alumnos: 0 }
   }
