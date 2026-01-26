@@ -64,7 +64,9 @@ export const IntroSection: React.FC<IntroSectionProps> = ({ onScrollClick }) => 
           transition={{ duration: 0.5, delay: 0.5 }}
           className="text-zinc-300 font-light text-sm md:text-lg max-w-md leading-relaxed"
         >
-          Explora el legado de los rectores que forjaron la identidad de la Tricentenaria Universidad de San Carlos de Guatemala.
+          Explora el legado de los rectores que forjaron la identidad de la
+          <br />
+          Tricentenaria Universidad de San Carlos de Guatemala.
         </motion.p>
 
         <motion.p
